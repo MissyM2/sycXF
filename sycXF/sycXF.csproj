@@ -1,0 +1,105 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="IdentityModel" Version="6.0.0" />
+    <PackageReference Include="PCLCrypto" Version="2.0.147" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="IdentityModel" />
+    <None Remove="PCLCrypto" />
+    <None Remove="System.ComponentModel.Annotations" />
+    <None Remove="Fonts\Font_Awesome_5_Free-Regular-400.otf" />
+    <None Remove="Fonts\Font_Awesome_5_Free-Solid-900.otf" />
+    <None Remove="Fonts\Montserrat-Bold.ttf" />
+    <None Remove="Fonts\Montserrat-Regular.ttf" />
+    <None Remove="Fonts\SourceSansPro-Regular.ttf" />
+    <None Remove="Resources\" />
+    <None Remove="Resources\banner.png" />
+    <None Remove="Resources\Default.png" />
+    <None Remove="Resources\Default%402x.png" />
+    <None Remove="Resources\default_campaign.png" />
+    <None Remove="Resources\default_product.png" />
+    <None Remove="Resources\Default-568h%402x.png" />
+    <None Remove="Resources\Default-Portrait.png" />
+    <None Remove="Resources\Default-Portrait%402x.png" />
+    <None Remove="Resources\eshop_logo.png" />
+    <None Remove="Resources\fake_campaign_01.png" />
+    <None Remove="Resources\fake_campaign_02.png" />
+    <None Remove="Resources\fake_product_01.png" />
+    <None Remove="Resources\fake_product_02.png" />
+    <None Remove="Resources\fake_product_03.png" />
+    <None Remove="Resources\fake_product_04.png" />
+    <None Remove="Resources\fake_product_05.png" />
+    <None Remove="Resources\Icon-60%402x.png" />
+    <None Remove="Resources\Icon-60%403x.png" />
+    <None Remove="Resources\Icon-76.png" />
+    <None Remove="Resources\Icon-76%402x.png" />
+    <None Remove="Resources\Icon-Small.png" />
+    <None Remove="Resources\Icon-Small%402x.png" />
+    <None Remove="Resources\Icon-Small%403x.png" />
+    <None Remove="Resources\Icon-Small-40.png" />
+    <None Remove="Resources\Icon-Small-40%402x.png" />
+    <None Remove="Resources\Icon-Small-40%403x.png" />
+    <None Remove="Resources\Logo.png" />
+    <None Remove="Resources\noimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Fonts\Font_Awesome_5_Free-Regular-400.otf" />
+    <EmbeddedResource Include="Fonts\Font_Awesome_5_Free-Solid-900.otf" />
+    <EmbeddedResource Include="Fonts\Montserrat-Bold.ttf" />
+    <EmbeddedResource Include="Fonts\Montserrat-Regular.ttf" />
+    <EmbeddedResource Include="Fonts\SourceSansPro-Regular.ttf" />
+    <EmbeddedResource Include="Resources\banner.png" />
+    <EmbeddedResource Include="Resources\fake_campaign_01.png" />
+    <EmbeddedResource Include="Resources\fake_campaign_02.png" />
+    <EmbeddedResource Include="Resources\fake_product_01.png" />
+    <EmbeddedResource Include="Resources\fake_product_02.png" />
+    <EmbeddedResource Include="Resources\fake_product_03.png" />
+    <EmbeddedResource Include="Resources\fake_product_04.png" />
+    <EmbeddedResource Include="Resources\fake_product_05.png" />
+    <EmbeddedResource Include="Resources\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\default_product.png" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Default-Portrait.png" />
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+    <BundleResource Include="Resources\eshop_logo.png" />
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\Icon-60%403x.png" />
+    <BundleResource Include="Resources\Icon-76.png" />
+    <BundleResource Include="Resources\Icon-76%402x.png" />
+    <BundleResource Include="Resources\Icon-Small.png" />
+    <BundleResource Include="Resources\Icon-Small%402x.png" />
+    <BundleResource Include="Resources\Icon-Small%403x.png" />
+    <BundleResource Include="Resources\Icon-Small-40.png" />
+    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
+    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
+    <BundleResource Include="Resources\noimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\default_campaign.png" />
+  </ItemGroup>
+</Project>
