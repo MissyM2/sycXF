@@ -3,7 +3,6 @@ using sycXF.Services.Catalog;
 using sycXF.Services.Dependency;
 using sycXF.Services.FixUri;
 using sycXF.Services.Identity;
-using sycXF.Services.Location;
 using sycXF.Services.OpenUrl;
 using sycXF.Services.Order;
 using sycXF.Services.RequestProvider;
@@ -47,7 +46,6 @@ namespace sycXF.ViewModels.Base
             Xamarin.Forms.DependencyService.RegisterSingleton<IIdentityService>(new IdentityService(requestProvider));
             Xamarin.Forms.DependencyService.RegisterSingleton<IDependencyService>(new Services.Dependency.DependencyService());
             Xamarin.Forms.DependencyService.RegisterSingleton<IFixUriService>(new FixUriService(settingsService));
-            Xamarin.Forms.DependencyService.RegisterSingleton<ILocationService>(new LocationService(requestProvider));
             Xamarin.Forms.DependencyService.RegisterSingleton<ICatalogService>(new CatalogMockService());
             Xamarin.Forms.DependencyService.RegisterSingleton<IBasketService>(new BasketMockService());
             Xamarin.Forms.DependencyService.RegisterSingleton<IOrderService>(new OrderMockService());

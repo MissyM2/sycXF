@@ -1,5 +1,4 @@
-﻿using sycXF.Services.Location;
-using sycXF.Services.Settings;
+﻿using sycXF.Services.Settings;
 using sycXF.Services.Theme;
 using sycXF.ViewModels.Base;
 using sycXF.Services;
@@ -42,15 +41,6 @@ namespace sycXF
         protected override async void OnStart()
         {
             base.OnStart();
-
-            if (_settingsService.AllowGpsLocation && !_settingsService.UseFakeLocation)
-            {
-                await GetGpsLocation();
-            }
-            if (!_settingsService.UseMocks && !string.IsNullOrEmpty(_settingsService.AuthAccessToken))
-            {
-                await SendCurrentLocation();
-            }
 
             OnResume();
         }
@@ -98,43 +88,6 @@ namespace sycXF
                     nav.BarTextColor = Color.Black;
                 }
             }
-        }
-
-        private async Task GetGpsLocation()
-        {
-            try
-            {
-                var request = new GeolocationRequest (GeolocationAccuracy.High);
-                var location = await Geolocation.GetLocationAsync (request, CancellationToken.None).ConfigureAwait(false);
-
-                if (location != null)
-                {
-                    _settingsService.Latitude = location.Latitude.ToString ();
-                    _settingsService.Longitude = location.Longitude.ToString ();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex is FeatureNotEnabledException || ex is FeatureNotEnabledException || ex is PermissionException)
-                {
-                    _settingsService.AllowGpsLocation = false;
-                }
-
-                // Unable to get location
-                Debug.WriteLine(ex);
-            }
-        }
-
-        private async Task SendCurrentLocation()
-        {
-            var location = new Models.Location.Location
-            {
-                Latitude = double.Parse(_settingsService.Latitude, CultureInfo.InvariantCulture),
-                Longitude = double.Parse(_settingsService.Longitude, CultureInfo.InvariantCulture)
-            };
-
-            var locationService = ViewModelLocator.Resolve<ILocationService>();
-            await locationService.UpdateUserLocation(location, _settingsService.AuthAccessToken);
         }
     }
 }

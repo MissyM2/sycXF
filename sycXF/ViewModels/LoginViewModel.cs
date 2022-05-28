@@ -197,7 +197,6 @@ namespace sycXF.ViewModels
                 _settingsService.AuthIdToken = string.Empty;
             }
 
-            _settingsService.UseFakeLocation = false;
         }
 
         private async Task NavigateAsync(string url)
