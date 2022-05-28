@@ -32,7 +32,13 @@
     </FlyoutItem>
 
     <TabBar Route="Main">
-        <ShellContent Title="MYCLOSET" Route="MyCloset" Icon="{StaticResource MyClosetIconImageSource}" ContentTemplate="{DataTemplate views:MyClosetView}" />
-        <ShellContent Title="PROFILE" Route="Profile" Icon="{StaticResource ProfileIconImageSource}" ContentTemplate="{DataTemplate views:ProfileView}" />
+        <ShellContent Title="My Closet"
+                      Route="MyCloset"
+                      Icon="{StaticResource MyClosetIconImageSource}"
+                      ContentTemplate="{DataTemplate views:MyClosetView}" />
+        <ShellContent Title="Share Closet"
+                      Route="ShareCloset"
+                      Icon="{StaticResource ProfileIconImageSource}"
+                      ContentTemplate="{DataTemplate views:ProfileView}" />
     </TabBar>
 </Shell>

@@ -24,10 +24,7 @@ namespace sycXF
 
         private void InitializeRouting()
         {
-            Routing.RegisterRoute ("Basket", typeof (BasketView));
             Routing.RegisterRoute ("Settings", typeof (SettingsView));
-            Routing.RegisterRoute ("OrderDetail", typeof (OrderDetailView));
-            Routing.RegisterRoute ("Checkout", typeof (CheckoutView));
         }
 
 

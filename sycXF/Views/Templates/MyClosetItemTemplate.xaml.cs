@@ -2,9 +2,9 @@
 
 namespace sycXF.Views.Templates
 {
-    public partial class OrderTemplate : ContentView
+    public partial class MyClosetItemTemplate : SwipeView
     {
-        public OrderTemplate()
+        public MyClosetItemTemplate()
         {
             InitializeComponent();
         }

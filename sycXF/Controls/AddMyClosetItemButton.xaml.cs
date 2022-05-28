@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace sycXF.Views
+namespace sycXF.Controls
 {
-    public partial class ProfileView : ContentPage
+    public partial class AddMyClosetItemButton : Grid
     {
-        public ProfileView()
+        public AddMyClosetItemButton()
         {
             InitializeComponent();
         }

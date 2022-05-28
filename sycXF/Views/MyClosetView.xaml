@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <views:ContentPageBase
     x:Class="sycXF.Views.MyClosetView"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -16,8 +16,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style x:Key="ProductsListStyle" TargetType="{x:Type ListView}">
-                <Setter Property="RowHeight" Value="400" />
+            <Style x:Key="MyClosetItemsListStyle" TargetType="{x:Type ListView}">
+                <Setter Property="RowHeight" Value="250" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="Margin" Value="0" />
             </Style>
@@ -28,7 +28,7 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
-            <animations:StoryBoard x:Key="ProductsAnimation" Target="{x:Reference Products}">
+            <animations:StoryBoard x:Key="MyClosetItemsAnimation" Target="{x:Reference MyClosetItems}">
                 <animations:FadeInAnimation
                     Delay="250"
                     Direction="Up"
@@ -39,7 +39,7 @@
     </ContentPage.Resources>
     <ContentPage.Triggers>
         <EventTrigger Event="Appearing">
-            <triggers:BeginAnimation Animation="{StaticResource ProductsAnimation}" />
+            <triggers:BeginAnimation Animation="{StaticResource MyClosetItemsAnimation}" />
         </EventTrigger>
     </ContentPage.Triggers>
     <ContentPage.ToolbarItems>
@@ -49,17 +49,17 @@
         <!--  MYCLOSET  -->
         <Label
             HorizontalOptions="Center"
-            IsVisible="{Binding Products, Converter={StaticResource ListIsNullOrEmptyConverter}}"
+            IsVisible="{Binding MyClosetItems, Converter={StaticResource ListIsNullOrEmptyConverter}}"
             Text="NO ITEMS IN MY CLOSET FOUND"
             VerticalOptions="Center" />
         <ListView
-            x:Name="Products"
+            x:Name="MyClosetItems"
             CachingStrategy="RecycleElement"
-            SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-            IsVisible="{Binding Products, Converter={StaticResource ListIsNotNullOrEmptyConverter}}"
-            ItemsSource="{Binding Products}"
+            SelectedItem="{Binding SelectedMyClosetItem, Mode=TwoWay}"
+            IsVisible="{Binding MyClosetItems, Converter={StaticResource ListIsNotNullOrEmptyConverter}}"
+            ItemsSource="{Binding MyClosetItems}"
             SeparatorVisibility="None"
-            Style="{StaticResource ProductsListStyle}">
+            Style="{StaticResource MyClosetItemsListStyle}">
             <ListView.Behaviors>
                 <xtc:EventToCommandBehavior
                     Command="{Binding AddMyClosetItemCommand}"
@@ -69,7 +69,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <templates:ProductTemplate />
+                        <templates:MyClosetItemTemplate />
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -89,26 +89,6 @@
             </ActivityIndicator.WidthRequest>
         </ActivityIndicator>
 
-        <xtc:BadgeView
-            x:Name="ShoppingCart"
-            BackgroundColor="{AppThemeBinding Light={StaticResource DarkBackgroundColor}, Dark={StaticResource LightBackgroundColor}}"
-            TextColor="{AppThemeBinding Light={StaticResource DarkForegroundColor}, Dark={StaticResource LightForegroundColor}}"
-            BadgePosition="TopRight"
-            AutoHide="True"
-            FontSize="Micro"
-            Text="{Binding BadgeCount, Mode=OneWay}"
-            Padding="16,0"
-            Margin="0,0,16,16"
-            HorizontalOptions="End"
-            VerticalOptions="End">
-            <ImageButton
-                Source="{DynamicResource BasketIconForTitleImageSource}"
-                Command="{Binding ViewBasketCommand}"
-                BackgroundColor="{StaticResource LightGreenColor}"
-                Padding="16"
-                CornerRadius="8"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"/>
-        </xtc:BadgeView>
+        
     </Grid>
 </views:ContentPageBase>

@@ -105,7 +105,6 @@
             <x:String x:Key="SettingsIcon">&#xf013;</x:String>
             <x:String x:Key="MyClosetIcon">&#xf03a;</x:String>
             <x:String x:Key="ProfileIcon">&#xf2bd;</x:String>
-            <x:String x:Key="BasketIcon">&#xf07a;</x:String>
             <x:String x:Key="FilterIcon">&#xf0b0;</x:String>
             <x:String x:Key="AddIcon">&#xf067;</x:String>
             <x:String x:Key="CircleIcon">&#xf111;</x:String>
@@ -126,30 +125,23 @@
                 x:Key="MyClosetIconImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"
                 Glyph="{StaticResource MyClosetIcon}"/>
-            <FontImageSource
-                x:Key="ProfileIconImageSource"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                Glyph="{StaticResource ProfileIcon}" />
-            <FontImageSource
-                x:Key="BasketIconImageSource"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                Glyph="{StaticResource BasketIcon}" />
-
-            <FontImageSource
-                x:Key="BasketIconForTitleImageSource"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                Glyph="{StaticResource BasketIcon}"
-                Size="22"
-                Color="{AppThemeBinding Dark={StaticResource DarkFontColor}, Light={StaticResource LightFontColor}}"/>
+          
             <FontImageSource
                 x:Key="FilterIconImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"
                 Glyph="{StaticResource FilterIcon}" />
+
             <FontImageSource
                 x:Key="FilterHighlightIconImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"
                 Glyph="{StaticResource FilterIcon}"
                 Color="{StaticResource AccentColor}"/>
+
+             <FontImageSource
+                x:Key="ProfileIconImageSource"
+                FontFamily="{StaticResource FontAwesomeSolid}"
+                Glyph="{StaticResource ProfileIcon}" />
+
             <FontImageSource
                 x:Key="FilterIconForTitleImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"

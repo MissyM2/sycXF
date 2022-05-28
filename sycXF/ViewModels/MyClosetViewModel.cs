@@ -1,6 +1,5 @@
-﻿using sycXF.Models.Basket;
-using sycXF.Models.MyCloset;
-using sycXF.Services.Basket;
+﻿using sycXF.Models.MyCloset;
+using sycXF.Services;
 using sycXF.Services.MyCloset;
 using sycXF.Services.Settings;
 using sycXF.Services.User;
@@ -17,46 +16,46 @@ namespace sycXF.ViewModels
     public class MyClosetViewModel : ViewModelBase
     {
         private ObservableCollection<MyClosetItem> _products;
-        private MyClosetItem _selectedProduct;
+        private MyClosetItem _selectedMyClosetItem;
         private ObservableCollection<MyClosetSeason> _seasons;
         private MyClosetSeason _season;
         private ObservableCollection<MyClosetType> _types;
         private MyClosetType _type;
         private int _badgeCount;
-        private IMyClosetService _catalogService;
-        private IBasketService _basketService;
+        private IMyClosetService _myClosetService;
         private ISettingsService _settingsService;
         private IUserService _userService;
+        private IDialogService _dialogService;
 
         public MyClosetViewModel()
         {
             this.MultipleInitialization = true;
 
-            _catalogService = DependencyService.Get<IMyClosetService> ();
-            _basketService = DependencyService.Get<IBasketService> ();
+            _myClosetService = DependencyService.Get<IMyClosetService> ();
             _settingsService = DependencyService.Get<ISettingsService> ();
             _userService = DependencyService.Get<IUserService> ();
+            _dialogService = DependencyService.Get<IDialogService>();
         }
 
-        public ObservableCollection<MyClosetItem> Products
+        public ObservableCollection<MyClosetItem> MyClosetItems
         {
             get => _products;
             set
             {
                 _products = value;
-                RaisePropertyChanged(() => Products);
+                RaisePropertyChanged(() => MyClosetItems);
             }
         }
 
-        public MyClosetItem SelectedProduct
+        public MyClosetItem SelectedMyClosetItem
         {
-            get => _selectedProduct;
+            get => _selectedMyClosetItem;
             set
             {
                 if (value == null)
                     return;
-                _selectedProduct = null;
-                RaisePropertyChanged(() => SelectedProduct);
+                _selectedMyClosetItem = null;
+                RaisePropertyChanged(() => SelectedMyClosetItem);
             }
         }
 
@@ -116,51 +115,74 @@ namespace sycXF.ViewModels
 
         public ICommand AddMyClosetItemCommand => new Command<MyClosetItem>(AddMyClosetItem);
 
+        public ICommand DeleteCommand => new Command<MyClosetItem>(async (item) => await DeleteMyClosetItemAsync(item));
+
+        private async Task DeleteMyClosetItemAsync(MyClosetItem item)
+        {
+            await _dialogService.ShowAlertAsync("Delete", "Delete this closet item function", "OK");
+
+
+            //BasketItems.Remove(item);
+
+            //var authToken = _settingsService.AuthAccessToken;
+            //var userInfo = await _userService.GetUserInfoAsync(authToken);
+            //var basket = await _basketService.GetBasketAsync(userInfo.UserId, authToken);
+            //if (basket != null)
+            //{
+            //    basket.Items.Remove(item);
+            //    await _basketService.UpdateBasketAsync(basket, authToken);
+            //    BadgeCount = basket.Items.Count();
+            //}
+
+            //await ReCalculateTotalAsync();
+        }
+
         public ICommand FilterCommand => new Command(async () => await FilterAsync());
 
 		public ICommand ClearFilterCommand => new Command(async () => await ClearFilterAsync());
 
-        public ICommand ViewBasketCommand => new Command (async () => await ViewBasket ());
+        //public ICommand ViewBasketCommand => new Command (async () => await ViewBasket ());
 
         public override async Task InitializeAsync (IDictionary<string, string> query)
         {
             IsBusy = true;
 
             // Get MyCloset, Seasons and Types
-            Products = await _catalogService.GetMyClosetAsync ();
-            Seasons = await _catalogService.GetMyClosetSeasonAsync ();
-            Types = await _catalogService.GetMyClosetTypeAsync ();
+            MyClosetItems = await _myClosetService.GetMyClosetAsync ();
+            Seasons = await _myClosetService.GetMyClosetSeasonAsync ();
+            Types = await _myClosetService.GetMyClosetTypeAsync ();
 
             var authToken = _settingsService.AuthAccessToken;
             var userInfo = await _userService.GetUserInfoAsync (authToken);
 
-            var basket = await _basketService.GetBasketAsync (userInfo.UserId, authToken);
-
-            BadgeCount = basket?.Items?.Count () ?? 0;
+            //BadgeCount = basket?.Items?.Count () ?? 0;
 
             IsBusy = false;
         }
 
-        private async void AddMyClosetItem(MyClosetItem catalogItem)
+        private async void AddMyClosetItem(MyClosetItem myClosetItem)
         {
             var authToken = _settingsService.AuthAccessToken;
             var userInfo = await _userService.GetUserInfoAsync (authToken);
-            var basket = await _basketService.GetBasketAsync (userInfo.UserId, authToken);
-            if(basket != null)
-            {
-                basket.Items.Add (
-                    new BasketItem
-                    {
-                        ProductId = catalogItem.Id,
-                        ProductName = catalogItem.Name,
-                        PictureUrl = catalogItem.PictureUri,
-                        UnitPrice = catalogItem.Price,
-                        Quantity = 1
-                    });
 
-                await _basketService.UpdateBasketAsync (basket, authToken);
-                BadgeCount = basket.Items.Count ();
-            }
+            await _dialogService.ShowAlertAsync("Add", "Add a closet item function", "OK");
+
+            //var basket = await _basketService.GetBasketAsync (userInfo.UserId, authToken);
+            //if(basket != null)
+            //{
+            //    basket.Items.Add (
+            //        new BasketItem
+            //        {
+            //            MyClosetItemId = myClosetItem.Id,
+            //            MyClosetItemName = myClosetItem.Name,
+            //            PictureUrl = myClosetItem.PictureUri,
+            //            UnitPrice = myClosetItem.Price,
+            //            Quantity = 1
+            //        });
+
+            //    await _basketService.UpdateBasketAsync (basket, authToken);
+            //BadgeCount = basket.Items.Count ();
+            //}
         }
 
         private async Task FilterAsync()
@@ -171,7 +193,7 @@ namespace sycXF.ViewModels
 
                 if (Season != null && Type != null)
                 {
-                    Products = await _catalogService.FilterAsync(Season.Id, Type.Id);
+                    MyClosetItems = await _myClosetService.FilterAsync(Season.Id, Type.Id);
                 }
             }
             finally
@@ -186,14 +208,11 @@ namespace sycXF.ViewModels
 
             Season = null;
             Type = null;
-            Products = await _catalogService.GetMyClosetAsync();
+            MyClosetItems = await _myClosetService.GetMyClosetAsync();
 
             IsBusy = false;
         }
 
-        private Task ViewBasket()
-        {
-            return NavigationService.NavigateToAsync ("Basket");
-        }
+       
     }
 }

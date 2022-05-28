@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<SwipeView
+    x:Class="sycXF.Views.Templates.MyClosetItemTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:sycXF.Controls;assembly=sycXF"
+    xmlns:vm="clr-namespace:sycXF.ViewModels">
+    <SwipeView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="MyClosetItemNameStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Margin" Value="0, 12, 0, 6" />
+            </Style>
+
+            <Style x:Key="MyClosetItemSeasonStyle" 
+               TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource MontserratRegular}" />
+                <!--<Setter Property="FontSize" 
+                        Value="{StaticResource MidMediumSize}" />
+                <Setter Property="HorizontalOptions" 
+                        Value="Start" />-->
+            </Style>
+
+            <Style x:Key="MyClosetItemTypeStyle" 
+               TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource MontserratRegular}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MidMediumSize}" />
+                <Setter Property="HorizontalOptions" 
+                        Value="Start" />
+            </Style>
+
+
+            <Style x:Key="AddButtonStyle" TargetType="{x:Type Grid}">
+                <Setter Property="HeightRequest" Value="42" />
+                <Setter Property="WidthRequest" Value="42" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="Margin" Value="0,0,0,24" />
+            </Style>
+
+            <Style x:Key="AddImageStyle" TargetType="{x:Type Image}">
+                <Setter Property="HeightRequest" Value="24" />
+                <Setter Property="WidthRequest" Value="24" />
+            </Style>
+
+        </ResourceDictionary>
+    </SwipeView.Resources>
+    <SwipeView.RightItems>
+        <SwipeItems>
+            <SwipeItem Text="Delete" BackgroundColor="Red"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MyClosetViewModel }}, Path=DeleteCommand}"
+                CommandParameter="{Binding}"/>
+        </SwipeItems>
+    </SwipeView.RightItems>
+
+    <ContentView.Content>
+        <Grid BackgroundColor="yellow">
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS, Android" Value="0" />
+                    <On Platform="UWP, WinRT, WinPhone" Value="12, 0" />
+                </OnPlatform>
+            </Grid.Padding>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--  IMAGE  -->
+            <Image
+                Grid.Column="0"
+                Grid.Row="0"
+                Grid.RowSpan="4"
+                Aspect="AspectFit"
+                VerticalOptions="Start"
+                Margin="12,0,0,0"
+                BackgroundColor="pink"
+                Source="{Binding PictureUri, TargetNullValue='default_product.png'}" />
+            
+            <!-- SEASON -->
+            <Label 
+                Grid.Column="1"
+                Grid.Row="0"
+                BackgroundColor="green"
+                Text="{Binding MyClosetSeason}"
+                Style="{StaticResource MyClosetItemSeasonStyle}"/>
+            <!-- TYPE -->
+            <Label    
+                Grid.Column="1"
+                Grid.Row="1"
+                Text="{Binding MyClosetType}"
+                BackgroundColor="lightblue"
+                Style="{StaticResource MyClosetItemTypeStyle}"/>
+             <!--  NAME/DESCRIPTION  -->
+            <Label
+                Grid.Column="1"
+                Grid.Row="2"
+                Grid.RowSpan="2"
+                BackgroundColor="orange"
+                Style="{StaticResource MyClosetItemNameStyle}"
+                Text="{Binding Name, Converter={StaticResource ToUpperConverter}}" />
+
+            <controls:AddMyClosetItemButton Grid.Column="1"
+                Grid.Row="4"/>
+           
+        </Grid>
+    </ContentView.Content>
+</SwipeView>
