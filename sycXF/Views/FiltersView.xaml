@@ -5,7 +5,7 @@
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:viewmodels="clr-namespace:sycXF.ViewModels"
     x:Class="sycXF.Views.FiltersView"
-    x:DataType="viewmodels:CatalogViewModel"
+    x:DataType="viewmodels:MyClosetViewModel"
     Size="240,320"
     VerticalOptions="Center"
     HorizontalOptions="Center">
@@ -68,12 +68,12 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
-    <!-- BRAND -->
+    <!-- SEASON -->
     <Picker
       Grid.Row="0"
-      Title="BRAND" 
-      ItemsSource="{Binding Brands}"
-      SelectedItem="{Binding Brand, Mode=TwoWay}"
+      Title="SEASON" 
+      ItemsSource="{Binding Seasons}"
+      SelectedItem="{Binding Season, Mode=TwoWay}"
       Style="{StaticResource FilterPickerStyle}">
       <Picker.HeightRequest>   
         <OnPlatform x:TypeArguments="x:Double">

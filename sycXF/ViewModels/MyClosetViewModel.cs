@@ -1,7 +1,7 @@
 ﻿using sycXF.Models.Basket;
-using sycXF.Models.Catalog;
+using sycXF.Models.MyCloset;
 using sycXF.Services.Basket;
-using sycXF.Services.Catalog;
+using sycXF.Services.MyCloset;
 using sycXF.Services.Settings;
 using sycXF.Services.User;
 using sycXF.ViewModels.Base;
@@ -14,31 +14,31 @@ using Xamarin.Forms;
 
 namespace sycXF.ViewModels
 {
-    public class CatalogViewModel : ViewModelBase
+    public class MyClosetViewModel : ViewModelBase
     {
-        private ObservableCollection<CatalogItem> _products;
-        private CatalogItem _selectedProduct;
-        private ObservableCollection<CatalogBrand> _brands;
-        private CatalogBrand _brand;
-        private ObservableCollection<CatalogType> _types;
-        private CatalogType _type;
+        private ObservableCollection<MyClosetItem> _products;
+        private MyClosetItem _selectedProduct;
+        private ObservableCollection<MyClosetSeason> _seasons;
+        private MyClosetSeason _season;
+        private ObservableCollection<MyClosetType> _types;
+        private MyClosetType _type;
         private int _badgeCount;
-        private ICatalogService _catalogService;
+        private IMyClosetService _catalogService;
         private IBasketService _basketService;
         private ISettingsService _settingsService;
         private IUserService _userService;
 
-        public CatalogViewModel()
+        public MyClosetViewModel()
         {
             this.MultipleInitialization = true;
 
-            _catalogService = DependencyService.Get<ICatalogService> ();
+            _catalogService = DependencyService.Get<IMyClosetService> ();
             _basketService = DependencyService.Get<IBasketService> ();
             _settingsService = DependencyService.Get<ISettingsService> ();
             _userService = DependencyService.Get<IUserService> ();
         }
 
-        public ObservableCollection<CatalogItem> Products
+        public ObservableCollection<MyClosetItem> Products
         {
             get => _products;
             set
@@ -48,7 +48,7 @@ namespace sycXF.ViewModels
             }
         }
 
-        public CatalogItem SelectedProduct
+        public MyClosetItem SelectedProduct
         {
             get => _selectedProduct;
             set
@@ -60,28 +60,28 @@ namespace sycXF.ViewModels
             }
         }
 
-        public ObservableCollection<CatalogBrand> Brands
+        public ObservableCollection<MyClosetSeason> Seasons
         {
-            get => _brands;
+            get => _seasons;
             set
             {
-                _brands = value;
-                RaisePropertyChanged(() => Brands);
+                _seasons = value;
+                RaisePropertyChanged(() => Seasons);
             }
         }
 
-        public CatalogBrand Brand
+        public MyClosetSeason Season
         {
-            get => _brand;
+            get => _season;
             set
             {
-                _brand = value;
-                RaisePropertyChanged(() => Brand);
+                _season = value;
+                RaisePropertyChanged(() => Season);
                 RaisePropertyChanged(() => IsFilter);
             }
         }
 
-        public ObservableCollection<CatalogType> Types
+        public ObservableCollection<MyClosetType> Types
         {
             get => _types;
             set
@@ -91,7 +91,7 @@ namespace sycXF.ViewModels
             }
         }
 
-        public CatalogType Type
+        public MyClosetType Type
         {
             get => _type;
             set
@@ -102,7 +102,7 @@ namespace sycXF.ViewModels
             }
         }
 
-        public bool IsFilter { get { return Brand != null || Type != null; } }
+        public bool IsFilter { get { return Season != null || Type != null; } }
 
         public int BadgeCount
         {
@@ -114,7 +114,7 @@ namespace sycXF.ViewModels
             }
         }
 
-        public ICommand AddCatalogItemCommand => new Command<CatalogItem>(AddCatalogItem);
+        public ICommand AddMyClosetItemCommand => new Command<MyClosetItem>(AddMyClosetItem);
 
         public ICommand FilterCommand => new Command(async () => await FilterAsync());
 
@@ -126,10 +126,10 @@ namespace sycXF.ViewModels
         {
             IsBusy = true;
 
-            // Get Catalog, Brands and Types
-            Products = await _catalogService.GetCatalogAsync ();
-            Brands = await _catalogService.GetCatalogBrandAsync ();
-            Types = await _catalogService.GetCatalogTypeAsync ();
+            // Get MyCloset, Seasons and Types
+            Products = await _catalogService.GetMyClosetAsync ();
+            Seasons = await _catalogService.GetMyClosetSeasonAsync ();
+            Types = await _catalogService.GetMyClosetTypeAsync ();
 
             var authToken = _settingsService.AuthAccessToken;
             var userInfo = await _userService.GetUserInfoAsync (authToken);
@@ -141,7 +141,7 @@ namespace sycXF.ViewModels
             IsBusy = false;
         }
 
-        private async void AddCatalogItem(CatalogItem catalogItem)
+        private async void AddMyClosetItem(MyClosetItem catalogItem)
         {
             var authToken = _settingsService.AuthAccessToken;
             var userInfo = await _userService.GetUserInfoAsync (authToken);
@@ -169,9 +169,9 @@ namespace sycXF.ViewModels
             {    
                 IsBusy = true;
 
-                if (Brand != null && Type != null)
+                if (Season != null && Type != null)
                 {
-                    Products = await _catalogService.FilterAsync(Brand.Id, Type.Id);
+                    Products = await _catalogService.FilterAsync(Season.Id, Type.Id);
                 }
             }
             finally
@@ -184,9 +184,9 @@ namespace sycXF.ViewModels
         {
             IsBusy = true;
 
-            Brand = null;
+            Season = null;
             Type = null;
-            Products = await _catalogService.GetCatalogAsync();
+            Products = await _catalogService.GetMyClosetAsync();
 
             IsBusy = false;
         }

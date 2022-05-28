@@ -19,7 +19,7 @@ namespace sycXF.Views
 
         void OnFilterClicked (System.Object sender, System.EventArgs e)
         {
-            if(BindingContext is CatalogViewModel viewModel)
+            if(BindingContext is MyClosetViewModel viewModel)
             {
                 viewModel.FilterCommand.Execute (null);
                 this.Dismiss (true);

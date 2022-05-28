@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using sycXF.Models.Basket;
-using sycXF.Models.Catalog;
+using sycXF.Models.MyCloset;
 
 namespace sycXF.Services.FixUri
 {
     public interface IFixUriService
     {
-        void FixCatalogItemPictureUri(IEnumerable<CatalogItem> catalogItems);
+        void FixMyClosetItemPictureUri(IEnumerable<MyClosetItem> catalogItems);
         void FixBasketItemPictureUri(IEnumerable<BasketItem> basketItems);
     }
 }

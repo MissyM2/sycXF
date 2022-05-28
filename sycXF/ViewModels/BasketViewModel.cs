@@ -1,5 +1,5 @@
 ﻿using sycXF.Models.Basket;
-using sycXF.Models.Catalog;
+using sycXF.Models.MyCloset;
 using sycXF.Services.Basket;
 using sycXF.Services.Settings;
 using sycXF.Services.User;
@@ -92,7 +92,7 @@ namespace sycXF.ViewModels
             RaisePropertyChanged (() => BasketItems);
         }
 
-        private async Task AddCatalogItemAsync(CatalogItem item)
+        private async Task AddMyClosetItemAsync(MyClosetItem item)
         {
             BasketItems.Add(new BasketItem
             {

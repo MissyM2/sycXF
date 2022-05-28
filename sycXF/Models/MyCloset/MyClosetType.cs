@@ -1,6 +1,6 @@
-﻿namespace sycXF.Models.Catalog
+﻿namespace sycXF.Models.MyCloset
 {
-    public class CatalogType
+    public class MyClosetType
     {
         public int Id { get; set; }
         public string Type { get; set; }

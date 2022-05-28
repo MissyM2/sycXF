@@ -27,7 +27,7 @@ namespace sycXF.Services
             if (string.IsNullOrEmpty(_settingsService.AuthAccessToken))
                 return NavigateToAsync("//Login");
             else
-                return NavigateToAsync("//Main/Catalog");
+                return NavigateToAsync("//Main/MyCloset");
         }
 
         public Task NavigateToAsync (string route, IDictionary<string, string> routeParameters = null)

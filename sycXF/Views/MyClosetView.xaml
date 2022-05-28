@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <views:ContentPageBase
-    x:Class="sycXF.Views.CatalogView"
+    x:Class="sycXF.Views.MyClosetView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:animations="clr-namespace:sycXF.Animations;assembly=sycXF"
@@ -10,9 +10,9 @@
     xmlns:viewmodels="clr-namespace:sycXF.ViewModels"
     xmlns:views="clr-namespace:sycXF.Views;assembly=sycXF"
     xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
-    Title="CATALOG"
+    Title="MYCLOSET"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true"
-    x:DataType="viewmodels:CatalogViewModel">
+    x:DataType="viewmodels:MyClosetViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
 
@@ -46,11 +46,11 @@
         <ToolbarItem IconImageSource="{DynamicResource FilterIconForTitleImageSource}" Clicked="OnFilterChanged" />
     </ContentPage.ToolbarItems>
     <Grid ColumnSpacing="0" RowSpacing="0">
-        <!--  CATALOG  -->
+        <!--  MYCLOSET  -->
         <Label
             HorizontalOptions="Center"
             IsVisible="{Binding Products, Converter={StaticResource ListIsNullOrEmptyConverter}}"
-            Text="NO PRODUCTS FOUND"
+            Text="NO ITEMS IN MY CLOSET FOUND"
             VerticalOptions="Center" />
         <ListView
             x:Name="Products"
@@ -62,7 +62,7 @@
             Style="{StaticResource ProductsListStyle}">
             <ListView.Behaviors>
                 <xtc:EventToCommandBehavior
-                    Command="{Binding AddCatalogItemCommand}"
+                    Command="{Binding AddMyClosetItemCommand}"
                     EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
                     EventName="ItemTapped" />
             </ListView.Behaviors>

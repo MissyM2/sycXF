@@ -1,77 +1,77 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using sycXF.Models.Catalog;
+using sycXF.Models.MyCloset;
 using sycXF.Services.RequestProvider;
 using sycXF.Extensions;
 using System.Collections.Generic;
 using sycXF.Services.FixUri;
 using sycXF.Helpers;
 
-namespace sycXF.Services.Catalog
+namespace sycXF.Services.MyCloset
 {
-    public class CatalogService : ICatalogService
+    public class MyClosetService : IMyClosetService
     {
         private readonly IRequestProvider _requestProvider;
         private readonly IFixUriService _fixUriService;
 		
         private const string ApiUrlBase = "c/api/v1/catalog";
 
-        public CatalogService(IRequestProvider requestProvider, IFixUriService fixUriService)
+        public MyClosetService(IRequestProvider requestProvider, IFixUriService fixUriService)
         {
             _requestProvider = requestProvider;
             _fixUriService = fixUriService;
         }
 
-        public async Task<ObservableCollection<CatalogItem>> FilterAsync(int catalogBrandId, int catalogTypeId)
+        public async Task<ObservableCollection<MyClosetItem>> FilterAsync(int catalogSeasonId, int catalogTypeId)
         {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items/type/{catalogTypeId}/brand/{catalogBrandId}");
+            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items/type/{catalogTypeId}/brand/{catalogSeasonId}");
 
-            CatalogRoot catalog = await _requestProvider.GetAsync<CatalogRoot>(uri);
+            MyClosetRoot catalog = await _requestProvider.GetAsync<MyClosetRoot>(uri);
 
             if (catalog?.Data != null)
                 return catalog?.Data.ToObservableCollection();
             else
-                return new ObservableCollection<CatalogItem>();
+                return new ObservableCollection<MyClosetItem>();
         }
 
-        public async Task<ObservableCollection<CatalogItem>> GetCatalogAsync()
+        public async Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync()
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
 
-            CatalogRoot catalog = await _requestProvider.GetAsync<CatalogRoot>(uri);
+            MyClosetRoot catalog = await _requestProvider.GetAsync<MyClosetRoot>(uri);
 
             if (catalog?.Data != null)
             {
-                _fixUriService.FixCatalogItemPictureUri(catalog?.Data);
+                _fixUriService.FixMyClosetItemPictureUri(catalog?.Data);
                 return catalog?.Data.ToObservableCollection();
             }
             else
-                return new ObservableCollection<CatalogItem>();
+                return new ObservableCollection<MyClosetItem>();
         }
 
-        public async Task<ObservableCollection<CatalogBrand>> GetCatalogBrandAsync()
+        public async Task<ObservableCollection<MyClosetSeason>> GetMyClosetSeasonAsync()
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogbrands");
 
-            IEnumerable<CatalogBrand> brands = await _requestProvider.GetAsync<IEnumerable<CatalogBrand>>(uri);
+            IEnumerable<MyClosetSeason> brands = await _requestProvider.GetAsync<IEnumerable<MyClosetSeason>>(uri);
 
             if (brands != null)
                 return brands?.ToObservableCollection();
             else
-                return new ObservableCollection<CatalogBrand>();
+                return new ObservableCollection<MyClosetSeason>();
         }
 
-        public async Task<ObservableCollection<CatalogType>> GetCatalogTypeAsync()
+        public async Task<ObservableCollection<MyClosetType>> GetMyClosetTypeAsync()
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogtypes");
 
-            IEnumerable<CatalogType> types = await _requestProvider.GetAsync<IEnumerable<CatalogType>>(uri);
+            IEnumerable<MyClosetType> types = await _requestProvider.GetAsync<IEnumerable<MyClosetType>>(uri);
 
             if (types != null)
                 return types.ToObservableCollection();
             else
-                return new ObservableCollection<CatalogType>();
+                return new ObservableCollection<MyClosetType>();
         }
     }
 }

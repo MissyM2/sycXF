@@ -1,5 +1,5 @@
 ﻿using sycXF.Models.Basket;
-using sycXF.Models.Catalog;
+using sycXF.Models.MyCloset;
 using sycXF.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace sycXF.Services.FixUri
             _settingsService = settingsService;
         }
 
-        public void FixCatalogItemPictureUri(IEnumerable<CatalogItem> catalogItems)
+        public void FixMyClosetItemPictureUri(IEnumerable<MyClosetItem> catalogItems)
         {
             if (catalogItems == null)
             {

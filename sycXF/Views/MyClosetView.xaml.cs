@@ -7,11 +7,11 @@ using Xamarin.Forms;
 
 namespace sycXF.Views
 {
-    public partial class CatalogView : ContentPageBase
+    public partial class MyClosetView : ContentPageBase
     {
         private FiltersView _filterView = new FiltersView();
 
-        public CatalogView()
+        public MyClosetView()
         {
             InitializeComponent();
         }

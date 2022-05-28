@@ -157,7 +157,7 @@ namespace sycXF.ViewModels
                 basketViewModel.BadgeCount = 0;
 
                 // Navigate to Orders
-                await NavigationService.NavigateToAsync("//Main/Catalog");
+                await NavigationService.NavigateToAsync("//Main/MyCloset");
 
                 // Show Dialog
                 await DialogService.ShowAlertAsync("Order sent successfully!", "Checkout", "Ok");
