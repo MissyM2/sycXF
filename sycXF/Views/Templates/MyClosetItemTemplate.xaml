@@ -60,6 +60,7 @@
     </SwipeView.RightItems>
 
     <ContentView.Content>
+        <Frame>
         <Grid BackgroundColor="yellow">
             <Grid.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
@@ -116,5 +117,6 @@
                 Grid.Row="4"/>
            
         </Grid>
+        </Frame>
     </ContentView.Content>
 </SwipeView>
