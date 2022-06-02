@@ -32,11 +32,11 @@
                 <Setter Property="FontAttributes"
                     Value="Bold" />
                 <Setter Property="FontSize"
-                    Value="{StaticResource MediumSize}" />
+                    Value="{StaticResource LargeSize}" />
                 <Setter Property="HorizontalOptions"
                     Value="Center" />
                 <Setter Property="Margin"
-                    Value="0, 12" />
+                    Value="0, 18" />
             </Style>
 
             <Style x:Key="HeaderLabelStyle"
@@ -44,7 +44,7 @@
                 <Setter Property="FontFamily"
                     Value="{StaticResource MontserratRegular}" />
                 <Setter Property="FontSize"
-                    Value="{StaticResource LittleSize}" />
+                    Value="{StaticResource MediumSize}" />
                 <Setter Property="TextColor"
                     Value="{StaticResource GreenColor}" />
                 <Setter Property="HorizontalOptions"

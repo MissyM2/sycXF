@@ -162,7 +162,7 @@
                 x:Key="AddIconLightImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"
                 Glyph="{StaticResource AddIcon}"
-                Color="{StaticResource WhiteColor}" />
+                Color="#83D01B" />
             <FontImageSource
                 x:Key="CircleIconImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"
@@ -252,7 +252,7 @@
 
             <Style x:Key="EntryStyle" TargetType="{x:Type Entry}">
                 <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
-                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="FontSize" Value="{StaticResource BigSize}" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="Opacity" Value="0.6" />

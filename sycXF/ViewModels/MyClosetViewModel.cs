@@ -113,6 +113,22 @@ namespace sycXF.ViewModels
             }
         }
 
+        public ICommand MyClosetItemSelectedCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedMyClosetItem == null)
+                        return;
+
+                    
+                    await _dialogService.ShowAlertAsync("Selected", "Item is selected", "OK");
+                    
+                    SelectedMyClosetItem = null;
+                });
+            }
+        }
         public ICommand AddMyClosetItemCommand => new Command<MyClosetItem>(AddMyClosetItem);
 
         public ICommand DeleteCommand => new Command<MyClosetItem>(async (item) => await DeleteMyClosetItemAsync(item));
@@ -121,20 +137,6 @@ namespace sycXF.ViewModels
         {
             await _dialogService.ShowAlertAsync("Delete", "Delete this closet item function", "OK");
 
-
-            //BasketItems.Remove(item);
-
-            //var authToken = _settingsService.AuthAccessToken;
-            //var userInfo = await _userService.GetUserInfoAsync(authToken);
-            //var basket = await _basketService.GetBasketAsync(userInfo.UserId, authToken);
-            //if (basket != null)
-            //{
-            //    basket.Items.Remove(item);
-            //    await _basketService.UpdateBasketAsync(basket, authToken);
-            //    BadgeCount = basket.Items.Count();
-            //}
-
-            //await ReCalculateTotalAsync();
         }
 
         public ICommand FilterCommand => new Command(async () => await FilterAsync());
@@ -167,22 +169,7 @@ namespace sycXF.ViewModels
 
             await _dialogService.ShowAlertAsync("Add", "Add a closet item function", "OK");
 
-            //var basket = await _basketService.GetBasketAsync (userInfo.UserId, authToken);
-            //if(basket != null)
-            //{
-            //    basket.Items.Add (
-            //        new BasketItem
-            //        {
-            //            MyClosetItemId = myClosetItem.Id,
-            //            MyClosetItemName = myClosetItem.Name,
-            //            PictureUrl = myClosetItem.PictureUri,
-            //            UnitPrice = myClosetItem.Price,
-            //            Quantity = 1
-            //        });
-
-            //    await _basketService.UpdateBasketAsync (basket, authToken);
-            //BadgeCount = basket.Items.Count ();
-            //}
+           
         }
 
         private async Task FilterAsync()

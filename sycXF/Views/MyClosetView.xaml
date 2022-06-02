@@ -10,7 +10,8 @@
     xmlns:viewmodels="clr-namespace:sycXF.ViewModels"
     xmlns:views="clr-namespace:sycXF.Views;assembly=sycXF"
     xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
-    Title="MYCLOSET"
+    xmlns:controls="clr-namespace:sycXF.Controls;assembly=sycXF"
+    Title="MyCloset"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true"
     x:DataType="viewmodels:MyClosetViewModel">
     <ContentPage.Resources>
@@ -43,6 +44,7 @@
         </EventTrigger>
     </ContentPage.Triggers>
     <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="{StaticResource AddIconLightImageSource}" Clicked="OnFilterChanged" />
         <ToolbarItem IconImageSource="{DynamicResource FilterIconForTitleImageSource}" Clicked="OnFilterChanged" />
     </ContentPage.ToolbarItems>
     <Grid ColumnSpacing="0" RowSpacing="0">
@@ -52,28 +54,21 @@
             IsVisible="{Binding MyClosetItems, Converter={StaticResource ListIsNullOrEmptyConverter}}"
             Text="NO ITEMS IN MY CLOSET FOUND"
             VerticalOptions="Center" />
-        <ListView
+
+        <CollectionView
             x:Name="MyClosetItems"
-            CachingStrategy="RecycleElement"
-            SelectedItem="{Binding SelectedMyClosetItem, Mode=TwoWay}"
-            IsVisible="{Binding MyClosetItems, Converter={StaticResource ListIsNotNullOrEmptyConverter}}"
             ItemsSource="{Binding MyClosetItems}"
-            SeparatorVisibility="None"
+            SelectionMode="Single"
+            SelectedItem="{Binding SelectedMyClosetItem, Mode=TwoWay}"
+            SelectionChangedCommand="{Binding MyClosetItemSelectedCommand}"
+            IsVisible="{Binding MyClosetItems, Converter={StaticResource ListIsNotNullOrEmptyConverter}}"
             Style="{StaticResource MyClosetItemsListStyle}">
-            <ListView.Behaviors>
-                <xtc:EventToCommandBehavior
-                    Command="{Binding AddMyClosetItemCommand}"
-                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                    EventName="ItemTapped" />
-            </ListView.Behaviors>
-            <ListView.ItemTemplate>
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
                         <templates:MyClosetItemTemplate />
-                    </ViewCell>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
         <!--  INDICATOR  -->
         <ActivityIndicator
             HorizontalOptions="Center"
