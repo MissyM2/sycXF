@@ -57,12 +57,24 @@
 
         <CollectionView
             x:Name="MyClosetItems"
-            ItemsSource="{Binding MyClosetItems}"
+            ItemsSource="{Binding MyClosetItemsGrouped}"
+            IsGrouped="true"
             SelectionMode="Single"
             SelectedItem="{Binding SelectedMyClosetItem, Mode=TwoWay}"
             SelectionChangedCommand="{Binding MyClosetItemSelectedCommand}"
             IsVisible="{Binding MyClosetItems, Converter={StaticResource ListIsNotNullOrEmptyConverter}}"
             Style="{StaticResource MyClosetItemsListStyle}">
+
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <!--<Label Text="missy" BackgroundColor="Aqua"/>-->
+                    <Label Text="{Binding Season}"
+                           BackgroundColor="Aquamarine"
+                           FontSize="Large"
+                           FontAttributes="Bold" />
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                         <templates:MyClosetItemTemplate />
