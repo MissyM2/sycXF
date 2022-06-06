@@ -12,18 +12,18 @@ namespace sycXF.Views
             InitializeComponent();
         }
 
-        protected override object GetLightDismissResult ()
-        {
-            return false;
-        }
+        //protected override object GetLightDismissResult ()
+        //{
+        //    return false;
+        //}
 
-        void OnFilterClicked (System.Object sender, System.EventArgs e)
-        {
-            if(BindingContext is MyClosetViewModel viewModel)
-            {
-                viewModel.FilterCommand.Execute (null);
-                this.Dismiss (true);
-            }
-        }
+        //void OnFilterClicked (System.Object sender, System.EventArgs e)
+        //{
+        //    if(BindingContext is MyClosetViewModel viewModel)
+        //    {
+        //        viewModel.FilterCommand.Execute (null);
+        //        this.Dismiss (true);
+        //    }
+        //}
     }
 }

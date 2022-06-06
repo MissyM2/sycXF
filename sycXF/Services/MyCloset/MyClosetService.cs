@@ -50,16 +50,16 @@ namespace sycXF.Services.MyCloset
                 return new ObservableCollection<MyClosetItem>();
         }
 
-        public async Task<ObservableCollection<MyClosetSeason>> GetMyClosetSeasonAsync()
+        public async Task<ObservableCollection<Season>> GetSeasonAsync()
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogbrands");
 
-            IEnumerable<MyClosetSeason> brands = await _requestProvider.GetAsync<IEnumerable<MyClosetSeason>>(uri);
+            IEnumerable<Season> brands = await _requestProvider.GetAsync<IEnumerable<Season>>(uri);
 
             if (brands != null)
                 return brands?.ToObservableCollection();
             else
-                return new ObservableCollection<MyClosetSeason>();
+                return new ObservableCollection<Season>();
         }
 
         public async Task<ObservableCollection<MyClosetType>> GetMyClosetTypeAsync()

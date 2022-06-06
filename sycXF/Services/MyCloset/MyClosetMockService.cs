@@ -10,19 +10,22 @@ namespace sycXF.Services.MyCloset
 {
     public class MyClosetMockService : IMyClosetService
     {
-        private ObservableCollection<MyClosetSeason> MockMyClosetSeason = new ObservableCollection<MyClosetSeason>
+
+        private Random RandomGenerator = new Random();
+        private int newItemId = 0;
+
+
+        private ObservableCollection<Season> MockSeason = new ObservableCollection<Season>
         {
-            new MyClosetSeason { Id = 1, Season = "Winter Basics" },
-            new MyClosetSeason { Id = 2, Season = "Spring Basics" },
-            new MyClosetSeason { Id = 3, Season = "Summer Basics" },
-            new MyClosetSeason { Id = 4, Season = "Fall Basics" },
-            new MyClosetSeason { Id = 5, Season = "Always in Season" }
+            new Season { Id = 1, Name = "Winter Basics" },
+            new Season { Id = 2, Name = "Spring Basics" },
+            new Season { Id = 3, Name = "Summer Basics" },
+            new Season { Id = 4, Name = "Fall Basics" },
+            new Season { Id = 5, Name = "Always in Season" }
         };
 
         private ObservableCollection<MyClosetType> MockMyClosetType = new ObservableCollection<MyClosetType>
         {
-            new MyClosetType { Id = 1, Type = "Mug" },
-            new MyClosetType { Id = 2, Type = "T-Shirt" },
             new MyClosetType { Id = 3, Type = "Top" },
             new MyClosetType { Id = 4, Type = "Bottom" },
             new MyClosetType { Id = 5, Type = "Dress" },
@@ -42,159 +45,178 @@ namespace sycXF.Services.MyCloset
 
         };
 
+        //public List<MyClosetItem> GetClosetItems()
+        //{
+        //    return allItems
+        //        .Select(b => new MyClosetItem
+        //        {
+        //            Id = b.Id,
+        //            Name = b.Name,
+        //            Description = b.Description,
+        //            PictureUri = b.PictureUri,
+        //            MyClosetSizeId = b.MyClosetSizeId,
+        //            MyClosetSize = b.MyClosetSize,
+        //            SeasonId = b.SeasonId,
+        //            Season = b.CurrentSeason,
+        //            MyClosetTypeId = b.MyClosetTypeId,
+        //            MyClosetType = b.MyClosetType
+
+        //        }).ToList();
+        //}
+
         private ObservableCollection<MyClosetItem> MockMyCloset = new ObservableCollection<MyClosetItem>
         {
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId01,
+                Id = 1,
                 PictureUri = "fake_product_01.png",
                 Name = "Floral cap-sleeved blouse",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
-                MyClosetSeasonId = 2,
-                MyClosetSeason = "Spring Basics",
+                SeasonId = 2,
+                Season = "Spring Basics",
                 MyClosetTypeId = 3,
                 MyClosetType = "Top"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId02,
+                Id = 2,
                 PictureUri = "fake_product_02.png",
                 Name = "Floral skirt",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
-                MyClosetSeasonId = 3,
-                MyClosetSeason = "Summer Basics",
+                SeasonId = 3,
+                Season = "Summer Basics",
                 MyClosetTypeId = 4,
                 MyClosetType = "Bottom"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId03,
+                Id = 3,
                 PictureUri = "fake_product_03.png",
                 Name = "Black tea-length dress",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 3,
                 MyClosetSize = "Medium",
-                MyClosetSeasonId = 1,
-                MyClosetSeason = "Winter Basics",
+                SeasonId = 1,
+                Season = "Winter Basics",
                 MyClosetTypeId = 5,
                 MyClosetType = "Dress"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId04,
+                Id = 4,
                 PictureUri = "fake_product_04.png",
                 Name = "London Fog rain coat",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 4,
                 MyClosetSize = "Large",
-                MyClosetSeasonId = 5,
-                MyClosetSeason = "Always in Season",
+                SeasonId = 5,
+                Season = "Always in Season",
                 MyClosetTypeId = 6,
                 MyClosetType = "Outerwear"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId05,
+                Id = 5,
                 PictureUri = "fake_product_05.png",
                 Name = "Black leather boots",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
-                MyClosetSeason = "Winter Basics",
+                Season = "Winter Basics",
                 MyClosetTypeId = 7,
                 MyClosetType = "Footwear"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId01,
+                Id = 6,
                 PictureUri = "fake_product_01.png",
                 Name = "White button-down blouse",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 3,
                 MyClosetSize = "Medium",
-                MyClosetSeason = "Spring Basics",
+                Season = "Spring Basics",
                 MyClosetTypeId = 3,
                 MyClosetType = "Top"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId02,
+                Id = 7,
                 PictureUri = "fake_product_02.png",
                 Name = "White jean skirt",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 4,
                 MyClosetSize = "Large",
-                MyClosetSeasonId = 3,
-                MyClosetSeason = "Summer Basics",
+                SeasonId = 3,
+                Season = "Summer Basics",
                 MyClosetTypeId = 4,
                 MyClosetType = "Bottom"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId03,
+                Id = 8,
                 PictureUri = "fake_product_03.png",
                 Name = "Flannel long-sleeved dress",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
-                MyClosetSeasonId = 4,
-                MyClosetSeason = "Fall Basics",
+                SeasonId = 4,
+                Season = "Fall Basics",
                 MyClosetTypeId = 5,
                 MyClosetType = "Dress"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId04,
+                Id = 9,
                 PictureUri = "fake_product_04.png",
                 Name = "White Sweater",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 3,
                 MyClosetSize = "Medium",
-                MyClosetSeasonId = 5,
-                MyClosetSeason = "Always in Season",
+                SeasonId = 5,
+                Season = "Always in Season",
                 MyClosetTypeId = 6,
                 MyClosetType = "Outerwear"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId05,
+                Id = 10,
                 PictureUri = "fake_product_05.png",
                 Name = "Pearl Necklace",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 3,
                 MyClosetSize = "Medium",
-                MyClosetSeasonId = 1,
-                MyClosetSeason = "Winter Basics",
+                SeasonId = 1,
+                Season = "Winter Basics",
                 MyClosetTypeId = 8,
                 MyClosetType = "Accessory"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId05,
+                Id = 11,
                 PictureUri = "fake_product_05.png",
                 Name = "Purse",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 4,
                 MyClosetSize = "Large",
-                MyClosetSeasonId = 2,
-                MyClosetSeason = "Spring Basics",
+                SeasonId = 2,
+                Season = "Spring Basics",
                 MyClosetTypeId = 8,
                 MyClosetType = "Accessory"
             },
             new MyClosetItem
             {
-                Id = Common.Common.MockMyClosetItemId05,
+                Id = 12,
                 PictureUri = "fake_product_05.png",
                 Name = "Jeans",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
-                MyClosetSeasonId = 1,
-                MyClosetSeason = "Winter Basics",
+                SeasonId = 1,
+                Season = "Winter Basics",
                 MyClosetTypeId = 4,
                 MyClosetType = "Bottom"
             }
@@ -213,16 +235,16 @@ namespace sycXF.Services.MyCloset
             await Task.Delay(10);
 
             return MockMyCloset
-                .Where(c => c.MyClosetSeasonId == catalogSeasonId &&
+                .Where(c => c.SeasonId == catalogSeasonId &&
                 c.MyClosetTypeId == catalogTypeId)
                 .ToObservableCollection();
         }
 
-        public async Task<ObservableCollection<MyClosetSeason>> GetMyClosetSeasonAsync()
+        public async Task<ObservableCollection<Season>> GetSeasonAsync()
         {
             await Task.Delay(10);
 
-            return MockMyClosetSeason;
+            return MockSeason;
         }
 
         public async Task<ObservableCollection<MyClosetType>> GetMyClosetTypeAsync()

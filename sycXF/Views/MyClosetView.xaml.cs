@@ -16,16 +16,16 @@ namespace sycXF.Views
             InitializeComponent();
         }
 
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
+        //protected override void OnBindingContextChanged()
+        //{
+        //    base.OnBindingContextChanged();
 
-            _filterView.BindingContext = BindingContext;
-        }
+        //    _filterView.BindingContext = BindingContext;
+        //}
 
-        private void OnFilterChanged(object sender, EventArgs e)
-        {
-            Navigation.ShowPopup (_filterView);
-        }
+        //private void OnFilterChanged(object sender, EventArgs e)
+        //{
+        //    Navigation.ShowPopup (_filterView);
+        //}
     }
 }

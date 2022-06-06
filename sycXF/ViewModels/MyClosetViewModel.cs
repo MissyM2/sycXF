@@ -1,9 +1,11 @@
-﻿using sycXF.Models.MyCloset;
+﻿using sycXF.Extensions;
+using sycXF.Models.MyCloset;
 using sycXF.Services;
 using sycXF.Services.MyCloset;
 using sycXF.Services.Settings;
 using sycXF.Services.User;
 using sycXF.ViewModels.Base;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,208 +27,177 @@ namespace sycXF.ViewModels
         #endregion
 
         #region Properties
+        
 
-        private ObservableCollection<MyClosetItem> _myClosetItems;
-        public ObservableCollection<MyClosetItem> MyClosetItems
+        private ObservableCollection<Season> _seasonsCollection;
+        public ObservableCollection<Season> SeasonsCollection
         {
-            get => _myClosetItems;
+            get => _seasonsCollection;
             set
             {
-                _myClosetItems = value;
-                RaisePropertyChanged(() => MyClosetItems);
+                if (value == _seasonsCollection) return;
+                _seasonsCollection = value;
+                RaisePropertyChanged(() => SeasonsCollection);
             }
         }
-
-        private ObservableCollection<Grouping<string, MyClosetItem>> _myClosetItemsGrouped;
-        public ObservableCollection<Grouping<string, MyClosetItem>> MyClosetItemsGrouped
-        {
-            get => _myClosetItemsGrouped;
-            set
-            {
-                _myClosetItemsGrouped = value;
-                RaisePropertyChanged(() => MyClosetItemsGrouped);
-            }
-        }
-
-        private MyClosetItem _selectedMyClosetItem;
-        public MyClosetItem SelectedMyClosetItem
-        {
-            get => _selectedMyClosetItem;
-            set
-            {
-                if (value == null)
-                    return;
-                _selectedMyClosetItem = null;
-                RaisePropertyChanged(() => SelectedMyClosetItem);
-            }
-        }
-
-        private ObservableCollection<MyClosetSeason> _seasons;
-        public ObservableCollection<MyClosetSeason> Seasons
-        {
-            get => _seasons;
-            set
-            {
-                _seasons = value;
-                RaisePropertyChanged(() => Seasons);
-            }
-        }
-
-        private MyClosetSeason _season;
-        public MyClosetSeason Season
-        {
-            get => _season;
-            set
-            {
-                _season = value;
-                RaisePropertyChanged(() => Season);
-                RaisePropertyChanged(() => IsFilter);
-            }
-        }
-
-        private ObservableCollection<MyClosetType> _types;
-        public ObservableCollection<MyClosetType> Types
-        {
-            get => _types;
-            set
-            {
-                _types = value;
-                RaisePropertyChanged(() => Types);
-            }
-        }
-
-        private MyClosetType _type;
-        public MyClosetType Type
-        {
-            get => _type;
-            set
-            {
-                _type = value;
-                RaisePropertyChanged(() => Type);
-                RaisePropertyChanged(() => IsFilter);
-            }
-        }
-
-        private int _badgeCount;
-        public int BadgeCount
-        {
-            get => _badgeCount;
-            set
-            {
-                _badgeCount = value;
-                RaisePropertyChanged(() => BadgeCount);
-            }
-        }
-
-        public bool IsFilter { get { return Season != null || Type != null; } }
-
-        #endregion
-
-        public MyClosetViewModel()
-        {
-            this.MultipleInitialization = true;
-
-            _myClosetService = DependencyService.Get<IMyClosetService> ();
-            _settingsService = DependencyService.Get<ISettingsService> ();
-            _userService = DependencyService.Get<IUserService> ();
-            _dialogService = DependencyService.Get<IDialogService>();
-        }
-
-        public ICommand MyClosetItemSelectedCommand
+        private Season _selectedSeason;
+        public Season SelectedSeason
         {
             get
             {
-                return new Command(async () =>
-                {
-                    if (SelectedMyClosetItem == null)
-                        return;
-
-                    
-                    await _dialogService.ShowAlertAsync("Selected", "Item is selected", "OK");
-                    
-                    SelectedMyClosetItem = null;
-                });
+                return _selectedSeason;
             }
-        }
-        public ICommand AddMyClosetItemCommand => new Command<MyClosetItem>(AddMyClosetItem);
-
-        public ICommand DeleteCommand => new Command<MyClosetItem>(async (item) => await DeleteMyClosetItemAsync(item));
-
-        public ICommand FilterCommand => new Command(async () => await FilterAsync());
-
-		public ICommand ClearFilterCommand => new Command(async () => await ClearFilterAsync());
-
-        //public ICommand ViewBasketCommand => new Command (async () => await ViewBasket ());
-
-
-
-        public override async Task InitializeAsync (IDictionary<string, string> query)
-        {
-            IsBusy = true;
-
-            // Get MyCloset, Seasons and Types
-            MyClosetItems = await _myClosetService.GetMyClosetAsync ();
-            Seasons = await _myClosetService.GetMyClosetSeasonAsync ();
-            Types = await _myClosetService.GetMyClosetTypeAsync ();
-
-            // order the list
-            // var OrderedList = MyClosetItems.OrderBy(x => x.MyClosetSeason).ToList();
-            //MyClosetItemsGrouped = new ObservableCollection<Grouping<string, MyClosetItem>>(OrderedList);
-
-            var sorted = from myclosetitem in MyClosetItems
-                         orderby myclosetitem.MyClosetSeason ascending 
-                         group myclosetitem by myclosetitem.MyClosetSeason into myclosetitemGroup
-                         select new Grouping<string, MyClosetItem>(myclosetitemGroup.Key, myclosetitemGroup);
-
-            MyClosetItemsGrouped = new ObservableCollection<Grouping<string, MyClosetItem>>(sorted);
-
-            var authToken = _settingsService.AuthAccessToken;
-            var userInfo = await _userService.GetUserInfoAsync (authToken);
-
-            //BadgeCount = basket?.Items?.Count () ?? 0;
-
-            IsBusy = false;
-        }
-
-        private async void AddMyClosetItem(MyClosetItem myClosetItem)
-        {
-            var authToken = _settingsService.AuthAccessToken;
-            var userInfo = await _userService.GetUserInfoAsync (authToken);
-
-            await _dialogService.ShowAlertAsync("Add", "Add a closet item function", "OK"); 
-        }
-
-        private async Task DeleteMyClosetItemAsync(MyClosetItem item)
-        {
-            await _dialogService.ShowAlertAsync("Delete", "Delete this closet item function", "OK");
-        }
-
-        private async Task FilterAsync()
-        {
-            try
-            {    
-                IsBusy = true;
-
-                if (Season != null && Type != null)
+            set
+            {
+                if (_selectedSeason != value)
                 {
-                    MyClosetItems = await _myClosetService.FilterAsync(Season.Id, Type.Id);
+                    _selectedSeason = value;
                 }
             }
-            finally
+        }
+
+        private ObservableCollection<MyClosetItem> _closetItems;
+        public ObservableCollection<MyClosetItem> ClosetItems
+        {
+            get => _closetItems;
+            set
             {
-                IsBusy = false;
+                if (value == _closetItems) return;
+                _closetItems = value;
+                RaisePropertyChanged(() => ClosetItems);
             }
         }
 
-        private async Task ClearFilterAsync()
+        private MyClosetItem _selectedClosetItem;
+        public MyClosetItem SelectedClosetItem
+        { 
+
+            get => _selectedClosetItem;
+            set
+            {
+                if (value == _selectedClosetItem) return;
+                _selectedClosetItem = value;
+                RaisePropertyChanged(() => _selectedClosetItem);
+            }
+        }
+
+
+        private ObservableCollection<MyClosetItem> _selectedClosetItems;
+        public ObservableCollection<MyClosetItem> SelectedClosetItems
+        {
+            get
+            {
+                return _selectedClosetItems;
+            }
+            set
+            {
+                if (value == _selectedClosetItems) return;
+                _selectedClosetItems = value;
+                RaisePropertyChanged(() => _selectedClosetItems);
+            }
+        }
+
+        private string _selectedClosetItemMessage; 
+        public string SelectedClosetItemMessage
+        {
+            get => _selectedClosetItemMessage;
+            set
+            {
+                _selectedClosetItemMessage = value;
+                RaisePropertyChanged(() => _selectedClosetItemMessage);
+            }
+        }
+
+        public IList<MyClosetItem> source;
+
+        int selectionCount = 1;
+
+        public IList<MyClosetItem> EmptyClosetItems { get; private set; }
+
+
+        #endregion
+
+        //public ICommand FilterCommand => new Command<Season>(FilterItems);
+        //public ICommand ClosetItemSelectionChangedCommand => new Command(ClosetItemSelectionChanged);
+
+        public MyClosetViewModel()
+        {
+
+            this.MultipleInitialization = true;
+
+            _myClosetService = DependencyService.Get<IMyClosetService>();
+            _settingsService = DependencyService.Get<ISettingsService>();
+            _userService = DependencyService.Get<IUserService>();
+            _dialogService = DependencyService.Get<IDialogService>();
+
+            
+
+            //source = new List<MyClosetItem>();
+        }
+
+       
+
+        public override async Task InitializeAsync(IDictionary<string, string> query)
         {
             IsBusy = true;
+            
+            SeasonsCollection = await _myClosetService.GetSeasonAsync();
+            //ClosetItemSelectionChanged();
 
-            Season = null;
-            Type = null;
-            MyClosetItems = await _myClosetService.GetMyClosetAsync();
+            ClosetItems = await _myClosetService.GetMyClosetAsync();
 
+            foreach (var item in ClosetItems)
+                Console.WriteLine("closetitem" + item.Name + " " + item.Season);
+
+            //source = await _myClosetService.GetMyClosetAsync();
+            //ClosetItems = new ObservableCollection<MyClosetItem>(source);
+
+            //SelectedClosetItems = new ObservableCollection<MyClosetItem>(source);
             IsBusy = false;
-        } 
+        }
+
+
+        
+
+        //void FilterItems(Season filter)
+        //{
+
+            //foreach (var item in SelectedClosetItems)
+            //    Console.WriteLine("before filtering" + item.Name + " " + item.Season);
+
+            //SelectedSeason = filter;
+            //var filteredItems = source.Where(closetitem => closetitem.Season == SelectedSeason.Name).ToList();
+            //foreach (var closetitem in source)
+            //{
+            //    if (!filteredItems.Contains(closetitem))
+            //    {
+            //        ClosetItems.Remove(closetitem);
+            //    }
+            //    else
+            //    {
+            //        if (!ClosetItems.Contains(closetitem))
+            //        {
+            //            ClosetItems.Add(closetitem);
+            //        }
+            //    }
+            //}
+
+            //foreach (var item in ClosetItems)
+            //    Console.WriteLine("filtered item" + item.Name + " " + item.Season);
+        //}
+
+        //void ClosetItemSelectionChanged()
+        //{
+        //    _selectedClosetItemMessage = $"Selection {selectionCount}: {SelectedClosetItem.Name}";
+        //    Console.WriteLine("message is " + _selectedClosetItemMessage);
+        //    //OnPropertyChanged("SelectedClosetItemMessage");
+        //    selectionCount++;
+        //}
+
+
+
+
+
+
     }
 }

@@ -111,7 +111,7 @@
                 Grid.Column="1"
                 Grid.Row="0"
                 BackgroundColor="green"
-                Text="{Binding MyClosetSeason}"
+                Text="{Binding Season}"
                 VerticalTextAlignment="Center"
                 HorizontalTextAlignment="Center"
                 HorizontalOptions="Center"

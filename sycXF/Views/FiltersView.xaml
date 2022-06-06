@@ -69,11 +69,11 @@
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
     <!-- SEASON -->
-    <Picker
+    <!--<Picker
       Grid.Row="0"
       Title="SEASON" 
-      ItemsSource="{Binding Seasons}"
-      SelectedItem="{Binding Season, Mode=TwoWay}"
+      ItemsSource="{Binding SeasonsCollection}"
+      SelectedItem="{Binding SelectedSeason, Mode=TwoWay}"
       Style="{StaticResource FilterPickerStyle}">
       <Picker.HeightRequest>   
         <OnPlatform x:TypeArguments="x:Double">
@@ -82,11 +82,11 @@
         </OnPlatform>
       </Picker.HeightRequest> 
     </Picker>
-    <!-- TYPE -->
+     TYPE 
     <Picker
       Grid.Row="1"
       Title="TYPE"
-      ItemsSource="{Binding Types}"
+      ItemsSource="{Binding TypesCollection}"
       SelectedItem="{Binding Type, Mode=TwoWay}"
       Style="{StaticResource FilterPickerStyle}">    
       <Picker.HeightRequest>   
@@ -95,8 +95,8 @@
             <On Platform="UWP, WinRT, WinPhone" Value="36" />
         </OnPlatform>
       </Picker.HeightRequest> 
-    </Picker>
-    <Button 
+    </Picker>-->
+    <!--<Button 
       Grid.Row="3"
       Text="Apply" 
       Style="{StaticResource FilterButtonStyle}"
@@ -106,6 +106,6 @@
       Text="Clear"
       IsEnabled="{Binding IsFilter}"
       Style="{StaticResource ClearFilterButtonStyle}"
-      Command="{Binding ClearFilterCommand}"/>
+      Command="{Binding ClearFilterCommand}"/>-->
 </Grid>
 </xct:Popup>

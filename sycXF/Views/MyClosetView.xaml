@@ -12,9 +12,10 @@
     xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
     xmlns:controls="clr-namespace:sycXF.Controls;assembly=sycXF"
     Title="MyCloset"
-    viewModelBase:ViewModelLocator.AutoWireViewModel="true"
-    x:DataType="viewmodels:MyClosetViewModel">
-    <ContentPage.Resources>
+    x:Name="MyClosetViewName"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+
+     <ContentPage.Resources>
         <ResourceDictionary>
 
             <Style x:Key="MyClosetItemsListStyle" TargetType="{x:Type ListView}">
@@ -29,73 +30,101 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
-            <animations:StoryBoard x:Key="MyClosetItemsAnimation" Target="{x:Reference MyClosetItems}">
+            <!--<animations:StoryBoard x:Key="MyClosetItemsAnimation" Target="{x:Reference MyClosetItems}">
                 <animations:FadeInAnimation
                     Delay="250"
                     Direction="Up"
                     Duration="1500" />
-            </animations:StoryBoard>
+            </animations:StoryBoard>-->
 
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ContentPage.Triggers>
-        <EventTrigger Event="Appearing">
-            <triggers:BeginAnimation Animation="{StaticResource MyClosetItemsAnimation}" />
-        </EventTrigger>
-    </ContentPage.Triggers>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="{StaticResource AddIconLightImageSource}" Clicked="OnFilterChanged" />
-        <ToolbarItem IconImageSource="{DynamicResource FilterIconForTitleImageSource}" Clicked="OnFilterChanged" />
-    </ContentPage.ToolbarItems>
-    <Grid ColumnSpacing="0" RowSpacing="0">
-        <!--  MYCLOSET  -->
-        <Label
-            HorizontalOptions="Center"
-            IsVisible="{Binding MyClosetItems, Converter={StaticResource ListIsNullOrEmptyConverter}}"
-            Text="NO ITEMS IN MY CLOSET FOUND"
-            VerticalOptions="Center" />
+
+     <Grid ColumnSpacing="0" RowSpacing="0">
 
         <CollectionView
-            x:Name="MyClosetItems"
-            ItemsSource="{Binding MyClosetItemsGrouped}"
-            IsGrouped="true"
-            SelectionMode="Single"
-            SelectedItem="{Binding SelectedMyClosetItem, Mode=TwoWay}"
-            SelectionChangedCommand="{Binding MyClosetItemSelectedCommand}"
-            IsVisible="{Binding MyClosetItems, Converter={StaticResource ListIsNotNullOrEmptyConverter}}"
-            Style="{StaticResource MyClosetItemsListStyle}">
+                x:Name="CVMyClosetItems"
+                SelectionMode="Single"
+                ItemsSource="{Binding ClosetItems}"
+                VerticalOptions="StartAndExpand">
 
-            <CollectionView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <!--<Label Text="missy" BackgroundColor="Aqua"/>-->
-                    <Label Text="{Binding Season}"
-                           BackgroundColor="Aquamarine"
-                           FontSize="Large"
-                           FontAttributes="Bold" />
-                </DataTemplate>
-            </CollectionView.GroupHeaderTemplate>
+                <!--<CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>-->
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                        <templates:MyClosetItemTemplate />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <!--  INDICATOR  -->
-        <ActivityIndicator
-            HorizontalOptions="Center"
-            IsRunning="{Binding IsBusy}"
-            IsVisible="{Binding IsBusy}"
-            VerticalOptions="Center"
-            Color="{StaticResource LightGreenColor}">
-            <ActivityIndicator.WidthRequest>
-                <OnPlatform x:TypeArguments="x:Double">
-                    <On Platform="iOS, Android" Value="100" />
-                    <On Platform="UWP, WinRT, WinPhone" Value="400" />
-                </OnPlatform>
-            </ActivityIndicator.WidthRequest>
-        </ActivityIndicator>
+                <CollectionView.Header>
+                    <StackLayout>
+                        <Label Margin="15, 0, 15, 0"
+                               Text="Choose Season"
+                               TextColor="Black"
+                               FontSize="Medium"/>
+                        <Label Margin="15, 15, 15, 0"
+                               Text="{Binding SelectedSeason}"
+                               TextColor="Black"
+                               FontSize="Medium"/>
+   
+                        <CollectionView x:Name="CVSeasons"
+                                        ItemsSource="{Binding SeasonsCollection}"
+                                        HeightRequest="130"
+                                        SelectionMode="Single"
+                                        SelectedItem="{Binding SelectedSeason}">
 
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference MyClosetViewName}, Path=BindingContext.FilterCommand}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </StackLayout.GestureRecognizers>
+                                        <Frame Padding="0"
+                                               BackgroundColor="Transparent"
+                                               Margin="15,0,15,0"
+                                               HasShadow="False">
+                                            <StackLayout Orientation="Vertical">
+                                                <Frame Padding="0"
+                                                       CornerRadius="50"
+                                                       IsClippedToBounds="True"
+                                                       HeightRequest="90"
+                                                       WidthRequest="90"
+                                                       HorizontalOptions="Center"
+                                                       HasShadow="False"
+                                                       BackgroundColor="{StaticResource LightGreenColor}">
+                                                    <Label VerticalTextAlignment="Center"
+                                                           HorizontalTextAlignment="Center"
+                                                           Text="Image"/>
+                                                </Frame>
+                                                <Label TextColor="{StaticResource DarkGreenColor}"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="Medium"
+                                                       Text="{Binding Name}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        </StackLayout>
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <!--<StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference MyClosetViewName}, Path=BindingContext.TriggerItemSelectedCommand}"
+                                                                  CommandParameter="{Binding .}"/>
+
+                                        </StackLayout.GestureRecognizers>-->
+                                  <templates:MyClosetItemTemplate />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                
         
     </Grid>
+    
 </views:ContentPageBase>

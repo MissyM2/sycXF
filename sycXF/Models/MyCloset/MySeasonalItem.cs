@@ -1,6 +1,7 @@
-﻿namespace sycXF.Models.MyCloset
+﻿using System;
+namespace sycXF.Models.MyCloset
 {
-    public class MyClosetItem
+	public class MySeasonalItem
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,3 +15,4 @@
         public string MyClosetType { get; set; }
     }
 }
+
