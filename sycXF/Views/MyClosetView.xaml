@@ -48,9 +48,9 @@
                 ItemsSource="{Binding ClosetItems}"
                 VerticalOptions="StartAndExpand">
 
-                <!--<CollectionView.ItemsLayout>
+                <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"/>
-                </CollectionView.ItemsLayout>-->
+                </CollectionView.ItemsLayout>
 
                 <CollectionView.Header>
                     <StackLayout>
