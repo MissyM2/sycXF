@@ -30,6 +30,29 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
+            <Style TargetType="StackLayout">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup>
+                            <VisualState x:Name="Normal"/>
+
+
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    
+                                    <Setter TargetName="CVSeasonsLabel" Property="Label.BackgroundColor"
+                                            Value="Transparent" />
+                                    <Setter TargetName="CVSeasonsLabel" Property="Label.TextColor"
+                                            Value="{StaticResource WhiteColor}" />
+                                    <Setter TargetName="CVSeasonsFrame" Property="Frame.BackgroundColor"
+                                            Value="{StaticResource DarkGreenColor}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
             <!--<animations:StoryBoard x:Key="MyClosetItemsAnimation" Target="{x:Reference MyClosetItems}">
                 <animations:FadeInAnimation
                     Delay="250"
@@ -40,8 +63,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-     <Grid ColumnSpacing="0" RowSpacing="0">
-
+     <StackLayout>
         <CollectionView
                 x:Name="CVMyClosetItems"
                 SelectionMode="Single"
@@ -56,16 +78,16 @@
                     <StackLayout>
                         <Label Margin="15, 0, 15, 0"
                                Text="Choose Season"
-                               TextColor="Black"
+                               TextColor="{StaticResource BlackColor}"
                                FontSize="Medium"/>
                         <Label Margin="15, 15, 15, 0"
                                Text="{Binding SelectedSeason}"
-                               TextColor="Black"
+                               TextColor="{StaticResource BlackColor}"
                                FontSize="Medium"/>
    
                         <CollectionView x:Name="CVSeasons"
                                         ItemsSource="{Binding SeasonsCollection}"
-                                        HeightRequest="130"
+                                        HeightRequest="75"
                                         SelectionMode="Single"
                                         SelectedItem="{Binding SelectedSeason}">
 
@@ -75,56 +97,47 @@
 
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout Orientation="Horizontal">
-                                        <StackLayout.GestureRecognizers>
+                                    <StackLayout x:Name="CVSeasonsStack">
+                                        <!--<StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={x:Reference MyClosetViewName}, Path=BindingContext.FilterCommand}"
                                                                   CommandParameter="{Binding .}"/>
-                                        </StackLayout.GestureRecognizers>
-                                        <Frame Padding="0"
-                                               BackgroundColor="Transparent"
-                                               Margin="15,0,15,0"
-                                               HasShadow="False">
-                                            <StackLayout Orientation="Vertical">
-                                                <Frame Padding="0"
-                                                       CornerRadius="50"
-                                                       IsClippedToBounds="True"
-                                                       HeightRequest="90"
-                                                       WidthRequest="90"
-                                                       HorizontalOptions="Center"
-                                                       HasShadow="False"
-                                                       BackgroundColor="{StaticResource LightGreenColor}">
-                                                    <Label VerticalTextAlignment="Center"
-                                                           HorizontalTextAlignment="Center"
-                                                           Text="Image"/>
-                                                </Frame>
-                                                <Label TextColor="{StaticResource DarkGreenColor}"
-                                                       HorizontalTextAlignment="Center"
-                                                       FontSize="Medium"
-                                                       Text="{Binding Name}"/>
-                                            </StackLayout>
-                                        </Frame>
+                                        </StackLayout.GestureRecognizers>-->
+                                         <Frame x:Name="CVSeasonsFrame"
+                                                Padding="10,5,10,5"
+                                                Margin="10,5,10,5"
+                                                CornerRadius="10"
+                                                HasShadow="False"
+                                                BackgroundColor="{StaticResource LightGreenColor}"
+                                                VerticalOptions="FillAndExpand">
+                                             <Label x:Name="CVSeasonsLabel" HorizontalTextAlignment="Center"
+                                                    VerticalTextAlignment="Center"
+                                                    Padding="0"
+                                                    FontSize="Medium"
+                                                    Text="{Binding Name}"
+                                                    TextColor="{StaticResource BlackColor}"/>
+                                         </Frame>
+                                        
                                     </StackLayout>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-                        </StackLayout>
+                </StackLayout>
                     </CollectionView.Header>
 
                     <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>
-                                    <!--<StackLayout.GestureRecognizers>
+                                    <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={x:Reference MyClosetViewName}, Path=BindingContext.TriggerItemSelectedCommand}"
                                                                   CommandParameter="{Binding .}"/>
 
-                                        </StackLayout.GestureRecognizers>-->
+                                        </StackLayout.GestureRecognizers>
                                   <templates:MyClosetItemTemplate />
                                 </StackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 
-        
-    </Grid>
+    </StackLayout>
     
 </views:ContentPageBase>

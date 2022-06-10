@@ -53,6 +53,7 @@ namespace sycXF
 
         protected override void OnResume()
         {
+            Console.WriteLine("alsdkfj inside onResume");
             SetStatusBar();
             RequestedThemeChanged += App_RequestedThemeChanged;
         }

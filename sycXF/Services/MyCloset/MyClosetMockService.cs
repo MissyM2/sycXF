@@ -17,10 +17,10 @@ namespace sycXF.Services.MyCloset
 
         private ObservableCollection<Season> MockSeason = new ObservableCollection<Season>
         {
-            new Season { Id = 1, Name = "Winter Basics" },
-            new Season { Id = 2, Name = "Spring Basics" },
-            new Season { Id = 3, Name = "Summer Basics" },
-            new Season { Id = 4, Name = "Fall Basics" },
+            new Season { Id = 1, Name = "Winter" },
+            new Season { Id = 2, Name = "Spring" },
+            new Season { Id = 3, Name = "Summer" },
+            new Season { Id = 4, Name = "Fall" },
             new Season { Id = 5, Name = "Always in Season" }
         };
 
