@@ -12,7 +12,7 @@
                 <Setter Property="FontFamily"
                         Value="{StaticResource MontserratRegular}" />
                 <Setter Property="FontSize" 
-                        Value="{StaticResource LargerSize}" />
+                        Value="{StaticResource LittleSize}" />
                 <Setter Property="HorizontalOptions" 
                         Value="Start" />
             </Style>
@@ -22,14 +22,14 @@
                 <Setter Property="FontFamily"
                         Value="{StaticResource MontserratRegular}" />
                 <Setter Property="FontSize" 
-                        Value="{StaticResource LargerSize}" />
+                        Value="{StaticResource LittleSize}" />
                 <Setter Property="HorizontalOptions" 
                         Value="Start" />
             </Style>
 
              <Style x:Key="MyClosetItemSizeStyle" TargetType="{x:Type Label}">
                 <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
-                <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
                 <Setter Property="HorizontalOptions" Value="Start" />
                 <Setter Property="Margin" Value="0, 12, 0, 6" />
             </Style>
@@ -73,8 +73,8 @@
     </SwipeView.RightItems>
 
     <ContentView.Content>
-        <Frame>
-        <Grid BackgroundColor="yellow">
+        <!--<Frame>-->
+        <Grid>
             <Grid.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="iOS, Android" Value="0" />
@@ -87,74 +87,40 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!--  IMAGE  -->
             <Image
                 Grid.Column="0"
                 Grid.Row="0"
-                Grid.RowSpan="4"
                 Aspect="AspectFit"
-                VerticalOptions="CenterAndExpand"
+                VerticalOptions="Start"
                 Margin="12,0,0,0"
                 BackgroundColor="pink"
                 Source="{Binding PictureUri, TargetNullValue='default_product.png'}" />
             
-             <!--SEASON--> 
-            <Label 
-                Grid.Column="1"
-                Grid.Row="0"
-                BackgroundColor="green"
-                Text="{Binding Season}"
-                VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Center"
-                HorizontalOptions="Center"
-                Style="{StaticResource MyClosetItemSeasonStyle}"/>
-            <!-- TYPE -->
-            <Label    
-                Grid.Column="1"
-                Grid.Row="1"
-                Text="{Binding MyClosetType}"
-                BackgroundColor="lightblue"
-                VerticalTextAlignment="Center"
-                HorizontalOptions="Center"
-                Style="{StaticResource MyClosetItemTypeStyle}"/>
-            <!-- SIZE -->
-            <Label 
-                Grid.Column="1"
-                Grid.Row="2"
-                BackgroundColor="PeachPuff"
-                Text="{Binding MyClosetSize}"
-                VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Center"
-                HorizontalOptions="Center"
-                Style="{StaticResource MyClosetItemSeasonStyle}"/>
-             <!--  NAME  -->
-            <Label
-                Grid.Column="1"
-                Grid.Row="3"
-                BackgroundColor="orange"
-                VerticalTextAlignment="Start"
-                Style="{StaticResource MyClosetItemNameStyle}"
-                Text="{Binding Name, Converter={StaticResource ToUpperConverter}}" />
+             <StackLayout Grid.Column="1"
+                          Grid.Row="0"
+                          Orientation="Vertical">
+                  <StackLayout Orientation="Horizontal"
+                         Grid.Column="1"
+                         Grid.Row="0">
+                        <Label Text="{Binding Season}"
+                               Style="{StaticResource MyClosetItemSeasonStyle}"/>
+                        <Label Text="{Binding MyClosetType}"
+                               Style="{StaticResource MyClosetItemTypeStyle}"/>
+                        <Label Text="{Binding MyClosetSize}"
+                               Style="{StaticResource MyClosetItemSeasonStyle}"/>
+                  </StackLayout>
+                 <Label VerticalTextAlignment="Start"
+                        Style="{StaticResource MyClosetItemNameStyle}"
+                        Text="{Binding Name, Converter={StaticResource ToUpperConverter}}" />
+                
+                 <Label VerticalTextAlignment="Start"
+                        Style="{StaticResource MyClosetItemDescStyle}"
+                        Text="{Binding Description}" />
 
-             <!--  DESCRIPTION  -->
-            <Label
-                Grid.Column="1"
-                Grid.Row="4"
-                Grid.RowSpan="2"
-                BackgroundColor="orange"
-                VerticalTextAlignment="Start"
-                Style="{StaticResource MyClosetItemDescStyle}"
-                Text="{Binding Description}" />
-
-           
+             </StackLayout>
         </Grid>
-        </Frame>
+        <!--</Frame>-->
     </ContentView.Content>
 </SwipeView>
