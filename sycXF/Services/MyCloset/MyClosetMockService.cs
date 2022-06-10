@@ -75,7 +75,7 @@ namespace sycXF.Services.MyCloset
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
                 SeasonId = 2,
-                Season = "Spring Basics",
+                Season = "Spring",
                 MyClosetTypeId = 3,
                 MyClosetType = "Top"
             },
@@ -88,7 +88,7 @@ namespace sycXF.Services.MyCloset
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
                 SeasonId = 3,
-                Season = "Summer Basics",
+                Season = "Summer",
                 MyClosetTypeId = 4,
                 MyClosetType = "Bottom"
             },
@@ -101,7 +101,7 @@ namespace sycXF.Services.MyCloset
                 MyClosetSizeId = 3,
                 MyClosetSize = "Medium",
                 SeasonId = 1,
-                Season = "Winter Basics",
+                Season = "Winter",
                 MyClosetTypeId = 5,
                 MyClosetType = "Dress"
             },
@@ -126,7 +126,7 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
-                Season = "Winter Basics",
+                Season = "Winter",
                 MyClosetTypeId = 7,
                 MyClosetType = "Footwear"
             },
@@ -138,7 +138,7 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 3,
                 MyClosetSize = "Medium",
-                Season = "Spring Basics",
+                Season = "Spring",
                 MyClosetTypeId = 3,
                 MyClosetType = "Top"
             },
@@ -151,7 +151,7 @@ namespace sycXF.Services.MyCloset
                 MyClosetSizeId = 4,
                 MyClosetSize = "Large",
                 SeasonId = 3,
-                Season = "Summer Basics",
+                Season = "Summer",
                 MyClosetTypeId = 4,
                 MyClosetType = "Bottom"
             },
@@ -164,7 +164,7 @@ namespace sycXF.Services.MyCloset
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
                 SeasonId = 4,
-                Season = "Fall Basics",
+                Season = "Fall",
                 MyClosetTypeId = 5,
                 MyClosetType = "Dress"
             },
@@ -190,7 +190,7 @@ namespace sycXF.Services.MyCloset
                 MyClosetSizeId = 3,
                 MyClosetSize = "Medium",
                 SeasonId = 1,
-                Season = "Winter Basics",
+                Season = "Winter",
                 MyClosetTypeId = 8,
                 MyClosetType = "Accessory"
             },
@@ -203,7 +203,7 @@ namespace sycXF.Services.MyCloset
                 MyClosetSizeId = 4,
                 MyClosetSize = "Large",
                 SeasonId = 2,
-                Season = "Spring Basics",
+                Season = "Spring",
                 MyClosetTypeId = 8,
                 MyClosetType = "Accessory"
             },
@@ -216,7 +216,7 @@ namespace sycXF.Services.MyCloset
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
                 SeasonId = 1,
-                Season = "Winter Basics",
+                Season = "Winter",
                 MyClosetTypeId = 4,
                 MyClosetType = "Bottom"
             }

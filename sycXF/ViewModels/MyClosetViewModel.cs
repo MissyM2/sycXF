@@ -56,6 +56,37 @@ namespace sycXF.ViewModels
             }
         }
 
+        public ICommand SeasonSelectedCommand
+        {
+            get
+            {
+                return new Command( () =>
+                {
+                    if (SelectedSeason == null)
+                        return;
+
+                    var filteredItems = source.Where(closetitem => closetitem.Season == SelectedSeason.Name).ToList();
+                    foreach (var closetitem in source)
+                    {
+                        if (!filteredItems.Contains(closetitem))
+                        {
+                            ClosetItems.Remove(closetitem);
+                        }
+                        else
+                        {
+                            if (!ClosetItems.Contains(closetitem))
+                            {
+                                ClosetItems.Add(closetitem);
+                            }
+                        }
+
+                        SelectedSeason = null;
+                    }
+                });
+            }
+        }
+
+
         private ObservableCollection<MyClosetItem> _closetItems;
         public ObservableCollection<MyClosetItem> ClosetItems
         {
@@ -172,7 +203,7 @@ namespace sycXF.ViewModels
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
                 SeasonId = 2,
-                Season = "Spring Basics",
+                Season = "Spring",
                 MyClosetTypeId = 3,
                 MyClosetType = "Top"
             });
@@ -186,7 +217,7 @@ namespace sycXF.ViewModels
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
                 SeasonId = 3,
-                Season = "Summer Basics",
+                Season = "Summer",
                 MyClosetTypeId = 4,
                 MyClosetType = "Bottom"
             });
@@ -200,7 +231,7 @@ namespace sycXF.ViewModels
                 MyClosetSizeId = 3,
                 MyClosetSize = "Medium",
                 SeasonId = 1,
-                Season = "Winter Basics",
+                Season = "Winter",
                 MyClosetTypeId = 5,
                 MyClosetType = "Dress"
             });
@@ -227,7 +258,7 @@ namespace sycXF.ViewModels
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
-                Season = "Winter Basics",
+                Season = "Winter",
                 MyClosetTypeId = 7,
                 MyClosetType = "Footwear"
             });
@@ -240,7 +271,7 @@ namespace sycXF.ViewModels
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 MyClosetSizeId = 3,
                 MyClosetSize = "Medium",
-                Season = "Spring Basics",
+                Season = "Spring",
                 MyClosetTypeId = 3,
                 MyClosetType = "Top"
             });
@@ -254,7 +285,7 @@ namespace sycXF.ViewModels
                 MyClosetSizeId = 4,
                 MyClosetSize = "Large",
                 SeasonId = 3,
-                Season = "Summer Basics",
+                Season = "Summer",
                 MyClosetTypeId = 4,
                 MyClosetType = "Bottom"
             });
@@ -268,7 +299,7 @@ namespace sycXF.ViewModels
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
                 SeasonId = 4,
-                Season = "Fall Basics",
+                Season = "Fall",
                 MyClosetTypeId = 5,
                 MyClosetType = "Dress"
             });
@@ -296,7 +327,7 @@ namespace sycXF.ViewModels
                 MyClosetSizeId = 3,
                 MyClosetSize = "Medium",
                 SeasonId = 1,
-                Season = "Winter Basics",
+                Season = "Winter",
                 MyClosetTypeId = 8,
                 MyClosetType = "Accessory"
             });
@@ -310,7 +341,7 @@ namespace sycXF.ViewModels
                 MyClosetSizeId = 4,
                 MyClosetSize = "Large",
                 SeasonId = 2,
-                Season = "Spring Basics",
+                Season = "Spring",
                 MyClosetTypeId = 8,
                 MyClosetType = "Accessory"
             });
@@ -324,7 +355,7 @@ namespace sycXF.ViewModels
                 MyClosetSizeId = 2,
                 MyClosetSize = "Small",
                 SeasonId = 1,
-                Season = "Winter Basics",
+                Season = "Winter",
                 MyClosetTypeId = 4,
                 MyClosetType = "Bottom"
             });
@@ -337,13 +368,14 @@ namespace sycXF.ViewModels
 
 
 
+        //void FilterItems(Season filter)
         void FilterItems(Season filter)
         {
 
-            foreach (var item in ClosetItems)
-                Console.WriteLine("before filtering" + item.Name + " " + item.Season);
+            //foreach (var item in ClosetItems)
+            //    Console.WriteLine("before filtering" + item.Name + " " + item.Season);
 
-            SelectedSeason = filter;
+            //SelectedSeason = filter;
             var filteredItems = source.Where(closetitem => closetitem.Season == SelectedSeason.Name).ToList();
             foreach (var closetitem in source)
             {
