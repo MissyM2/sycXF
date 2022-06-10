@@ -30,7 +30,7 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
-            <Style TargetType="StackLayout">
+            <!--<Style TargetType="StackLayout">
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup>
@@ -51,7 +51,7 @@
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
-            </Style>
+            </Style>-->
 
             <!--<animations:StoryBoard x:Key="MyClosetItemsAnimation" Target="{x:Reference MyClosetItems}">
                 <animations:FadeInAnimation
@@ -97,18 +97,27 @@
 
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout x:Name="CVSeasonsStack">
+                                    <StackLayout>
                                         <!--<StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={x:Reference MyClosetViewName}, Path=BindingContext.FilterCommand}"
                                                                   CommandParameter="{Binding .}"/>
                                         </StackLayout.GestureRecognizers>-->
-                                         <Frame x:Name="CVSeasonsFrame"
+                                        <!--<Image 
+                                            Source="{Binding .}"
+                                            BackgroundColor="Transparent"
+                                            HeightRequest="100"
+                                            WidthRequest="100"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Start"/>-->
+
+                                        <Frame x:Name="CVSeasonsFrame"
                                                 Padding="10,5,10,5"
                                                 Margin="10,5,10,5"
                                                 CornerRadius="10"
                                                 HasShadow="False"
                                                 BackgroundColor="{StaticResource LightGreenColor}"
                                                 VerticalOptions="FillAndExpand">
+                                            
                                              <Label x:Name="CVSeasonsLabel" HorizontalTextAlignment="Center"
                                                     VerticalTextAlignment="Center"
                                                     Padding="0"
@@ -116,6 +125,31 @@
                                                     Text="{Binding Name}"
                                                     TextColor="{StaticResource BlackColor}"/>
                                          </Frame>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup
+                                                    Name="CommonStates">
+                                                <VisualState
+                                                        Name="Normal" />
+                                                <VisualState
+                                                        Name="Focused" />
+                                                <VisualState
+                                                        Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="{StaticResource WhiteColor}" />
+                                                        <Setter TargetName="CVSeasonsFrame"
+                                                                Property="Frame.BackgroundColor"
+                                                                Value="{StaticResource DarkGreenColor}" />
+                                                        <Setter TargetName="CVSeasonsLabel" Property="Label.TextColor"
+                                                                Value="{StaticResource WhiteColor}" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
+
+
+                                    
                                         
                                     </StackLayout>
                                 </DataTemplate>
