@@ -145,7 +145,66 @@ namespace sycXF.ViewModels
             }
         }
 
+        // SizeCategory filter
 
+        private ObservableCollection<SizeCategory> _sizeCategoryCollection;
+        public ObservableCollection<SizeCategory> SizeCategoryCollection
+        {
+            get => _sizeCategoryCollection;
+            set
+            {
+                if (value == _sizeCategoryCollection) return;
+                _sizeCategoryCollection = value;
+                RaisePropertyChanged(() => SizeCategoryCollection);
+            }
+        }
+        private SizeCategory _selectedSizeCategory;
+        public SizeCategory SelectedSizeCategory
+        {
+            get
+            {
+                return _selectedSizeCategory;
+            }
+            set
+            {
+                if (_selectedSizeCategory != value)
+                {
+                    _selectedSizeCategory = value;
+                }
+            }
+        }
+
+        public ICommand SizeCategorySelectedCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (SelectedSizeCategory == null)
+                        return;
+
+                    var filteredItems = source.Where(closetitem => closetitem.SizeCategoryName == SelectedSizeCategory.SizeCategoryName).ToList();
+                    foreach (var closetitem in source)
+                    {
+                        if (!filteredItems.Contains(closetitem))
+                        {
+                            ClosetItems.Remove(closetitem);
+                        }
+                        else
+                        {
+                            if (!ClosetItems.Contains(closetitem))
+                            {
+                                ClosetItems.Add(closetitem);
+                            }
+                        }
+
+                        SelectedSizeCategory = null;
+                    }
+                });
+            }
+        }
+
+        // Closet Items
         private ObservableCollection<MyClosetItem> _closetItems;
         public ObservableCollection<MyClosetItem> ClosetItems
         {
@@ -207,9 +266,9 @@ namespace sycXF.ViewModels
 
         #endregion
 
-        public ICommand FilterCommand => new Command<SeasonCategory>(FilterItems);
-        public ICommand FilterTypeCommand => new Command<Type>(FilterTypeItems);
-        //public ICommand ClosetItemSelectionChangedCommand => new Command(ClosetItemSelectionChanged);
+        public ICommand FilterSeasonCategoryCommand => new Command<SeasonCategory>(FilterSeasonCategoryItems);
+        public ICommand FilterApparelCategoryCommand => new Command<ApparelCategory>(FilterApparelCategoryItems);
+        public ICommand FilterSizeCategoryCommand => new Command<SizeCategory>(FilterSizeCategoryItems);
 
         public MyClosetViewModel()
         {
@@ -239,23 +298,8 @@ namespace sycXF.ViewModels
 
             SeasonsCategoryCollection = await _myClosetService.GetSeasonCategoriesAsync();
             ApparelCategoryCollection = await _myClosetService.GetApparelCategoriesAsync();
+            SizeCategoryCollection = await _myClosetService.GetSizeCategoriesAsync();
 
-
-            //ClosetItems = await _myClosetService.GetMyClosetAsync();
-
-            //foreach (var item in ClosetItems)
-            //    Console.WriteLine("closetitem" + item.Name + " " + item.SeasonCategoryName);
-
-            foreach (var item in SeasonsCategoryCollection)
-                Console.WriteLine("season " + item.SeasonCategoryName);
-
-            foreach (var item in ApparelCategoryCollection)
-                Console.WriteLine("closetitem" + item.ApparelCategoryName);
-
-            //source = await _myClosetService.GetMyClosetAsync();
-            //ClosetItems = new ObservableCollection<MyClosetItem>(source);
-
-            //SelectedClosetItems = new ObservableCollection<MyClosetItem>(source);
             IsBusy = false;
         }
 
@@ -435,14 +479,9 @@ namespace sycXF.ViewModels
 
 
 
-        //void FilterItems(Season filter)
-        void FilterItems(SeasonCategory filter)
+        void FilterSeasonCategoryItems(SeasonCategory filter)
         {
 
-            //foreach (var item in ClosetItems)
-            //    Console.WriteLine("before filtering" + item.Name + " " + item.Season);
-
-            //SelectedSeason = filter;
             var filteredItems = source.Where(closetitem => closetitem.SeasonCategoryName == SelectedSeason.SeasonCategoryName).ToList();
             foreach (var closetitem in source)
             {
@@ -458,19 +497,11 @@ namespace sycXF.ViewModels
                     }
                 }
             }
-
-            foreach (var item in ClosetItems)
-                Console.WriteLine("filtered item by season" + item.Name + " " + item.SeasonCategoryName);
         }
 
         
-        void FilterTypeItems(Type filter)
+        void FilterApparelCategoryItems(ApparelCategory filter)
         {
-
-            //foreach (var item in ClosetItems)
-            //    Console.WriteLine("before filtering" + item.Name + " " + item.Season);
-
-            //SelectedSeason = filter;
             var filteredItems = source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
             foreach (var closetitem in source)
             {
@@ -487,9 +518,28 @@ namespace sycXF.ViewModels
                 }
             }
 
-            foreach (var item in ClosetItems)
-                Console.WriteLine("filtered item by type" + item.Name + " " + item.ApparelCategoryName);
-        }
+    }
+
+        void FilterSizeCategoryItems(SizeCategory filter)
+        {
+
+            var filteredItems = source.Where(closetitem => closetitem.SizeCategoryName == SelectedSizeCategory.SizeCategoryName).ToList();
+            foreach (var closetitem in source)
+            {
+                if (!filteredItems.Contains(closetitem))
+                {
+                    ClosetItems.Remove(closetitem);
+                }
+                else
+                {
+                    if (!ClosetItems.Contains(closetitem))
+                    {
+                        ClosetItems.Add(closetitem);
+                    }
+                }
+            }
+
+     }
 
         void ClosetItemSelectionChanged()
         {

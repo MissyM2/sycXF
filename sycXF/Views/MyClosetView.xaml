@@ -45,7 +45,8 @@
                 x:Name="CVMyClosetItems"
                 SelectionMode="Single"
                 ItemsSource="{Binding ClosetItems}"
-                VerticalOptions="StartAndExpand">
+                VerticalOptions="StartAndExpand"
+            BackgroundColor="{StaticResource GrayColor}">
 
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"/>
@@ -53,27 +54,27 @@
 
                 <CollectionView.Header>
 
-                    <StackLayout BackgroundColor="Aquamarine">
+                    <StackLayout BackgroundColor="{StaticResource WhiteColor}">
+
+                        <!-- Choose By Season -->
+                        <Label Text=""
+                               HeightRequest="1"
+                               BackgroundColor="{StaticResource SeparatorLineColor}" />
                         
                         <Label Margin="15, 0, 15, 0"
-                               Text="Choose Season"
+                               Text="Choose By Season"
                                TextColor="{StaticResource BlackColor}"
                                FontSize="Medium"/>
-                        <Label Margin="15, 15, 15, 0"
-                               Text="{Binding SelectedSeason}"
-                               TextColor="{StaticResource BlackColor}"
-                               FontSize="Medium"/>
-   
+
                         <CollectionView x:Name="CVSeasonCategories"
                                         ItemsSource="{Binding SeasonsCategoryCollection}"
-                                        HeightRequest="75"
+                                        HeightRequest="50"
                                         SelectionMode="Single"
                                         SelectedItem="{Binding SelectedSeason, Mode=TwoWay}"
                                         SelectionChangedCommand="{Binding SeasonsCategorySelectedCommand, Mode=TwoWay}"
                                         SelectionChangedCommandParameter="{Binding .}">
 
                             <CollectionView.ItemsLayout>
-
                                 <LinearItemsLayout Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>
 
@@ -81,8 +82,8 @@
                                 <DataTemplate>
                                     <StackLayout>
                                         <Frame x:Name="CVSeasonCategoryFrame"
-                                                Padding="10,5,10,5"
-                                                Margin="10,5,10,5"
+                                                Padding="10,0,10,0"
+                                                Margin="5"
                                                 CornerRadius="10"
                                                 HasShadow="False"
                                                 BackgroundColor="{StaticResource LightGreenColor}"
@@ -91,7 +92,7 @@
                                              <Label x:Name="CVSeasonCategoryLabel" HorizontalTextAlignment="Center"
                                                     VerticalTextAlignment="Center"
                                                     Padding="0"
-                                                    FontSize="Medium"
+                                                    FontSize="{StaticResource MidMediumSize}"
                                                     Text="{Binding SeasonCategoryName}"
                                                     TextColor="{StaticResource BlackColor}"/>
                                          </Frame>
@@ -116,28 +117,25 @@
                                                 </VisualState>
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
-
-
-
-                                    
                                         
                                     </StackLayout>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
 
+                        <!-- Choose By Apparel Type-->
+                        <Label Text=""
+                               HeightRequest="1"
+                               BackgroundColor="{StaticResource SeparatorLineColor}" />
                          <Label Margin="15, 0, 15, 0"
-                               Text="Choose Type"
-                               TextColor="{StaticResource BlackColor}"
-                               FontSize="Medium"/>
-                        <Label Margin="15, 15, 15, 0"
-                               Text="{Binding SelectedType}"
+                               Text="Choose By Apparel Type"
                                TextColor="{StaticResource BlackColor}"
                                FontSize="Medium"/>
 
+
                         <CollectionView x:Name="CVApparelCategories"
                                         ItemsSource="{Binding ApparelCategoryCollection}"
-                                        HeightRequest="75"
+                                        HeightRequest="50"
                                         SelectionMode="Single"
                                         SelectedItem="{Binding SelectedApparelCategory, Mode=TwoWay}"
                                         SelectionChangedCommand="{Binding ApparelCategorySelectedCommand, Mode=TwoWay}"
@@ -152,8 +150,8 @@
                                 <DataTemplate>
                                     <StackLayout>
                                         <Frame x:Name="CVApparelCategoryFrame"
-                                                Padding="10,5,10,5"
-                                                Margin="10,5,10,5"
+                                                Padding="10,0,10,0"
+                                                Margin="5"
                                                 CornerRadius="10"
                                                 HasShadow="False"
                                                 BackgroundColor="{StaticResource LightGreenColor}"
@@ -162,7 +160,7 @@
                                              <Label x:Name="CVApparelCategoryLabel" HorizontalTextAlignment="Center"
                                                     VerticalTextAlignment="Center"
                                                     Padding="0"
-                                                    FontSize="Medium"
+                                                    FontSize="{StaticResource MidMediumSize}"
                                                     Text="{Binding ApparelCategoryName}"
                                                     TextColor="{StaticResource BlackColor}"/>
                                          </Frame>
@@ -192,12 +190,84 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
+
+                        <!-- Choose by Size-->
+
+                        <Label Text=""
+                               HeightRequest="1"
+                               BackgroundColor="{StaticResource SeparatorLineColor}" />
+                         <Label Margin="15, 0, 15, 0"
+                               Text="Choose By Size"
+                               TextColor="{StaticResource BlackColor}"
+                               FontSize="Medium"/>
+
+
+                        <CollectionView x:Name="CVSizeCategories"
+                                        ItemsSource="{Binding SizeCategoryCollection}"
+                                        HeightRequest="50"
+                                        SelectionMode="Single"
+                                        SelectedItem="{Binding SelectedSizeCategory, Mode=TwoWay}"
+                                        SelectionChangedCommand="{Binding SizeCategorySelectedCommand, Mode=TwoWay}"
+                                        SelectionChangedCommandParameter="{Binding .}">
+
+                            <CollectionView.ItemsLayout>
+
+                                <LinearItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Frame x:Name="CVSizeCategoryFrame"
+                                                Padding="10,0,10,0"
+                                                Margin="5"
+                                                CornerRadius="10"
+                                                HasShadow="False"
+                                                BackgroundColor="{StaticResource LightGreenColor}"
+                                                VerticalOptions="FillAndExpand">
+                                            
+                                             <Label x:Name="CVSizeCategoryLabel" HorizontalTextAlignment="Center"
+                                                    VerticalTextAlignment="Center"
+                                                    Padding="0"
+                                                    FontSize="{StaticResource MidMediumSize}"
+                                                    Text="{Binding SizeCategoryName}"
+                                                    TextColor="{StaticResource BlackColor}"/>
+                                         </Frame>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup
+                                                    Name="CommonStates">
+                                                <VisualState
+                                                        Name="Normal" />
+                                                <VisualState
+                                                        Name="Focused" />
+                                                <VisualState
+                                                        Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor"
+                                                                Value="{StaticResource WhiteColor}" />
+                                                        <Setter TargetName="CVSizeCategoryFrame"
+                                                                Property="Frame.BackgroundColor"
+                                                                Value="{StaticResource DarkGreenColor}" />
+                                                        <Setter TargetName="CVSizeCategoryLabel" Property="Label.TextColor"
+                                                                Value="{StaticResource WhiteColor}" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Label Text=""
+                               HeightRequest="1"
+                               BackgroundColor="{StaticResource SeparatorLineColor}" />
                     </StackLayout>
                  </CollectionView.Header>
 
                 <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
+                            <StackLayout HeightRequest="180">
                                 <templates:MyClosetItemTemplate />
                             </StackLayout>
                         </DataTemplate>
