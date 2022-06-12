@@ -6,9 +6,10 @@ namespace sycXF.Services.MyCloset
 {
     public interface IMyClosetService
     {
-        Task<ObservableCollection<Season>> GetSeasonAsync();
+        Task<ObservableCollection<SeasonCategory>> GetSeasonCategoriesAsync();
         Task<ObservableCollection<MyClosetItem>> FilterAsync(int catalogSeasonId, int catalogTypeId);
-        Task<ObservableCollection<MyClosetType>> GetMyClosetTypeAsync();
+        Task<ObservableCollection<ApparelCategory>> GetApparelCategoriesAsync();
+        Task<ObservableCollection<SizeCategory>> GetSizeCategoriesAsync();
         Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync();
     }
 }

@@ -28,20 +28,20 @@ namespace sycXF.ViewModels
 
         #region Properties
         
-
-        private ObservableCollection<Season> _seasonsCollection;
-        public ObservableCollection<Season> SeasonsCollection
+        // SeasonsCategory filter
+        private ObservableCollection<SeasonCategory> _seasonsCategoryCollection;
+        public ObservableCollection<SeasonCategory> SeasonsCategoryCollection
         {
-            get => _seasonsCollection;
+            get => _seasonsCategoryCollection;
             set
             {
-                if (value == _seasonsCollection) return;
-                _seasonsCollection = value;
-                RaisePropertyChanged(() => SeasonsCollection);
+                if (value == _seasonsCategoryCollection) return;
+                _seasonsCategoryCollection = value;
+                RaisePropertyChanged(() => SeasonsCategoryCollection);
             }
         }
-        private Season _selectedSeason;
-        public Season SelectedSeason
+        private SeasonCategory _selectedSeason;
+        public SeasonCategory SelectedSeason
         {
             get
             {
@@ -56,7 +56,7 @@ namespace sycXF.ViewModels
             }
         }
 
-        public ICommand SeasonSelectedCommand
+        public ICommand SeasonsCategorySelectedCommand
         {
             get
             {
@@ -65,7 +65,7 @@ namespace sycXF.ViewModels
                     if (SelectedSeason == null)
                         return;
 
-                    var filteredItems = source.Where(closetitem => closetitem.Season == SelectedSeason.Name).ToList();
+                    var filteredItems = source.Where(closetitem => closetitem.SeasonCategoryName == SelectedSeason.SeasonCategoryName).ToList();
                     foreach (var closetitem in source)
                     {
                         if (!filteredItems.Contains(closetitem))
@@ -81,6 +81,65 @@ namespace sycXF.ViewModels
                         }
 
                         SelectedSeason = null;
+                    }
+                });
+            }
+        }
+
+        // ApparelCategory filter
+
+        private ObservableCollection<ApparelCategory> _apparelCategoryCollection;
+        public ObservableCollection<ApparelCategory> ApparelCategoryCollection
+        {
+            get => _apparelCategoryCollection;
+            set
+            {
+                if (value == _apparelCategoryCollection) return;
+                _apparelCategoryCollection = value;
+                RaisePropertyChanged(() => ApparelCategoryCollection);
+            }
+        }
+        private ApparelCategory _selectedApparelCategory;
+        public ApparelCategory SelectedApparelCategory
+        {
+            get
+            {
+                return _selectedApparelCategory;
+            }
+            set
+            {
+                if (_selectedApparelCategory != value)
+                {
+                    _selectedApparelCategory = value;
+                }
+            }
+        }
+
+        public ICommand ApparelCategorySelectedCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (SelectedApparelCategory == null)
+                        return;
+
+                    var filteredItems = source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
+                    foreach (var closetitem in source)
+                    {
+                        if (!filteredItems.Contains(closetitem))
+                        {
+                            ClosetItems.Remove(closetitem);
+                        }
+                        else
+                        {
+                            if (!ClosetItems.Contains(closetitem))
+                            {
+                                ClosetItems.Add(closetitem);
+                            }
+                        }
+
+                        SelectedApparelCategory = null;
                     }
                 });
             }
@@ -148,7 +207,8 @@ namespace sycXF.ViewModels
 
         #endregion
 
-        public ICommand FilterCommand => new Command<Season>(FilterItems);
+        public ICommand FilterCommand => new Command<SeasonCategory>(FilterItems);
+        public ICommand FilterTypeCommand => new Command<Type>(FilterTypeItems);
         //public ICommand ClosetItemSelectionChangedCommand => new Command(ClosetItemSelectionChanged);
 
         public MyClosetViewModel()
@@ -177,13 +237,20 @@ namespace sycXF.ViewModels
         {
             IsBusy = true;
 
-            SeasonsCollection = await _myClosetService.GetSeasonAsync();
-            
+            SeasonsCategoryCollection = await _myClosetService.GetSeasonCategoriesAsync();
+            ApparelCategoryCollection = await _myClosetService.GetApparelCategoriesAsync();
+
 
             //ClosetItems = await _myClosetService.GetMyClosetAsync();
 
-            foreach (var item in ClosetItems)
-                Console.WriteLine("closetitem" + item.Name + " " + item.Season);
+            //foreach (var item in ClosetItems)
+            //    Console.WriteLine("closetitem" + item.Name + " " + item.SeasonCategoryName);
+
+            foreach (var item in SeasonsCategoryCollection)
+                Console.WriteLine("season " + item.SeasonCategoryName);
+
+            foreach (var item in ApparelCategoryCollection)
+                Console.WriteLine("closetitem" + item.ApparelCategoryName);
 
             //source = await _myClosetService.GetMyClosetAsync();
             //ClosetItems = new ObservableCollection<MyClosetItem>(source);
@@ -200,12 +267,12 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_01.png",
                 Name = "Floral cap-sleeved blouse",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 2,
-                MyClosetSize = "Small",
-                SeasonId = 2,
-                Season = "Spring",
-                MyClosetTypeId = 3,
-                MyClosetType = "Top"
+                SizeCategoryId = 2,
+                SizeCategoryName = "Small",
+                SeasonCategoryId = 2,
+                SeasonCategoryName = "Spring",
+                ApparelCategoryId = 3,
+                ApparelCategoryName = "Top"
             });
 
             source.Add(new MyClosetItem
@@ -214,12 +281,12 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_02.png",
                 Name = "Floral skirt",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 2,
-                MyClosetSize = "Small",
-                SeasonId = 3,
-                Season = "Summer",
-                MyClosetTypeId = 4,
-                MyClosetType = "Bottom"
+                SizeCategoryId = 2,
+                SizeCategoryName = "Small",
+                SeasonCategoryId = 3,
+                SeasonCategoryName = "Summer",
+                ApparelCategoryId = 4,
+                ApparelCategoryName = "Bottom"
             });
 
             source.Add(new MyClosetItem
@@ -228,12 +295,12 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_03.png",
                 Name = "Black tea-length dress",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 3,
-                MyClosetSize = "Medium",
-                SeasonId = 1,
-                Season = "Winter",
-                MyClosetTypeId = 5,
-                MyClosetType = "Dress"
+                SizeCategoryId = 3,
+                SizeCategoryName = "Medium",
+                SeasonCategoryId = 1,
+                SeasonCategoryName = "Winter",
+                ApparelCategoryId = 5,
+                ApparelCategoryName = "Dress"
             });
 
             source.Add(new MyClosetItem
@@ -242,12 +309,12 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_04.png",
                 Name = "London Fog rain coat",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 4,
-                MyClosetSize = "Large",
-                SeasonId = 5,
-                Season = "Always in Season",
-                MyClosetTypeId = 6,
-                MyClosetType = "Outerwear"
+                SizeCategoryId = 4,
+                SizeCategoryName = "Large",
+                SeasonCategoryId = 5,
+                SeasonCategoryName = "Always in Season",
+                ApparelCategoryId = 6,
+                ApparelCategoryName = "Outerwear"
             });
 
             source.Add(new MyClosetItem
@@ -256,11 +323,11 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_05.png",
                 Name = "Black leather boots",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 2,
-                MyClosetSize = "Small",
-                Season = "Winter",
-                MyClosetTypeId = 7,
-                MyClosetType = "Footwear"
+                SizeCategoryId = 2,
+                SizeCategoryName = "Small",
+                SeasonCategoryName = "Winter",
+                ApparelCategoryId = 7,
+                ApparelCategoryName = "Footwear"
             });
 
             source.Add(new MyClosetItem
@@ -269,11 +336,11 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_01.png",
                 Name = "White button-down blouse",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 3,
-                MyClosetSize = "Medium",
-                Season = "Spring",
-                MyClosetTypeId = 3,
-                MyClosetType = "Top"
+                SizeCategoryId = 3,
+                SizeCategoryName = "Medium",
+                SeasonCategoryName = "Spring",
+                ApparelCategoryId = 3,
+                ApparelCategoryName = "Top"
             });
 
             source.Add(new MyClosetItem
@@ -282,12 +349,12 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_02.png",
                 Name = "White jean skirt",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 4,
-                MyClosetSize = "Large",
-                SeasonId = 3,
-                Season = "Summer",
-                MyClosetTypeId = 4,
-                MyClosetType = "Bottom"
+                SizeCategoryId = 4,
+                SizeCategoryName = "Large",
+                SeasonCategoryId = 3,
+                SeasonCategoryName = "Summer",
+                ApparelCategoryId = 4,
+                ApparelCategoryName = "Bottom"
             });
 
             source.Add(new MyClosetItem
@@ -296,12 +363,12 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_03.png",
                 Name = "Flannel long-sleeved dress",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 2,
-                MyClosetSize = "Small",
-                SeasonId = 4,
-                Season = "Fall",
-                MyClosetTypeId = 5,
-                MyClosetType = "Dress"
+                SizeCategoryId = 2,
+                SizeCategoryName = "Small",
+                SeasonCategoryId = 4,
+                SeasonCategoryName = "Fall",
+                ApparelCategoryId = 5,
+                ApparelCategoryName = "Dress"
             });
 
             source.Add(new MyClosetItem
@@ -310,12 +377,12 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_04.png",
                 Name = "White Sweater",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 3,
-                MyClosetSize = "Medium",
-                SeasonId = 5,
-                Season = "Always in Season",
-                MyClosetTypeId = 6,
-                MyClosetType = "Outerwear"
+                SizeCategoryId = 3,
+                SizeCategoryName = "Medium",
+                SeasonCategoryId = 5,
+                SeasonCategoryName = "Always in Season",
+                ApparelCategoryId = 6,
+                ApparelCategoryName = "Outerwear"
             });
 
             source.Add(new MyClosetItem
@@ -324,12 +391,12 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_05.png",
                 Name = "Pearl Necklace",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 3,
-                MyClosetSize = "Medium",
-                SeasonId = 1,
-                Season = "Winter",
-                MyClosetTypeId = 8,
-                MyClosetType = "Accessory"
+                SizeCategoryId = 3,
+                SizeCategoryName = "Medium",
+                SeasonCategoryId = 1,
+                SeasonCategoryName = "Winter",
+                ApparelCategoryId = 8,
+                ApparelCategoryName = "Accessory"
             });
 
             source.Add(new MyClosetItem
@@ -338,12 +405,12 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_05.png",
                 Name = "Purse",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 4,
-                MyClosetSize = "Large",
-                SeasonId = 2,
-                Season = "Spring",
-                MyClosetTypeId = 8,
-                MyClosetType = "Accessory"
+                SizeCategoryId = 4,
+                SizeCategoryName = "Large",
+                SeasonCategoryId = 2,
+                SeasonCategoryName = "Spring",
+                ApparelCategoryId = 8,
+                ApparelCategoryName = "Accessory"
             });
 
             source.Add(new MyClosetItem
@@ -352,12 +419,12 @@ namespace sycXF.ViewModels
                 PictureUri = "fake_product_05.png",
                 Name = "Jeans",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                MyClosetSizeId = 2,
-                MyClosetSize = "Small",
-                SeasonId = 1,
-                Season = "Winter",
-                MyClosetTypeId = 4,
-                MyClosetType = "Bottom"
+                SizeCategoryId = 2,
+                SizeCategoryName = "Small",
+                SeasonCategoryId = 1,
+                SeasonCategoryName = "Winter",
+                ApparelCategoryId = 4,
+                ApparelCategoryName = "Bottom"
             });
 
             ClosetItems = new ObservableCollection<MyClosetItem>(source);
@@ -369,14 +436,14 @@ namespace sycXF.ViewModels
 
 
         //void FilterItems(Season filter)
-        void FilterItems(Season filter)
+        void FilterItems(SeasonCategory filter)
         {
 
             //foreach (var item in ClosetItems)
             //    Console.WriteLine("before filtering" + item.Name + " " + item.Season);
 
             //SelectedSeason = filter;
-            var filteredItems = source.Where(closetitem => closetitem.Season == SelectedSeason.Name).ToList();
+            var filteredItems = source.Where(closetitem => closetitem.SeasonCategoryName == SelectedSeason.SeasonCategoryName).ToList();
             foreach (var closetitem in source)
             {
                 if (!filteredItems.Contains(closetitem))
@@ -393,7 +460,35 @@ namespace sycXF.ViewModels
             }
 
             foreach (var item in ClosetItems)
-                Console.WriteLine("filtered item" + item.Name + " " + item.Season);
+                Console.WriteLine("filtered item by season" + item.Name + " " + item.SeasonCategoryName);
+        }
+
+        
+        void FilterTypeItems(Type filter)
+        {
+
+            //foreach (var item in ClosetItems)
+            //    Console.WriteLine("before filtering" + item.Name + " " + item.Season);
+
+            //SelectedSeason = filter;
+            var filteredItems = source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
+            foreach (var closetitem in source)
+            {
+                if (!filteredItems.Contains(closetitem))
+                {
+                    ClosetItems.Remove(closetitem);
+                }
+                else
+                {
+                    if (!ClosetItems.Contains(closetitem))
+                    {
+                        ClosetItems.Add(closetitem);
+                    }
+                }
+            }
+
+            foreach (var item in ClosetItems)
+                Console.WriteLine("filtered item by type" + item.Name + " " + item.ApparelCategoryName);
         }
 
         void ClosetItemSelectionChanged()

@@ -6,11 +6,11 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public string PictureUri { get; set; }
-        public int MyClosetSizeId { get; set; }
-        public string MyClosetSize { get; set; }
-        public int SeasonId { get; set; }
-        public string Season { get; set; }
-        public int MyClosetTypeId { get; set; }
-        public string MyClosetType { get; set; }
+        public int SizeCategoryId { get; set; }
+        public string SizeCategoryName { get; set; }
+        public int SeasonCategoryId { get; set; }
+        public string SeasonCategoryName { get; set; }
+        public int ApparelCategoryId { get; set; }
+        public string ApparelCategoryName { get; set; }
     }
 }

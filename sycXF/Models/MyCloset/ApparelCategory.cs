@@ -1,13 +1,13 @@
 ﻿namespace sycXF.Models.MyCloset
 {
-    public class MyClosetType
+    public class ApparelCategory
     {
         public int Id { get; set; }
-        public string Type { get; set; }
+        public string ApparelCategoryName { get; set; }
 
         public override string ToString()
         {
-            return Type;
+            return ApparelCategoryName;
         }
     }
 }

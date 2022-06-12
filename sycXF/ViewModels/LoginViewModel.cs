@@ -130,36 +130,36 @@ namespace sycXF.ViewModels
         private async Task MockSignInAsync()
         {
             IsBusy = true;
-            IsValid = true;
-            bool isValid = Validate();
-            bool isAuthenticated = false;
+            //IsValid = true;
+            //bool isValid = Validate();
+            //bool isAuthenticated = false;
 
-            if (isValid)
-            {
-                try
-                {
-                    await Task.Delay(10);
+            //if (isValid)
+            //{
+            //    try
+            //    {
+            //        await Task.Delay(10);
 
-                    isAuthenticated = true;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"[SignIn] Error signing in: {ex}");
-                }
-            }
-            else
-            {
-                IsValid = false;
-            }
+            //        isAuthenticated = true;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Debug.WriteLine($"[SignIn] Error signing in: {ex}");
+            //    }
+            //}
+            //else
+            //{
+            //    IsValid = false;
+            //}
 
-            if (isAuthenticated)
-            {
-                _settingsService.AuthAccessToken = GlobalSetting.Instance.AuthToken;
+            //if (isAuthenticated)
+            //{
+            //    _settingsService.AuthAccessToken = GlobalSetting.Instance.AuthToken;
 
                 await NavigationService.NavigateToAsync ("//Main/MyCloset");
-            }
+            //}
 
-            IsBusy = false;
+            //IsBusy = false;
         }
 
         private async Task SignInAsync()

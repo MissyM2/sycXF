@@ -50,28 +50,40 @@ namespace sycXF.Services.MyCloset
                 return new ObservableCollection<MyClosetItem>();
         }
 
-        public async Task<ObservableCollection<Season>> GetSeasonAsync()
+        public async Task<ObservableCollection<SeasonCategory>> GetSeasonCategoriesAsync()
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogbrands");
 
-            IEnumerable<Season> brands = await _requestProvider.GetAsync<IEnumerable<Season>>(uri);
+            IEnumerable<SeasonCategory> brands = await _requestProvider.GetAsync<IEnumerable<SeasonCategory>>(uri);
 
             if (brands != null)
                 return brands?.ToObservableCollection();
             else
-                return new ObservableCollection<Season>();
+                return new ObservableCollection<SeasonCategory>();
         }
 
-        public async Task<ObservableCollection<MyClosetType>> GetMyClosetTypeAsync()
+        public async Task<ObservableCollection<ApparelCategory>> GetApparelCategoriesAsync()
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogtypes");
 
-            IEnumerable<MyClosetType> types = await _requestProvider.GetAsync<IEnumerable<MyClosetType>>(uri);
+            IEnumerable<ApparelCategory> types = await _requestProvider.GetAsync<IEnumerable<ApparelCategory>>(uri);
 
             if (types != null)
                 return types.ToObservableCollection();
             else
-                return new ObservableCollection<MyClosetType>();
+                return new ObservableCollection<ApparelCategory>();
+        }
+
+        public async Task<ObservableCollection<SizeCategory>> GetSizeCategoriesAsync()
+        {
+            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogtypes");
+
+            IEnumerable<SizeCategory> types = await _requestProvider.GetAsync<IEnumerable<SizeCategory>>(uri);
+
+            if (types != null)
+                return types.ToObservableCollection();
+            else
+                return new ObservableCollection<SizeCategory>();
         }
     }
 }

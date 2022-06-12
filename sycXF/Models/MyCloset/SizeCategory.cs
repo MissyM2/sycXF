@@ -1,14 +1,14 @@
 ﻿using System;
 namespace sycXF.Models.MyCloset
 {
-	public class MyClosetSize
+	public class SizeCategory
     {
         public int Id { get; set; }
-        public string Size { get; set; }
+        public string SizeCategoryName { get; set; }
 
         public override string ToString()
         {
-            return Size;
+            return SizeCategoryName;
         }
     }
 }
