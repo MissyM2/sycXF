@@ -65,8 +65,8 @@ namespace sycXF.ViewModels
                     if (SelectedSeason == null)
                         return;
 
-                    var filteredItems = source.Where(closetitem => closetitem.SeasonCategoryName == SelectedSeason.SeasonCategoryName).ToList();
-                    foreach (var closetitem in source)
+                    var filteredItems = _source.Where(closetitem => closetitem.SeasonCategoryName == SelectedSeason.SeasonCategoryName).ToList();
+                    foreach (var closetitem in _source)
                     {
                         if (!filteredItems.Contains(closetitem))
                         {
@@ -124,8 +124,8 @@ namespace sycXF.ViewModels
                     if (SelectedApparelCategory == null)
                         return;
 
-                    var filteredItems = source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
-                    foreach (var closetitem in source)
+                    var filteredItems = _source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
+                    foreach (var closetitem in _source)
                     {
                         if (!filteredItems.Contains(closetitem))
                         {
@@ -183,8 +183,8 @@ namespace sycXF.ViewModels
                     if (SelectedSizeCategory == null)
                         return;
 
-                    var filteredItems = source.Where(closetitem => closetitem.SizeCategoryName == SelectedSizeCategory.SizeCategoryName).ToList();
-                    foreach (var closetitem in source)
+                    var filteredItems = _source.Where(closetitem => closetitem.SizeCategoryName == SelectedSizeCategory.SizeCategoryName).ToList();
+                    foreach (var closetitem in _source)
                     {
                         if (!filteredItems.Contains(closetitem))
                         {
@@ -205,6 +205,19 @@ namespace sycXF.ViewModels
         }
 
         // Closet Items
+
+        //private List<MyClosetItem> _source;
+        //public List<MyClosetItem> Source
+        //{
+        //    get => _source;
+        //    set
+        //    {
+        //        if (value == _source) return;
+        //        _source = value;
+        //        RaisePropertyChanged(() => Source);
+        //    }
+        //}
+
         private ObservableCollection<MyClosetItem> _closetItems;
         public ObservableCollection<MyClosetItem> ClosetItems
         {
@@ -257,11 +270,11 @@ namespace sycXF.ViewModels
             }
         }
 
-        public IList<MyClosetItem> source;
+        public List<MyClosetItem> _source;
 
         int selectionCount = 1;
 
-        public IList<MyClosetItem> EmptyClosetItems { get; private set; }
+        public List<MyClosetItem> EmptyClosetItems { get; private set; }
 
 
         #endregion
@@ -280,34 +293,28 @@ namespace sycXF.ViewModels
             _userService = DependencyService.Get<IUserService>();
             _dialogService = DependencyService.Get<IDialogService>();
 
-            source = new List<MyClosetItem>();
-            CreateClosetItemCollection();
+            //source = new List<MyClosetItem>();
 
-            _selectedClosetItem = ClosetItems.FirstOrDefault();
-            ClosetItemSelectionChanged();
+            //CreateClosetItemCollection();
 
-            SelectedClosetItems = new ObservableCollection<object>()
-            {
-                ClosetItems[1], ClosetItems[2], ClosetItems[3]
-            };
+            //_selectedClosetItem = ClosetItems.FirstOrDefault();
+            //ClosetItemSelectionChanged();
+
+            //SelectedClosetItems = new ObservableCollection<object>()
+            //{
+            //    ClosetItems[1], ClosetItems[2], ClosetItems[3]
+            //};
         }
 
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
             IsBusy = true;
+            //_source = new List<MyClosetItem>();
+            _source = await _myClosetService.GetMyClosetAsyncSource();
 
-            SeasonsCategoryCollection = await _myClosetService.GetSeasonCategoriesAsync();
-            ApparelCategoryCollection = await _myClosetService.GetApparelCategoriesAsync();
-            SizeCategoryCollection = await _myClosetService.GetSizeCategoriesAsync();
-
-            IsBusy = false;
-        }
-
-        void CreateClosetItemCollection()
-        {
-            source.Add(new MyClosetItem
+            _source.Add(new MyClosetItem
             {
-                Id = 1,
+                Id = 21,
                 PictureUri = "fake_product_01.png",
                 Name = "Floral cap-sleeved blouse",
                 Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
@@ -319,171 +326,22 @@ namespace sycXF.ViewModels
                 ApparelCategoryName = "Top"
             });
 
-            source.Add(new MyClosetItem
-            {
-                Id = 2,
-                PictureUri = "fake_product_02.png",
-                Name = "Floral skirt",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 2,
-                SizeCategoryName = "Small",
-                SeasonCategoryId = 3,
-                SeasonCategoryName = "Summer",
-                ApparelCategoryId = 4,
-                ApparelCategoryName = "Bottom"
-            });
+            ClosetItems = new ObservableCollection<MyClosetItem>(_source);
 
-            source.Add(new MyClosetItem
-            {
-                Id = 3,
-                PictureUri = "fake_product_03.png",
-                Name = "Black tea-length dress",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 3,
-                SizeCategoryName = "Medium",
-                SeasonCategoryId = 1,
-                SeasonCategoryName = "Winter",
-                ApparelCategoryId = 5,
-                ApparelCategoryName = "Dress"
-            });
+            //ClosetItems = await _myClosetService.GetMyClosetAsync();
+            SeasonsCategoryCollection = await _myClosetService.GetSeasonCategoriesAsync();
+            ApparelCategoryCollection = await _myClosetService.GetApparelCategoriesAsync();
+            SizeCategoryCollection = await _myClosetService.GetSizeCategoriesAsync();
 
-            source.Add(new MyClosetItem
-            {
-                Id = 4,
-                PictureUri = "fake_product_04.png",
-                Name = "London Fog rain coat",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 4,
-                SizeCategoryName = "Large",
-                SeasonCategoryId = 5,
-                SeasonCategoryName = "Always in Season",
-                ApparelCategoryId = 6,
-                ApparelCategoryName = "Outerwear"
-            });
-
-            source.Add(new MyClosetItem
-            {
-                Id = 5,
-                PictureUri = "fake_product_05.png",
-                Name = "Black leather boots",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 2,
-                SizeCategoryName = "Small",
-                SeasonCategoryName = "Winter",
-                ApparelCategoryId = 7,
-                ApparelCategoryName = "Footwear"
-            });
-
-            source.Add(new MyClosetItem
-            {
-                Id = 6,
-                PictureUri = "fake_product_01.png",
-                Name = "White button-down blouse",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 3,
-                SizeCategoryName = "Medium",
-                SeasonCategoryName = "Spring",
-                ApparelCategoryId = 3,
-                ApparelCategoryName = "Top"
-            });
-
-            source.Add(new MyClosetItem
-            {
-                Id = 7,
-                PictureUri = "fake_product_02.png",
-                Name = "White jean skirt",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 4,
-                SizeCategoryName = "Large",
-                SeasonCategoryId = 3,
-                SeasonCategoryName = "Summer",
-                ApparelCategoryId = 4,
-                ApparelCategoryName = "Bottom"
-            });
-
-            source.Add(new MyClosetItem
-            {
-                Id = 8,
-                PictureUri = "fake_product_03.png",
-                Name = "Flannel long-sleeved dress",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 2,
-                SizeCategoryName = "Small",
-                SeasonCategoryId = 4,
-                SeasonCategoryName = "Fall",
-                ApparelCategoryId = 5,
-                ApparelCategoryName = "Dress"
-            });
-
-            source.Add(new MyClosetItem
-            {
-                Id = 9,
-                PictureUri = "fake_product_04.png",
-                Name = "White Sweater",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 3,
-                SizeCategoryName = "Medium",
-                SeasonCategoryId = 5,
-                SeasonCategoryName = "Always in Season",
-                ApparelCategoryId = 6,
-                ApparelCategoryName = "Outerwear"
-            });
-
-            source.Add(new MyClosetItem
-            {
-                Id = 10,
-                PictureUri = "fake_product_05.png",
-                Name = "Pearl Necklace",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 3,
-                SizeCategoryName = "Medium",
-                SeasonCategoryId = 1,
-                SeasonCategoryName = "Winter",
-                ApparelCategoryId = 8,
-                ApparelCategoryName = "Accessory"
-            });
-
-            source.Add(new MyClosetItem
-            {
-                Id = 11,
-                PictureUri = "fake_product_05.png",
-                Name = "Purse",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 4,
-                SizeCategoryName = "Large",
-                SeasonCategoryId = 2,
-                SeasonCategoryName = "Spring",
-                ApparelCategoryId = 8,
-                ApparelCategoryName = "Accessory"
-            });
-
-            source.Add(new MyClosetItem
-            {
-                Id = 12,
-                PictureUri = "fake_product_05.png",
-                Name = "Jeans",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 2,
-                SizeCategoryName = "Small",
-                SeasonCategoryId = 1,
-                SeasonCategoryName = "Winter",
-                ApparelCategoryId = 4,
-                ApparelCategoryName = "Bottom"
-            });
-
-            ClosetItems = new ObservableCollection<MyClosetItem>(source);
+            IsBusy = false;
         }
-
-        
-
-
 
 
         void FilterSeasonCategoryItems(SeasonCategory filter)
         {
 
-            var filteredItems = source.Where(closetitem => closetitem.SeasonCategoryName == SelectedSeason.SeasonCategoryName).ToList();
-            foreach (var closetitem in source)
+            var filteredItems = _source.Where(closetitem => closetitem.SeasonCategoryName == SelectedSeason.SeasonCategoryName).ToList();
+            foreach (var closetitem in _source)
             {
                 if (!filteredItems.Contains(closetitem))
                 {
@@ -502,8 +360,8 @@ namespace sycXF.ViewModels
         
         void FilterApparelCategoryItems(ApparelCategory filter)
         {
-            var filteredItems = source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
-            foreach (var closetitem in source)
+            var filteredItems = _source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
+            foreach (var closetitem in _source)
             {
                 if (!filteredItems.Contains(closetitem))
                 {
@@ -523,8 +381,8 @@ namespace sycXF.ViewModels
         void FilterSizeCategoryItems(SizeCategory filter)
         {
 
-            var filteredItems = source.Where(closetitem => closetitem.SizeCategoryName == SelectedSizeCategory.SizeCategoryName).ToList();
-            foreach (var closetitem in source)
+            var filteredItems = _source.Where(closetitem => closetitem.SizeCategoryName == SelectedSizeCategory.SizeCategoryName).ToList();
+            foreach (var closetitem in _source)
             {
                 if (!filteredItems.Contains(closetitem))
                 {

@@ -35,17 +35,42 @@ namespace sycXF.Services.MyCloset
                 return new ObservableCollection<MyClosetItem>();
         }
 
+        //public async Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync()
+        //{
+        //    var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
+
+        //    MyClosetRoot catalog = await _requestProvider.GetAsync<MyClosetRoot>(uri);
+
+        //    if (catalog?.Data != null)
+        //    {
+        //        _fixUriService.FixMyClosetItemPictureUri(catalog?.Data);
+        //        return catalog?.Data.ToObservableCollection();
+        //    }
+        //    else
+        //        return new ObservableCollection<MyClosetItem>();
+        //}
+
+
+        public async Task<List<MyClosetItem>> GetMyClosetAsyncSource()
+        {
+            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
+
+            List<MyClosetItem> myclosetitems = await _requestProvider.GetAsync<List<MyClosetItem>>(uri);
+
+            if (myclosetitems != null)
+                return myclosetitems;
+            else
+                return new List<MyClosetItem>();
+        }
+
         public async Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync()
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
 
-            MyClosetRoot catalog = await _requestProvider.GetAsync<MyClosetRoot>(uri);
+            IEnumerable<MyClosetItem> myclosetitems = await _requestProvider.GetAsync<IEnumerable<MyClosetItem>>(uri);
 
-            if (catalog?.Data != null)
-            {
-                _fixUriService.FixMyClosetItemPictureUri(catalog?.Data);
-                return catalog?.Data.ToObservableCollection();
-            }
+            if (myclosetitems != null)
+                return myclosetitems?.ToObservableCollection();
             else
                 return new ObservableCollection<MyClosetItem>();
         }
@@ -54,10 +79,10 @@ namespace sycXF.Services.MyCloset
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogbrands");
 
-            IEnumerable<SeasonCategory> brands = await _requestProvider.GetAsync<IEnumerable<SeasonCategory>>(uri);
+            IEnumerable<SeasonCategory> seasoncategories = await _requestProvider.GetAsync<IEnumerable<SeasonCategory>>(uri);
 
-            if (brands != null)
-                return brands?.ToObservableCollection();
+            if (seasoncategories != null)
+                return seasoncategories?.ToObservableCollection();
             else
                 return new ObservableCollection<SeasonCategory>();
         }
@@ -66,10 +91,10 @@ namespace sycXF.Services.MyCloset
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogtypes");
 
-            IEnumerable<ApparelCategory> types = await _requestProvider.GetAsync<IEnumerable<ApparelCategory>>(uri);
+            IEnumerable<ApparelCategory> apparelcategories = await _requestProvider.GetAsync<IEnumerable<ApparelCategory>>(uri);
 
-            if (types != null)
-                return types.ToObservableCollection();
+            if (apparelcategories != null)
+                return apparelcategories.ToObservableCollection();
             else
                 return new ObservableCollection<ApparelCategory>();
         }
@@ -78,10 +103,10 @@ namespace sycXF.Services.MyCloset
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogtypes");
 
-            IEnumerable<SizeCategory> types = await _requestProvider.GetAsync<IEnumerable<SizeCategory>>(uri);
+            IEnumerable<SizeCategory> sizecategories = await _requestProvider.GetAsync<IEnumerable<SizeCategory>>(uri);
 
-            if (types != null)
-                return types.ToObservableCollection();
+            if (sizecategories != null)
+                return sizecategories.ToObservableCollection();
             else
                 return new ObservableCollection<SizeCategory>();
         }

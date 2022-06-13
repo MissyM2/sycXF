@@ -1,4 +1,5 @@
 ﻿using sycXF.Models.MyCloset;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace sycXF.Services.MyCloset
         Task<ObservableCollection<MyClosetItem>> FilterAsync(int catalogSeasonId, int catalogTypeId);
         Task<ObservableCollection<ApparelCategory>> GetApparelCategoriesAsync();
         Task<ObservableCollection<SizeCategory>> GetSizeCategoriesAsync();
+        Task<List<MyClosetItem>> GetMyClosetAsyncSource();
         Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync();
     }
 }
