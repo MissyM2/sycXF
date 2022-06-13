@@ -204,20 +204,6 @@ namespace sycXF.ViewModels
             }
         }
 
-        // Closet Items
-
-        //private List<MyClosetItem> _source;
-        //public List<MyClosetItem> Source
-        //{
-        //    get => _source;
-        //    set
-        //    {
-        //        if (value == _source) return;
-        //        _source = value;
-        //        RaisePropertyChanged(() => Source);
-        //    }
-        //}
-
         private ObservableCollection<MyClosetItem> _closetItems;
         public ObservableCollection<MyClosetItem> ClosetItems
         {
@@ -259,6 +245,7 @@ namespace sycXF.ViewModels
             }
         }
 
+
         private string _selectedClosetItemMessage; 
         public string SelectedClosetItemMessage
         {
@@ -279,10 +266,7 @@ namespace sycXF.ViewModels
 
         #endregion
 
-        public ICommand FilterSeasonCategoryCommand => new Command<SeasonCategory>(FilterSeasonCategoryItems);
-        public ICommand FilterApparelCategoryCommand => new Command<ApparelCategory>(FilterApparelCategoryItems);
-        public ICommand FilterSizeCategoryCommand => new Command<SizeCategory>(FilterSizeCategoryItems);
-
+       
         public MyClosetViewModel()
         {
 
@@ -337,68 +321,6 @@ namespace sycXF.ViewModels
         }
 
 
-        void FilterSeasonCategoryItems(SeasonCategory filter)
-        {
-
-            var filteredItems = _source.Where(closetitem => closetitem.SeasonCategoryName == SelectedSeason.SeasonCategoryName).ToList();
-            foreach (var closetitem in _source)
-            {
-                if (!filteredItems.Contains(closetitem))
-                {
-                    ClosetItems.Remove(closetitem);
-                }
-                else
-                {
-                    if (!ClosetItems.Contains(closetitem))
-                    {
-                        ClosetItems.Add(closetitem);
-                    }
-                }
-            }
-        }
-
-        
-        void FilterApparelCategoryItems(ApparelCategory filter)
-        {
-            var filteredItems = _source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
-            foreach (var closetitem in _source)
-            {
-                if (!filteredItems.Contains(closetitem))
-                {
-                    ClosetItems.Remove(closetitem);
-                }
-                else
-                {
-                    if (!ClosetItems.Contains(closetitem))
-                    {
-                        ClosetItems.Add(closetitem);
-                    }
-                }
-            }
-
-    }
-
-        void FilterSizeCategoryItems(SizeCategory filter)
-        {
-
-            var filteredItems = _source.Where(closetitem => closetitem.SizeCategoryName == SelectedSizeCategory.SizeCategoryName).ToList();
-            foreach (var closetitem in _source)
-            {
-                if (!filteredItems.Contains(closetitem))
-                {
-                    ClosetItems.Remove(closetitem);
-                }
-                else
-                {
-                    if (!ClosetItems.Contains(closetitem))
-                    {
-                        ClosetItems.Add(closetitem);
-                    }
-                }
-            }
-
-     }
-
         void ClosetItemSelectionChanged()
         {
             _selectedClosetItemMessage = $"Selection {selectionCount}: {SelectedClosetItem.Name}";
@@ -406,10 +328,6 @@ namespace sycXF.ViewModels
             //OnPropertyChanged("SelectedClosetItemMessage");
             selectionCount++;
         }
-
-
-
-
 
 
     }
