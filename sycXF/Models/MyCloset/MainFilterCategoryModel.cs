@@ -3,7 +3,7 @@ namespace sycXF.Models.MyCloset
 {
     public class MainFilterCategoryModel
     {
-        public int Identifier { get; set; }
+        public int Id { get; set; }
         public string PropertyName { get; set; }
     }
 }

@@ -61,6 +61,8 @@
     <None Remove="Resources\Logo.png" />
     <None Remove="Resources\noimage.png" />
     <None Remove="Xamarin.Forms.PancakeView" />
+    <None Remove="ReleaseNotes\" />
+    <None Remove="Resources\noun-skirt-1202595.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\Font_Awesome_5_Free-Regular-400.otf" />
@@ -77,9 +79,11 @@
     <EmbeddedResource Include="Resources\fake_product_04.png" />
     <EmbeddedResource Include="Resources\fake_product_05.png" />
     <EmbeddedResource Include="Resources\Logo.png" />
+    <EmbeddedResource Include="Resources\noun-skirt-1202595.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="ReleaseNotes\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default.png" />

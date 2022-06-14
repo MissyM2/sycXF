@@ -87,7 +87,7 @@
                 <On Platform="iOS, Android" Value="0" />
             </OnPlatform>
 
-            <!--  FONTS  -->
+            <!--  FONTS -->
             <x:String x:Key="MontserratRegular">Montserrat-Regular</x:String>
             <x:String x:Key="MontserratBold">Montserrat-Bold</x:String>
             <x:String x:Key="SourceSansProRegular">SourceSansPro-Regular</x:String>

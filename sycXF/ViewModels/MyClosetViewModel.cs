@@ -27,64 +27,71 @@ namespace sycXF.ViewModels
         #endregion
 
         #region Properties
-        
-        // SeasonsCategory filter
-        private ObservableCollection<SeasonCategory> _seasonsCategoryCollection;
-        public ObservableCollection<SeasonCategory> SeasonsCategoryCollection
+
+        // FilterCategory CV
+        private ObservableCollection<MainFilterCategoryModel> _mainFilterCategoryCollection;
+        public ObservableCollection<MainFilterCategoryModel> MainFilterCategoryCollection
         {
-            get => _seasonsCategoryCollection;
+            get => _mainFilterCategoryCollection;
             set
             {
-                if (value == _seasonsCategoryCollection) return;
-                _seasonsCategoryCollection = value;
-                RaisePropertyChanged(() => SeasonsCategoryCollection);
+                if (value == _mainFilterCategoryCollection) return;
+                _mainFilterCategoryCollection = value;
+                RaisePropertyChanged(() => MainFilterCategoryCollection);
             }
         }
-        private SeasonCategory _selectedSeason;
-        public SeasonCategory SelectedSeason
+        private MainFilterCategoryModel _selectedMainFilterCategory;
+        public MainFilterCategoryModel SelectedMainFilterCategory
         {
             get
             {
-                return _selectedSeason;
+                return _selectedMainFilterCategory;
             }
             set
             {
-                if (_selectedSeason != value)
+                if (_selectedMainFilterCategory != value)
                 {
-                    _selectedSeason = value;
+                    _selectedMainFilterCategory = value;
                 }
             }
         }
 
-        public ICommand SeasonsCategorySelectedCommand
+        public ICommand MainFilterCategorySelectedCommand
         {
             get
             {
-                return new Command( () =>
+                return new Command(() =>
                 {
-                    if (SelectedSeason == null)
+                    if (SelectedMainFilterCategory == null)
                         return;
+                    _dialogService.ShowAlertAsync("OK", SelectedMainFilterCategory.PropertyName, "OK");
+                    //var filteredItems = _source.Where(closetitem => closetitem.SeasonCategoryName == SelectedMainFilterCategory.PropertyName).ToList();
+                    //foreach (var closetitem in _source)
+                    //{
+                    //    if (!filteredItems.Contains(closetitem))
+                    //    {
+                    //        ClosetItems.Remove(closetitem);
+                    //    }
+                    //    else
+                    //    {
+                    //        if (!ClosetItems.Contains(closetitem))
+                    //        {
+                    //            ClosetItems.Add(closetitem);
+                    //        }
+                    //    }
 
-                    var filteredItems = _source.Where(closetitem => closetitem.SeasonCategoryName == SelectedSeason.SeasonCategoryName).ToList();
-                    foreach (var closetitem in _source)
-                    {
-                        if (!filteredItems.Contains(closetitem))
-                        {
-                            ClosetItems.Remove(closetitem);
-                        }
-                        else
-                        {
-                            if (!ClosetItems.Contains(closetitem))
-                            {
-                                ClosetItems.Add(closetitem);
-                            }
-                        }
-
-                        SelectedSeason = null;
-                    }
+                        SelectedMainFilterCategory = null;
+                   // }
                 });
             }
         }
+
+
+        //System.Text.RegularExpressions.Regex.Unescape
+        //string glyph = "F7B4";
+
+        //char result = (char)(Convert.ToInt32(glyph, 16)); // '\uF7B4'
+
 
         // ApparelCategory filter
 
@@ -124,144 +131,30 @@ namespace sycXF.ViewModels
                     if (SelectedApparelCategory == null)
                         return;
 
-                    var filteredItems = _source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
-                    foreach (var closetitem in _source)
-                    {
-                        if (!filteredItems.Contains(closetitem))
-                        {
-                            ClosetItems.Remove(closetitem);
-                        }
-                        else
-                        {
-                            if (!ClosetItems.Contains(closetitem))
-                            {
-                                ClosetItems.Add(closetitem);
-                            }
-                        }
+                    //var filteredItems = _source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
+                    //foreach (var closetitem in _source)
+                    //{
+                    //    if (!filteredItems.Contains(closetitem))
+                    //    {
+                    //        ClosetItems.Remove(closetitem);
+                    //    }
+                    //    else
+                    //    {
+                    //        if (!ClosetItems.Contains(closetitem))
+                    //        {
+                    //            ClosetItems.Add(closetitem);
+                    //        }
+                    //    }
 
                         SelectedApparelCategory = null;
-                    }
+                    //}
                 });
             }
         }
 
-        // SizeCategory filter
-
-        private ObservableCollection<SizeCategory> _sizeCategoryCollection;
-        public ObservableCollection<SizeCategory> SizeCategoryCollection
-        {
-            get => _sizeCategoryCollection;
-            set
-            {
-                if (value == _sizeCategoryCollection) return;
-                _sizeCategoryCollection = value;
-                RaisePropertyChanged(() => SizeCategoryCollection);
-            }
-        }
-        private SizeCategory _selectedSizeCategory;
-        public SizeCategory SelectedSizeCategory
-        {
-            get
-            {
-                return _selectedSizeCategory;
-            }
-            set
-            {
-                if (_selectedSizeCategory != value)
-                {
-                    _selectedSizeCategory = value;
-                }
-            }
-        }
-
-        public ICommand SizeCategorySelectedCommand
-        {
-            get
-            {
-                return new Command(() =>
-                {
-                    if (SelectedSizeCategory == null)
-                        return;
-
-                    var filteredItems = _source.Where(closetitem => closetitem.SizeCategoryName == SelectedSizeCategory.SizeCategoryName).ToList();
-                    foreach (var closetitem in _source)
-                    {
-                        if (!filteredItems.Contains(closetitem))
-                        {
-                            ClosetItems.Remove(closetitem);
-                        }
-                        else
-                        {
-                            if (!ClosetItems.Contains(closetitem))
-                            {
-                                ClosetItems.Add(closetitem);
-                            }
-                        }
-
-                        SelectedSizeCategory = null;
-                    }
-                });
-            }
-        }
-
-        private ObservableCollection<MyClosetItem> _closetItems;
-        public ObservableCollection<MyClosetItem> ClosetItems
-        {
-            get => _closetItems;
-            set
-            {
-                if (value == _closetItems) return;
-                _closetItems = value;
-                RaisePropertyChanged(() => ClosetItems);
-            }
-        }
-
-        private MyClosetItem _selectedClosetItem;
-        public MyClosetItem SelectedClosetItem
-        { 
-
-            get => _selectedClosetItem;
-            set
-            {
-                if (value == _selectedClosetItem) return;
-                _selectedClosetItem = value;
-                RaisePropertyChanged(() => _selectedClosetItem);
-            }
-        }
 
 
-        private ObservableCollection<Object> _selectedClosetItems;
-        public ObservableCollection<Object> SelectedClosetItems
-        {
-            get
-            {
-                return _selectedClosetItems;
-            }
-            set
-            {
-                if (value == _selectedClosetItems) return;
-                _selectedClosetItems = value;
-                RaisePropertyChanged(() => _selectedClosetItems);
-            }
-        }
-
-
-        private string _selectedClosetItemMessage; 
-        public string SelectedClosetItemMessage
-        {
-            get => _selectedClosetItemMessage;
-            set
-            {
-                _selectedClosetItemMessage = value;
-                RaisePropertyChanged(() => _selectedClosetItemMessage);
-            }
-        }
-
-        public List<MyClosetItem> _source;
-
-        int selectionCount = 1;
-
-        public List<MyClosetItem> EmptyClosetItems { get; private set; }
+      
 
 
         #endregion
@@ -276,59 +169,18 @@ namespace sycXF.ViewModels
             _settingsService = DependencyService.Get<ISettingsService>();
             _userService = DependencyService.Get<IUserService>();
             _dialogService = DependencyService.Get<IDialogService>();
-
-            //source = new List<MyClosetItem>();
-
-            //CreateClosetItemCollection();
-
-            //_selectedClosetItem = ClosetItems.FirstOrDefault();
-            //ClosetItemSelectionChanged();
-
-            //SelectedClosetItems = new ObservableCollection<object>()
-            //{
-            //    ClosetItems[1], ClosetItems[2], ClosetItems[3]
-            //};
+            
         }
 
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
             IsBusy = true;
-            //_source = new List<MyClosetItem>();
-            _source = await _myClosetService.GetMyClosetAsyncSource();
-
-            _source.Add(new MyClosetItem
-            {
-                Id = 21,
-                PictureUri = "fake_product_01.png",
-                Name = "Floral cap-sleeved blouse",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
-                SizeCategoryId = 2,
-                SizeCategoryName = "Small",
-                SeasonCategoryId = 2,
-                SeasonCategoryName = "Spring",
-                ApparelCategoryId = 3,
-                ApparelCategoryName = "Top"
-            });
-
-            ClosetItems = new ObservableCollection<MyClosetItem>(_source);
-
-            //ClosetItems = await _myClosetService.GetMyClosetAsync();
-            SeasonsCategoryCollection = await _myClosetService.GetSeasonCategoriesAsync();
+            
             ApparelCategoryCollection = await _myClosetService.GetApparelCategoriesAsync();
-            SizeCategoryCollection = await _myClosetService.GetSizeCategoriesAsync();
+            MainFilterCategoryCollection = await _myClosetService.GetMainFilterCategoriesAsync();
 
             IsBusy = false;
         }
-
-
-        void ClosetItemSelectionChanged()
-        {
-            _selectedClosetItemMessage = $"Selection {selectionCount}: {SelectedClosetItem.Name}";
-            Console.WriteLine("message is " + _selectedClosetItemMessage);
-            //OnPropertyChanged("SelectedClosetItemMessage");
-            selectionCount++;
-        }
-
 
     }
 }
