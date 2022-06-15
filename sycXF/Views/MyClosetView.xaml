@@ -118,7 +118,8 @@
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedApparelCategory, Mode=TwoWay}"
                         SelectionChangedCommand="{Binding ApparelCategorySelectedCommand, Mode=TwoWay}"
-                        SelectionChangedCommandParameter="{Binding .}">
+                        SelectionChangedCommandParameter="{Binding .}"
+                        IsVisible="{Binding IsVisibleCVApparelTypes}">
 
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical"/>

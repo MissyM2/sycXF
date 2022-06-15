@@ -64,18 +64,20 @@ namespace sycXF.ViewModels
                 {
                     if (SelectedMainFilterCategory == null)
                         return;
-                    if (SelectedMainFilterCategory.PropertyName == "Categories")
-                   // {
-                        _isVisibleCVApparelTypes = !_isVisibleCVApparelTypes;
-                       // _isVisibleCVSeasons = false;
-                    //}
-                    //else if (SelectedMainFilterCategory.PropertyName == "Seasons")
-                    //{
-                    //    _isVisibleCVApparelTypes = false;
-                    //    _isVisibleCVSeasons = true;
 
-                    //}
-                        
+                    IsVisibleCVApparelTypes = true;
+                    if (SelectedMainFilterCategory.PropertyName == "Categories")
+                    {
+                        IsVisibleCVApparelTypes = true;
+                        IsVisibleCVSeasons = false;
+                    }
+                    else if (SelectedMainFilterCategory.PropertyName == "Seasons")
+                    {
+                        IsVisibleCVApparelTypes = false;
+                        IsVisibleCVSeasons = true;
+
+                    }
+
 
                     //var filteredItems = _source.Where(closetitem => closetitem.SeasonCategoryName == SelectedMainFilterCategory.PropertyName).ToList();
                     //foreach (var closetitem in _source)
@@ -184,6 +186,7 @@ namespace sycXF.ViewModels
                 if (_isVisibleCVApparelTypes != value)
                 {
                     _isVisibleCVApparelTypes = value;
+                    RaisePropertyChanged(() => IsVisibleCVApparelTypes);
                 }
             }
         }
