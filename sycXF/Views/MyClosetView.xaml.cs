@@ -14,6 +14,7 @@ namespace sycXF.Views
         public MyClosetView()
         {
             InitializeComponent();
+            VisualStateManager.GoToState(CVMainFilterCategories, "Selected");
         }
 
         //protected override void OnBindingContextChanged()

@@ -20,6 +20,7 @@
             <Color x:Key="GreenColor">#00A69C</Color>
             <Color x:Key="DarkGreenColor">#00857D</Color>
             <Color x:Key="GrayColor">#e2e2e2</Color>
+            <Color x:Key="LighterGrayColor">#f1f1f1</Color>
             <Color x:Key="DisabledColor">Gray</Color>
             <Color x:Key="ErrorColor">#ff5252</Color>
             <Color x:Key="TextColor">#757575</Color>

@@ -41,24 +41,25 @@
     </ContentPage.Resources>
 
      <StackLayout>
-         <FlexLayout x:Name="CVMainFilterCategories"
-                     BindableLayout.ItemsSource="{Binding MainFilterCategoryCollection}"
-                     HeightRequest="50"
-                     AlignItems="Center"
-                     JustifyContent="SpaceEvenly">
 
-                <BindableLayout.ItemTemplate>
+            <CollectionView x:Name="CVMainFilterCategories"
+                            ItemsSource="{Binding MainFilterCategoryCollection}"
+                            SelectedItem="{Binding SelectedMainFilterCategory, Mode=TwoWay}"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding MainFilterCategorySelectedCommand, Mode=TwoWay}"
+                            HeightRequest="100">
+        
+                <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Padding="0,20,0,10">
+                        <StackLayout x:Name="CVmainStack">
                             <Frame x:Name="CVMainFilterCategoryFrame"
-                                    Padding="10,0,10,0"
-                                    Margin="5"
-                                    CornerRadius="10"
-                                    HasShadow="False"
-                                    VerticalOptions="FillAndExpand">
-                                <Frame.GestureRecognizers>
-                                         <TapGestureRecognizer Command="{Binding MainFilterCategorySelectedCommand, Mode=TwoWay}"/>
-                                </Frame.GestureRecognizers>
+                                   HasShadow="False"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand">
                                     <StackLayout>  
                                         <Label x:Name="CVMainFilterCategoryLabel"
                                                HorizontalTextAlignment="Center"
@@ -67,25 +68,49 @@
                                                FontSize="{StaticResource LargeSize}"
                                                Text="{Binding PropertyName}"
                                                TextColor="{StaticResource LightGreenColor}"/>
-                                        <BoxView x:Name="FLUnderline"
-                                               BackgroundColor="{StaticResource LightGreenColor}"
-                                               IsVisible="True"
-                                               HeightRequest="1"
+                                        <BoxView x:Name="CVMainFilterCategoryUnderline"
+                                               BackgroundColor="{StaticResource WhiteColor}"
+                                               IsVisible="False"
+                                               HeightRequest="2"
                                                Margin="0,6,0,0"/>
 
 
                                     </StackLayout>
                                 </Frame>
-                             <Label x:Name="StackUnderline"
-                                    TextColor="{StaticResource GrayColor}"
-                                    IsVisible="True"
-                                    HeightRequest="1"/>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup
+                                            Name="CommonStates">
+                                        <VisualState
+                                                Name="Normal" />
+                                        <VisualState
+                                                Name="Focused" />
+                                        <VisualState
+                                                Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor"
+                                                         Value="{StaticResource WhiteColor}" />
+                                                 <Setter TargetName="CVMainFilterCategoryFrame" Property="Frame.BackgroundColor"
+                                                        Value="#00857D" />
+                                                 <Setter TargetName="CVMainFilterCategoryLabel" Property="Label.TextColor"
+                                                        Value="{StaticResource WhiteColor}" />
+                                                <Setter TargetName="CVMainFilterCategoryLabel" Property="Label.FontAttributes"
+                                                        Value="Bold" />
+                                                <Setter TargetName="CVMainFilterCategoryLabel" Property="Label.FontSize"
+                                                        Value="{StaticResource BigSize}" />
+                                                 <Setter TargetName="CVMainFilterCategoryUnderline" Property="BoxView.IsVisible"
+                                                        Value="True" />
+                                                
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
                         </StackLayout>
                     </DataTemplate>
-                </BindableLayout.ItemTemplate>
-        <!--</CollectionView>-->
-         </FlexLayout>
+                </CollectionView.ItemTemplate>
+             </CollectionView>
+        <Label Text="{Binding IsVisibleCVApparelTypes}" BackgroundColor="{StaticResource ErrorColor}" IsVisible="true"/>
 
+         <!-- CV Apparel Types-->
     <StackLayout>
 
         <CollectionView x:Name="CVApparelCategories"
@@ -102,7 +127,7 @@
             <CollectionView.Header>
                 <FlexLayout Direction="Row"
                             JustifyContent="SpaceBetween"
-                            BackgroundColor="{StaticResource GrayColor}"
+                            BackgroundColor="{StaticResource LighterGrayColor}"
                             Padding="12,20,12,20"
                             Margin="0,0,0,20">
                     <Label Text="Browse By Apparel Types"
@@ -149,34 +174,96 @@
 
                                         </Image.Clip>-->
                                     </Image>
-                                    <!--<Image
-                                        HeightRequest="40"
-                                        WidthRequest="40">
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{Binding IconFamily}"
-                                                             Color="{StaticResource LightGreenColor}"
-                                                             Glyph="{Binding IconGlyph}">
-
-
-                                            </FontImageSource>
-                                        </Image.Source>
-                                    </Image>-->
-
-                                    <!--<Image Aspect="AspectFill"
-                                           Source="{Binding IconGlyph, TargetNullValue='default_product.png'}"
-                                           HeightRequest="80"
-                                           WidthRequest="80"
-                                           BackgroundColor="AliceBlue">
-                                        
-                                    </Image>-->
 
                                 </Frame>
             
                                  <StackLayout Grid.Column="1"
                                               VerticalOptions="Center">
-                      
-                                     <Label Text="{Binding ApparelCategoryTitle}"/>
-              
+                                     <Label Text="{Binding ApparelCategoryTitle}"
+                                            TextColor="{StaticResource DarkGreenColor}"
+                                            FontSize="{StaticResource LargerSize}"/>
+                                 </StackLayout>
+                    
+                            </Grid>
+                            
+                        <!--</StackLayout>-->
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+        </CollectionView>
+        </StackLayout>
+
+    <!-- CV Seasons-->
+     <StackLayout IsVisible="{Binding IsVisibleCVSeasons}">
+
+        <CollectionView x:Name="CVSeasonCategories"
+                        ItemsSource="{Binding SeasonCategoryCollection}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedSeasonCategory, Mode=TwoWay}"
+                        SelectionChangedCommand="{Binding SeasonCategorySelectedCommand, Mode=TwoWay}"
+                        SelectionChangedCommandParameter="{Binding .}">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+            <CollectionView.Header>
+                <FlexLayout Direction="Row"
+                            JustifyContent="SpaceBetween"
+                            BackgroundColor="{StaticResource LighterGrayColor}"
+                            Padding="12,20,12,20"
+                            Margin="0,0,0,20">
+                    <Label Text="Browse By Season"
+                           FontSize="{StaticResource LargerSize}"/>
+                    <Label Text="See all #"/>
+                   
+
+                </FlexLayout>
+                
+
+            </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <!--<StackLayout BackgroundColor="AliceBlue" Padding="0" Margin="0">-->
+                            <Grid>
+                                <Grid.Padding>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="iOS, Android" Value="0" />
+                                        <On Platform="UWP, WinRT, WinPhone" Value="12, 0" />
+                                    </OnPlatform>
+                                </Grid.Padding>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
+               
+                                <Frame Grid.Column="0"
+                                       BackgroundColor="Transparent"
+                                       HasShadow="False"
+                                       Padding="8"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       HeightRequest="80"
+                                       WidthRequest="80">
+                                    <Image Aspect="AspectFill"
+                                           Source="{Binding IconGlyph, TargetNullValue='default_product.png'}"
+                                           HeightRequest="60"
+                                           WidthRequest="60">
+                                        <!--<Image.Clip>
+                                            <EllipseGeometry Center="40,40"
+                                                             RadiusX="40"
+                                                             RadiusY="40"/>
+
+                                        </Image.Clip>-->
+                                    </Image>
+
+                                </Frame>
+            
+                                 <StackLayout Grid.Column="1"
+                                              VerticalOptions="Center">
+                                     <Label Text="{Binding SeasonCategoryName}"
+                                            TextColor="{StaticResource DarkGreenColor}"
+                                            FontSize="{StaticResource LargerSize}"/>
                                  </StackLayout>
                     
                             </Grid>
