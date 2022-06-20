@@ -2,7 +2,8 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
 
 namespace sycXF.ViewModels.Base
 {

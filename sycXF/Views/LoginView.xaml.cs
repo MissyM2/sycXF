@@ -3,7 +3,8 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Xamarin.Forms;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
 
 namespace sycXF.Views
 {

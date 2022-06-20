@@ -10,7 +10,8 @@ using sycXF.Services;
 using System;
 using System.Globalization;
 using System.Reflection;
-using Xamarin.Forms;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
 
 namespace sycXF.ViewModels.Base
 {

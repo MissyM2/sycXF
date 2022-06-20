@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <views:ContentPageBase
     x:Class="sycXF.Views.MyClosetView"
-    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:animations="clr-namespace:sycXF.Animations;assembly=sycXF"
     xmlns:templates="clr-namespace:sycXF.Views.Templates;assembly=sycXF"
@@ -40,14 +40,15 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-     <StackLayout>
+     <StackLayout Margin="0" BackgroundColor="pink">
 
             <CollectionView x:Name="CVMainFilterCategories"
                             ItemsSource="{Binding MainFilterCategoryCollection}"
                             SelectedItem="{Binding SelectedMainFilterCategory, Mode=TwoWay}"
                             SelectionMode="Single"
                             SelectionChangedCommand="{Binding MainFilterCategorySelectedCommand, Mode=TwoWay}"
-                            HeightRequest="100">
+                            HeightRequest="100"
+                            Margin="0">
         
                 <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal"/>
@@ -108,10 +109,14 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
              </CollectionView>
-        <Label Text="{Binding IsVisibleCVApparelTypes}" BackgroundColor="{StaticResource ErrorColor}" IsVisible="true"/>
+        <Label  Text="" BackgroundColor="{StaticResource PinkAccentColor}"
+                 HeightRequest="2"
+                 Margin="0"
+                Padding="0"/>
 
          <!-- CV Apparel Types-->
-    <StackLayout>
+    <StackLayout Margin="0"
+                            BackgroundColor="Orange">
 
         <CollectionView x:Name="CVApparelCategories"
                         ItemsSource="{Binding ApparelCategoryCollection}"
@@ -129,7 +134,7 @@
                 <FlexLayout Direction="Row"
                             JustifyContent="SpaceBetween"
                             BackgroundColor="{StaticResource LighterGrayColor}"
-                            Padding="12,20,12,20"
+                            Padding="12,0,12,20"
                             Margin="0,0,0,20">
                     <Label Text="Browse By Apparel Types"
                            FontSize="{StaticResource LargerSize}"/>

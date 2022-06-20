@@ -3,7 +3,8 @@ using sycXF.iOS.Services;
 using Foundation;
 using UIKit;
 using Xamarin.Essentials;
-using Xamarin.Forms;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
 
 [assembly: Dependency(typeof(ThemeService))]
 namespace sycXF.iOS.Services

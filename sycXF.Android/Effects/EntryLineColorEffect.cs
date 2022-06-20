@@ -3,8 +3,10 @@ using sycXF.Behaviors;
 using sycXF.Android.Effects;
 using System;
 using System.ComponentModel;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
+using Microsoft.Maui
+using Microsoft.Maui.Controls.Platform.Android;
 
 [assembly: ResolutionGroupName("sycXF")]
 [assembly: ExportEffect(typeof(EntryLineColorEffect), "EntryLineColorEffect")]

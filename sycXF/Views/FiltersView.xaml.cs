@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using sycXF.ViewModels;
 using Xamarin.CommunityToolkit.UI.Views;
-using Xamarin.Forms;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
 
 namespace sycXF.Views
 {

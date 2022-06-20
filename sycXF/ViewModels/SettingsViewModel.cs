@@ -4,7 +4,8 @@ using sycXF.ViewModels.Base;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Forms;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
 using sycXF.Services.Dependency;
 using Xamarin.Essentials;
 using System.Runtime.CompilerServices;

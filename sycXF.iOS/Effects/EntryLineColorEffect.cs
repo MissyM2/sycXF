@@ -6,8 +6,10 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using UIKit;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.iOS;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
+using Microsoft.Maui
+using Microsoft.Maui.Controls.Platform.iOS;
 
 [assembly: ResolutionGroupName("sycXF")]
 [assembly: ExportEffect(typeof(EntryLineColorEffect), "EntryLineColorEffect")]

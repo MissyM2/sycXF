@@ -2,8 +2,10 @@
 using CoreGraphics;
 using sycXF.iOS.Effects;
 using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.iOS;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
+using Microsoft.Maui
+using Microsoft.Maui.Controls.Platform.iOS;
 
 [assembly: ExportEffect(typeof(CircleEffect), "CircleEffect")]
 namespace sycXF.iOS.Effects

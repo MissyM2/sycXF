@@ -3,7 +3,8 @@ using Android.Views;
 using sycXF.Services.Theme;
 using sycXF.Droid.Services;
 using Xamarin.Essentials;
-using Xamarin.Forms;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
 
 [assembly: Dependency(typeof(ThemeService))]
 namespace sycXF.Droid.Services

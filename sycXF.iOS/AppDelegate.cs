@@ -1,18 +1,15 @@
 ﻿using Foundation;
+using Microsoft.Maui;
 using UIKit;
 
 namespace sycXF.iOS
 {
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public partial class AppDelegate : MauiUIApplicationDele
     {
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
-
-            LoadApplication(new App());
-
-            return base.FinishedLaunching(app, options);
+            protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
         }
     }
 }

@@ -5,6 +5,7 @@ using sycXF.Services.MyCloset;
 using sycXF.Services.Settings;
 using sycXF.Services.User;
 using sycXF.ViewModels.Base;
+using sycXF.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +13,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.CommunityToolkit.ObjectModel;
-using Xamarin.Forms;
+using Microsoft.Maui
+using Microsoft.Maui.Controls;
 
 namespace sycXF.ViewModels
 {
@@ -27,6 +29,18 @@ namespace sycXF.ViewModels
         #endregion
 
         #region Properties
+
+        private bool _isVisibleLine;
+        public bool IsVisibleLine
+        {
+            get => _isVisibleLine;
+            set
+            {
+                if (value == _isVisibleLine) return;
+                _isVisibleLine = value;
+                RaisePropertyChanged(() => IsVisibleLine);
+            }
+        }
 
         // FilterCategory CV
         private ObservableCollection<MainFilterCategoryModel> _mainFilterCategoryCollection;
@@ -52,6 +66,27 @@ namespace sycXF.ViewModels
                 if (_selectedMainFilterCategory != value)
                 {
                     _selectedMainFilterCategory = value;
+                    IsVisibleCVApparelTypes = true;
+                    if (SelectedMainFilterCategory.PropertyName == "Categories")
+                    {
+                        IsVisibleCVApparelTypes = true;
+                        IsVisibleCVSeasons = false;
+                        IsVisibleLine = true;
+                        //VisualStateManager.GoToState(e.Element as VisualElement, "Selected");
+                    }
+                    else if (SelectedMainFilterCategory.PropertyName == "Seasons")
+                    {
+                        IsVisibleCVApparelTypes = false;
+                        IsVisibleCVSeasons = true;
+                        IsVisibleLine = true;
+                        
+                        //VisualStateManager.GoToState(MyClosetView.CVMainFilterCategoryFrame as VisualElement, "Selected");
+
+                    }
+                    else
+                    {
+                        IsVisibleLine = false;
+                    }
                 }
             }
         }
@@ -65,36 +100,27 @@ namespace sycXF.ViewModels
                     if (SelectedMainFilterCategory == null)
                         return;
 
-                    IsVisibleCVApparelTypes = true;
-                    if (SelectedMainFilterCategory.PropertyName == "Categories")
-                    {
-                        IsVisibleCVApparelTypes = true;
-                        IsVisibleCVSeasons = false;
-                    }
-                    else if (SelectedMainFilterCategory.PropertyName == "Seasons")
-                    {
-                        IsVisibleCVApparelTypes = false;
-                        IsVisibleCVSeasons = true;
-
-                    }
-
-
-                    //var filteredItems = _source.Where(closetitem => closetitem.SeasonCategoryName == SelectedMainFilterCategory.PropertyName).ToList();
-                    //foreach (var closetitem in _source)
+                    //IsVisibleCVApparelTypes = true;
+                    //if (SelectedMainFilterCategory.PropertyName == "Categories")
                     //{
-                    //    if (!filteredItems.Contains(closetitem))
-                    //    {
-                    //        ClosetItems.Remove(closetitem);
-                    //    }
-                    //    else
-                    //    {
-                    //        if (!ClosetItems.Contains(closetitem))
-                    //        {
-                    //            ClosetItems.Add(closetitem);
-                    //        }
-                    //    }
+                    //    IsVisibleCVApparelTypes = true;
+                    //    IsVisibleCVSeasons = false;
+                    //    IsVisibleLine = true;
+                    //}
+                    //else if (SelectedMainFilterCategory.PropertyName == "Seasons")
+                    //{
+                    //    IsVisibleCVApparelTypes = false;
+                    //    IsVisibleCVSeasons = true;
+                    //    IsVisibleLine = true;
 
-                    SelectedMainFilterCategory = null;
+                    //}
+                    //else
+                    //{
+                    //    //IsVisibleLine = false;
+                    //}
+                    
+
+                   // SelectedMainFilterCategory = null;
                    // }
                 });
             }
@@ -147,12 +173,13 @@ namespace sycXF.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
                     if (SelectedSeasonCategory == null)
                         return;
 
-                   
+                    await NavigationService.NavigateToAsync(
+                        "ClosetItemsRoute");
 
                     //var filteredItems = _source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
                     //foreach (var closetitem in _source)
@@ -222,10 +249,12 @@ namespace sycXF.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
                     if (SelectedApparelCategory == null)
                         return;
+                    await NavigationService.NavigateToAsync(
+                        "ClosetItemsRoute");
 
                   //var filteredItems = _source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
                   //foreach (var closetitem in _source)
@@ -274,7 +303,8 @@ namespace sycXF.ViewModels
             
             ApparelCategoryCollection = await _myClosetService.GetApparelCategoriesAsync();
             MainFilterCategoryCollection = await _myClosetService.GetMainFilterCategoriesAsync();
-           // _selectedMainFilterCategory = MainFilterCategoryCollection.FirstOrDefault();
+            SeasonCategoryCollection = await _myClosetService.GetSeasonCategoriesAsync();
+            SelectedMainFilterCategory = MainFilterCategoryCollection.Skip(0).FirstOrDefault();
             
             
 
