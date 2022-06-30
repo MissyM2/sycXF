@@ -1,7 +1,7 @@
 ﻿using sycXF.Extensions;
-using sycXF.Models.MyCloset;
+using sycXF.Models.Closet;
 using sycXF.Services;
-using sycXF.Services.MyCloset;
+using sycXF.Services.Closet;
 using sycXF.Services.Settings;
 using sycXF.Services.User;
 using sycXF.ViewModels.Base;
@@ -16,10 +16,10 @@ using Xamarin.Forms;
 
 namespace sycXF.ViewModels
 {
-    public class MyClosetViewModel : ViewModelBase
+    public class ClosetViewModel : ViewModelBase
     {
         #region Services
-        private IMyClosetService _myClosetService;
+        private IClosetService _myClosetService;
         private ISettingsService _settingsService;
         private IUserService _userService;
         private IDialogService _dialogService;
@@ -204,8 +204,8 @@ namespace sycXF.ViewModels
             }
         }
 
-        private ObservableCollection<MyClosetItem> _closetItems;
-        public ObservableCollection<MyClosetItem> ClosetItems
+        private ObservableCollection<ClosetItem> _closetItems;
+        public ObservableCollection<ClosetItem> ClosetItems
         {
             get => _closetItems;
             set
@@ -216,8 +216,8 @@ namespace sycXF.ViewModels
             }
         }
 
-        private MyClosetItem _selectedClosetItem;
-        public MyClosetItem SelectedClosetItem
+        private ClosetItem _selectedClosetItem;
+        public ClosetItem SelectedClosetItem
         { 
 
             get => _selectedClosetItem;
@@ -257,27 +257,27 @@ namespace sycXF.ViewModels
             }
         }
 
-        public List<MyClosetItem> _source;
+        public List<ClosetItem> _source;
 
         int selectionCount = 1;
 
-        public List<MyClosetItem> EmptyClosetItems { get; private set; }
+        public List<ClosetItem> EmptyClosetItems { get; private set; }
 
 
         #endregion
 
        
-        public MyClosetViewModel()
+        public ClosetViewModel()
         {
 
             this.MultipleInitialization = true;
 
-            _myClosetService = DependencyService.Get<IMyClosetService>();
+            _myClosetService = DependencyService.Get<IClosetService>();
             _settingsService = DependencyService.Get<ISettingsService>();
             _userService = DependencyService.Get<IUserService>();
             _dialogService = DependencyService.Get<IDialogService>();
 
-            //source = new List<MyClosetItem>();
+            //source = new List<ClosetItem>();
 
             //CreateClosetItemCollection();
 
@@ -293,10 +293,10 @@ namespace sycXF.ViewModels
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
             IsBusy = true;
-            //_source = new List<MyClosetItem>();
-            _source = await _myClosetService.GetMyClosetAsyncSource();
+            //_source = new List<ClosetItem>();
+            _source = await _myClosetService.GetClosetAsyncSource();
 
-            _source.Add(new MyClosetItem
+            _source.Add(new ClosetItem
             {
                 Id = 21,
                 PictureUri = "fake_product_01.png",
@@ -310,9 +310,9 @@ namespace sycXF.ViewModels
                 ApparelCategoryName = "Top"
             });
 
-            ClosetItems = new ObservableCollection<MyClosetItem>(_source);
+            ClosetItems = new ObservableCollection<ClosetItem>(_source);
 
-            //ClosetItems = await _myClosetService.GetMyClosetAsync();
+            //ClosetItems = await _myClosetService.GetClosetAsync();
             SeasonsCategoryCollection = await _myClosetService.GetSeasonCategoriesAsync();
             ApparelCategoryCollection = await _myClosetService.GetApparelCategoriesAsync();
             SizeCategoryCollection = await _myClosetService.GetSizeCategoriesAsync();

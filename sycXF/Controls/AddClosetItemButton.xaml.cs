@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace sycXF.Controls
 {
-    public partial class AddMyClosetItemButton : Grid
+    public partial class AddClosetItemButton : Grid
     {
-        public AddMyClosetItemButton()
+        public AddClosetItemButton()
         {
             InitializeComponent();
         }

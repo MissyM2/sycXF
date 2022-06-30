@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
     xmlns:effects="clr-namespace:sycXF.Effects"
-    x:Class="sycXF.Controls.AddMyClosetItemButton">
+    x:Class="sycXF.Controls.AddClosetItemButton">
        <Ellipse  
                     Fill="#83D01B"
                     StrokeThickness="0"

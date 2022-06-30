@@ -156,7 +156,7 @@ namespace sycXF.ViewModels
             //{
             //    _settingsService.AuthAccessToken = GlobalSetting.Instance.AuthToken;
 
-                await NavigationService.NavigateToAsync ("//Main/MyCloset");
+                await NavigationService.NavigateToAsync ("//Main/Closet");
             //}
 
             //IsBusy = false;
@@ -222,7 +222,7 @@ namespace sycXF.ViewModels
                     {
                         _settingsService.AuthAccessToken = accessToken;
                         _settingsService.AuthIdToken = authResponse.IdentityToken;
-                        await NavigationService.NavigateToAsync ("//Main/MyCloset");
+                        await NavigationService.NavigateToAsync ("//Main/Closet");
                     }
                 }
             }

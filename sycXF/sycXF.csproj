@@ -94,4 +94,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\default_campaign.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controls\AddClosetItemButton.xaml.cs">
+      <DependentUpon>AddClosetItemButton.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

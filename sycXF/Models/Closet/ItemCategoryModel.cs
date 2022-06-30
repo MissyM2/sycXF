@@ -1,7 +1,7 @@
 ﻿using System;
-namespace sycXF.Models.MyCloset
+namespace sycXF.Models.Closet
 {
-    public class ItemCategory
+    public class ItemCategoryModel
     {
         public int Id { get; set; }
         public string CategoryType { get; set; }

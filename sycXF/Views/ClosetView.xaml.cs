@@ -2,9 +2,9 @@
 
 namespace sycXF.Views
 {
-    public partial class MyClosetView : ContentPageBase
+    public partial class ClosetView : ContentPageBase
     {
-        public MyClosetView()
+        public ClosetView()
         {
             InitializeComponent();
         }

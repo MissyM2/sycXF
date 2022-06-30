@@ -6,14 +6,14 @@
     xmlns:viewModelBase="clr-namespace:sycXF.ViewModels.Base;assembly=sycXF"
     xmlns:viewmodels="clr-namespace:sycXF.ViewModels"
     x:DataType="viewmodels:ClosetItemsViewModel"
-    Title="MyCloset"
-    x:Name="MyClosetViewName"
+    Title="Closet"
+    x:Name="ClosetViewName"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true"
     x:Class="sycXF.Views.ClosetItemsView">
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style x:Key="MyClosetItemsListStyle" TargetType="{x:Type ListView}">
+            <Style x:Key="ClosetItemsListStyle" TargetType="{x:Type ListView}">
                 <Setter Property="RowHeight" Value="250" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="Margin" Value="0" />
@@ -25,7 +25,7 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
-            <!--<animations:StoryBoard x:Key="MyClosetItemsAnimation" Target="{x:Reference MyClosetItems}">
+            <!--<animations:StoryBoard x:Key="ClosetItemsAnimation" Target="{x:Reference ClosetItems}">
                 <animations:FadeInAnimation
                     Delay="250"
                     Direction="Up"
@@ -36,9 +36,9 @@
     </ContentPage.Resources>
 
      <StackLayout>
-        <CollectionView x:Name="CVMyClosetItems"
+        <CollectionView x:Name="CVClosetItems"
                         SelectionMode="Single"
-                        ItemsSource="{Binding MyClosetItemCollection}"
+                        ItemsSource="{Binding ClosetItemCollection}"
                         VerticalOptions="StartAndExpand"
                         BackgroundColor="{StaticResource WhiteColor}">
 
@@ -70,7 +70,7 @@
                 <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
-                                <templates:MyClosetItemTemplate />
+                                <templates:ClosetItemTemplate />
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

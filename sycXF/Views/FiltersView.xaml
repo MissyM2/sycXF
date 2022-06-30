@@ -5,7 +5,7 @@
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:viewmodels="clr-namespace:sycXF.ViewModels"
     x:Class="sycXF.Views.FiltersView"
-    x:DataType="viewmodels:MyClosetViewModel"
+    x:DataType="viewmodels:ClosetViewModel"
     Size="240,320"
     VerticalOptions="Center"
     HorizontalOptions="Center">

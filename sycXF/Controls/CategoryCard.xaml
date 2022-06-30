@@ -3,8 +3,6 @@
     x:Class="sycXF.Controls.CategoryCard"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:models="clr-namespace:sycXF.Models;assembly=sycXF"
-    x:DataType="models:MyCloset.ItemCategory"
     Padding="10">
 
     <Frame Style="{StaticResource CategoryCard}">

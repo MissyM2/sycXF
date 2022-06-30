@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <views:ContentPageBase
-    x:Class="sycXF.Views.MyClosetView"
+    x:Class="sycXF.Views.ClosetView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:animations="clr-namespace:sycXF.Animations;assembly=sycXF"
@@ -11,14 +11,14 @@
     xmlns:views="clr-namespace:sycXF.Views;assembly=sycXF"
     xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
     xmlns:controls="clr-namespace:sycXF.Controls;assembly=sycXF"
-    Title="MyCloset"
-    x:Name="MyClosetViewName"
+    Title="Closet"
+    x:Name="ClosetViewName"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true">
 
      <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style x:Key="MyClosetItemsListStyle" TargetType="{x:Type ListView}">
+            <Style x:Key="ClosetItemsListStyle" TargetType="{x:Type ListView}">
                 <Setter Property="RowHeight" Value="250" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="Margin" Value="0" />
@@ -30,7 +30,7 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
-            <!--<animations:StoryBoard x:Key="MyClosetItemsAnimation" Target="{x:Reference MyClosetItems}">
+            <!--<animations:StoryBoard x:Key="ClosetItemsAnimation" Target="{x:Reference ClosetItems}">
                 <animations:FadeInAnimation
                     Delay="250"
                     Direction="Up"
@@ -42,7 +42,7 @@
 
      <StackLayout>
         <CollectionView
-                x:Name="CVMyClosetItems"
+                x:Name="CVClosetItems"
                 SelectionMode="Single"
                 ItemsSource="{Binding ClosetItems}"
                 VerticalOptions="StartAndExpand"
@@ -268,7 +268,7 @@
                 <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout HeightRequest="180">
-                                <templates:MyClosetItemTemplate />
+                                <templates:ClosetItemTemplate />
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;using sycXF.Models.MyCloset;
+﻿using System.Collections.Generic;using sycXF.Models.Closet;
 
 namespace sycXF.Services.FixUri
 {
     public interface IFixUriService
     {
-        void FixMyClosetItemPictureUri(IEnumerable<MyClosetItem> catalogItems);
+        void FixClosetItemPictureUri(IEnumerable<ClosetItemModel> catalogItems);
     }
 }

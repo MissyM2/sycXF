@@ -1,5 +1,5 @@
 ﻿using System;
-namespace sycXF.Models.MyCloset
+namespace sycXF.Models.Closet
 {
     public class MainFilterCategoryModel
     {

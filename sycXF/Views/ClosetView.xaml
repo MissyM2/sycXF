@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <views:ContentPageBase
-    x:Class="sycXF.Views.MyClosetView"
+    x:Class="sycXF.Views.ClosetView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModelBase="clr-namespace:sycXF.ViewModels.Base;assembly=sycXF"
     xmlns:views="clr-namespace:sycXF.Views;assembly=sycXF"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-    xmlns:model="clr-namespace:sycXF.Models.MyCloset;assembly=sycXF"
+    xmlns:model="clr-namespace:sycXF.Models.Closet;assembly=sycXF"
     xmlns:controls="clr-namespace:sycXF.Controls;assembly=sycXF"
-    Title="MyCloset"
-    x:Name="MyClosetViewName"
+    Title="Closet"
+    x:Name="ClosetViewName"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true">
 
      <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style x:Key="MyClosetItemsListStyle" TargetType="{x:Type ListView}">
+            <Style x:Key="ClosetItemsListStyle" TargetType="{x:Type ListView}">
                 <Setter Property="RowHeight" Value="250" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="Margin" Value="0" />
@@ -27,7 +27,7 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
-            <!--<animations:StoryBoard x:Key="MyClosetItemsAnimation" Target="{x:Reference MyClosetItems}">
+            <!--<animations:StoryBoard x:Key="ClosetItemsAnimation" Target="{x:Reference ClosetItems}">
                 <animations:FadeInAnimation
                     Delay="250"
                     Direction="Up"

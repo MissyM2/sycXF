@@ -105,7 +105,7 @@
             </OnPlatform>
 
             <x:String x:Key="SettingsIcon">&#xf013;</x:String>
-            <x:String x:Key="MyClosetIcon">&#xf03a;</x:String>
+            <x:String x:Key="ClosetIcon">&#xf03a;</x:String>
             <x:String x:Key="ProfileIcon">&#xf2bd;</x:String>
             <x:String x:Key="FilterIcon">&#xf0b0;</x:String>
             <x:String x:Key="AddIcon">&#xf067;</x:String>
@@ -124,9 +124,9 @@
                 Color="{StaticResource WhiteColor}" />
 
             <FontImageSource
-                x:Key="MyClosetIconImageSource"
+                x:Key="ClosetIconImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"
-                Glyph="{StaticResource MyClosetIcon}"/>
+                Glyph="{StaticResource ClosetIcon}"/>
           
             <FontImageSource
                 x:Key="FilterIconImageSource"

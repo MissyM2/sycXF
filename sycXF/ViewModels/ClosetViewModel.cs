@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using sycXF.Models.MyCloset;
+using sycXF.Models.Closet;
 using sycXF.Services;
-using sycXF.Services.MyCloset;
+using sycXF.Services.Closet;
 using sycXF.Services.Settings;
 using sycXF.Services.User;
 using sycXF.ViewModels.Base;
@@ -14,10 +14,10 @@ using Xamarin.Forms;
 
 namespace sycXF.ViewModels
 {
-    public class MyClosetViewModel : ViewModelBase
+    public class ClosetViewModel : ViewModelBase
     {
         #region Services
-        private IMyClosetService _myClosetService;
+        private IClosetService _myClosetService;
         private ISettingsService _settingsService;
         private IUserService _userService;
         private IDialogService _dialogService;
@@ -26,8 +26,8 @@ namespace sycXF.ViewModels
 
         #region Properties
 
-        private ObservableCollection<MyClosetItem> _allItemsCollection;
-        public ObservableCollection<MyClosetItem> AllItemsCollection
+        private ObservableCollection<ClosetItemModel> _allItemsCollection;
+        public ObservableCollection<ClosetItemModel> AllItemsCollection
         {
             get => _allItemsCollection;
             set
@@ -145,8 +145,8 @@ namespace sycXF.ViewModels
         }
 
         
-        private ObservableCollection<ItemCategory> _seasonCategoryCollection;
-        public ObservableCollection<ItemCategory> SeasonCategoryCollection
+        private ObservableCollection<ItemCategoryModel> _seasonCategoryCollection;
+        public ObservableCollection<ItemCategoryModel> SeasonCategoryCollection
         {
             get => _seasonCategoryCollection;
             set
@@ -157,39 +157,7 @@ namespace sycXF.ViewModels
             }
         }
 
-        //private ItemCategory _selectedSeasonCategory;
-        //public ItemCategory SelectedSeasonCategory
-        //{
-        //    get
-        //    {
-        //        return _selectedSeasonCategory;
-        //    }
-        //    set
-        //    {
-        //        if (_selectedSeasonCategory != value)
-        //        {
-        //            _selectedSeasonCategory = value;
-        //        }
-        //    }
-        //}
-
-        //public ICommand SeasonCategorySelectedCommand
-        //{
-        //    get
-        //    {
-        //        return new Command(async () =>
-        //        {
-        //            if (SelectedSeasonCategory == null)
-        //                return;
-
-        //            var dictionary = new Dictionary<string, string>();
-        //            dictionary.Add("SeasonCategoryName", SelectedSeasonCategory.CategoryName);
-        //            await NavigationService.NavigateToAsync("ClosetItemsSeasons", dictionary);
-        //            SelectedSeasonCategory = null;
-
-        //        });
-        //    }
-        //}
+        
 
         // ApparelCategory filter
         private bool _isVisibleCVApparelTypes;
@@ -206,8 +174,8 @@ namespace sycXF.ViewModels
             }
         }
 
-        private ObservableCollection<ItemCategory> _apparelCategoryCollection;
-        public ObservableCollection<ItemCategory> ApparelCategoryCollection
+        private ObservableCollection<ItemCategoryModel> _apparelCategoryCollection;
+        public ObservableCollection<ItemCategoryModel> ApparelCategoryCollection
         {
             get => _apparelCategoryCollection;
             set
@@ -218,8 +186,8 @@ namespace sycXF.ViewModels
             }
         }
 
-        private ItemCategory _selectedCategory;
-        public ItemCategory SelectedCategory
+        private ItemCategoryModel _selectedCategory;
+        public ItemCategoryModel SelectedCategory
         {
             get
             {
@@ -275,12 +243,12 @@ namespace sycXF.ViewModels
         #endregion
 
 
-        public MyClosetViewModel()
+        public ClosetViewModel()
         {
 
             this.MultipleInitialization = true;
 
-            _myClosetService = DependencyService.Get<IMyClosetService>();
+            _myClosetService = DependencyService.Get<IClosetService>();
             _settingsService = DependencyService.Get<ISettingsService>();
             _userService = DependencyService.Get<IUserService>();
             _dialogService = DependencyService.Get<IDialogService>();
@@ -292,7 +260,7 @@ namespace sycXF.ViewModels
         {
             IsBusy = true;
 
-            AllItemsCollection = await _myClosetService.GetMyClosetAsync();
+            AllItemsCollection = await _myClosetService.GetClosetAsync();
 
             ItemCount = AllItemsCollection.Count;
 

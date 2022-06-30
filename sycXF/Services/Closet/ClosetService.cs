@@ -1,39 +1,39 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using sycXF.Models.MyCloset;
+using sycXF.Models.Closet;
 using sycXF.Services.RequestProvider;
 using sycXF.Extensions;
 using System.Collections.Generic;
 using sycXF.Services.FixUri;
 using sycXF.Helpers;
 
-namespace sycXF.Services.MyCloset
+namespace sycXF.Services.Closet
 {
-    public class MyClosetService : IMyClosetService
+    public class ClosetService : IClosetService
     {
         private readonly IRequestProvider _requestProvider;
         private readonly IFixUriService _fixUriService;
 		
         private const string ApiUrlBase = "c/api/v1/catalog";
 
-        public MyClosetService(IRequestProvider requestProvider, IFixUriService fixUriService)
+        public ClosetService(IRequestProvider requestProvider, IFixUriService fixUriService)
         {
             _requestProvider = requestProvider;
             _fixUriService = fixUriService;
         }
 
        
-        public async Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync()
+        public async Task<ObservableCollection<ClosetItemModel>> GetClosetAsync()
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
 
-            IEnumerable<MyClosetItem> myclosetitems = await _requestProvider.GetAsync<IEnumerable<MyClosetItem>>(uri);
+            IEnumerable<ClosetItemModel> myclosetitems = await _requestProvider.GetAsync<IEnumerable<ClosetItemModel>>(uri);
 
             if (myclosetitems != null)
                 return myclosetitems?.ToObservableCollection();
             else
-                return new ObservableCollection<MyClosetItem>();
+                return new ObservableCollection<ClosetItemModel>();
         }
 
         public async Task<ObservableCollection<MainFilterCategoryModel>> GetMainFilterCategoriesAsync()
@@ -49,43 +49,30 @@ namespace sycXF.Services.MyCloset
         }
 
 
-        public async Task<ObservableCollection<ItemCategory>> GetCategoriesAsync(string categoryType)
+        public async Task<ObservableCollection<ItemCategoryModel>> GetCategoriesAsync(string categoryType)
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogbrands");
 
-            IEnumerable<ItemCategory> categories = await _requestProvider.GetAsync<IEnumerable<ItemCategory>>(uri);
+            IEnumerable<ItemCategoryModel> categories = await _requestProvider.GetAsync<IEnumerable<ItemCategoryModel>>(uri);
 
             if (categories != null)
                 return categories?.ToObservableCollection();
             else
-                return new ObservableCollection<ItemCategory>();
+                return new ObservableCollection<ItemCategoryModel>();
         }
 
         
 
-        public async Task<ObservableCollection<MyClosetItem>> GetClosetItemsAsync(string queryType, string categoryName)
+        public async Task<ObservableCollection<ClosetItemModel>> GetClosetItemsAsync(string queryType, string categoryName)
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
 
-            IEnumerable<MyClosetItem> myclosetitems = await _requestProvider.GetAsync<IEnumerable<MyClosetItem>>(uri);
+            IEnumerable<ClosetItemModel> myclosetitems = await _requestProvider.GetAsync<IEnumerable<ClosetItemModel>>(uri);
 
             if (myclosetitems != null)
                 return myclosetitems?.ToObservableCollection();
             else
-                return new ObservableCollection<MyClosetItem>();
+                return new ObservableCollection<ClosetItemModel>();
         }
-
-        //public async Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string season)
-        //{
-        //    var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
-
-        //    IEnumerable<MyClosetItem> myclosetitems = await _requestProvider.GetAsync<IEnumerable<MyClosetItem>>(uri);
-
-        //    if (myclosetitems != null)
-        //        return myclosetitems?.ToObservableCollection();
-        //    else
-        //        return new ObservableCollection<MyClosetItem>();
-
-        //}
     }
 }

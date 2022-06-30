@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <SwipeView
-    x:Class="sycXF.Views.Templates.MyClosetItemTemplate"
+    x:Class="sycXF.Views.Templates.ClosetItemTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:sycXF.ViewModels">
@@ -34,14 +34,14 @@
                 <Setter Property="Margin" Value="0, 12, 0, 6" />
             </Style>
 
-             <Style x:Key="MyClosetItemNameStyle" TargetType="{x:Type Label}">
+             <Style x:Key="ClosetItemNameStyle" TargetType="{x:Type Label}">
                 <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
                 <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
                 <Setter Property="HorizontalOptions" Value="Start" />
                 <Setter Property="Margin" Value="0, 12, 0, 6" />
             </Style>
 
-             <Style x:Key="MyClosetItemDescStyle" TargetType="{x:Type Label}">
+             <Style x:Key="ClosetItemDescStyle" TargetType="{x:Type Label}">
                 <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
                 <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
                 <Setter Property="HorizontalOptions" Value="Start" />
@@ -67,11 +67,11 @@
     <SwipeView.RightItems>
         <SwipeItems>
             <SwipeItem Text="Favorite" BackgroundColor="LightBlue"
-                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MyClosetViewModel }}, Path=FavoriteCommand}"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ClosetViewModel }}, Path=FavoriteCommand}"
                 CommandParameter="{Binding}"/>
         
             <SwipeItem Text="Delete" BackgroundColor="LightCoral"
-                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MyClosetViewModel }}, Path=DeleteCommand}"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ClosetViewModel }}, Path=DeleteCommand}"
                 CommandParameter="{Binding}"/>
         </SwipeItems>
     </SwipeView.RightItems>
@@ -133,11 +133,11 @@
                                    Style="{StaticResource SeasonCategoryStyle}"/>
                       </StackLayout>
                      <Label VerticalTextAlignment="Start"
-                            Style="{StaticResource MyClosetItemNameStyle}"
+                            Style="{StaticResource ClosetItemNameStyle}"
                             Text="{Binding Name, Converter={StaticResource ToUpperConverter}}"/>
                 
                      <Label VerticalTextAlignment="Start"
-                            Style="{StaticResource MyClosetItemDescStyle}"
+                            Style="{StaticResource ClosetItemDescStyle}"
                             Text="{Binding Description}"/>
 
                  </StackLayout>

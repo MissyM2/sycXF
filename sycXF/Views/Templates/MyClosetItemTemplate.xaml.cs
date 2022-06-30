@@ -2,9 +2,9 @@
 
 namespace sycXF.Views.Templates
 {
-    public partial class MyClosetItemTemplate : SwipeView
+    public partial class ClosetItemTemplate : SwipeView
     {
-        public MyClosetItemTemplate()
+        public ClosetItemTemplate()
         {
             InitializeComponent();
         }
