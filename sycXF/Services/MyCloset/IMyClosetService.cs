@@ -12,7 +12,9 @@ namespace sycXF.Services.MyCloset
         Task<ObservableCollection<ApparelCategory>> GetApparelCategoriesAsync();
         Task<ObservableCollection<SizeCategory>> GetSizeCategoriesAsync();
         Task<ObservableCollection<MainFilterCategoryModel>> GetMainFilterCategoriesAsync();
-        Task<List<MyClosetItem>> GetMyClosetAsyncSource();
-        //Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync();
+        //Task<List<MyClosetItem>> GetMyClosetAsyncSource();
+        Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync();
+        Task<ObservableCollection<MyClosetItem>> GetItemsByApparelAsync(string apparelType);
+        Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string seasonType);
     }
 }

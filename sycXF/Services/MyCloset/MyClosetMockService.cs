@@ -22,7 +22,7 @@ namespace sycXF.Services.MyCloset
             new SeasonCategory { Id = 2, IconGlyph = "noun-sunny-2494509.png", SeasonCategoryName = "Spring" },
             new SeasonCategory { Id = 3, IconGlyph = "noun-sun-2494511.png", SeasonCategoryName = "Summer" },
             new SeasonCategory { Id = 4, IconGlyph = "noun-autumn-3789702.png", SeasonCategoryName = "Fall" },
-            new SeasonCategory { Id = 5, IconGlyph = "noun-dress-3013536.png", SeasonCategoryName = "Always in Season" }
+            new SeasonCategory { Id = 5, IconGlyph = "noun-dress-3013536.png", SeasonCategoryName = "Always" }
         };
 
         private ObservableCollection<ApparelCategory> MockApparelCategories = new ObservableCollection<ApparelCategory>
@@ -97,17 +97,16 @@ namespace sycXF.Services.MyCloset
         {
             new MainFilterCategoryModel { Id = 1, PropertyName = "Categories" },
             new MainFilterCategoryModel { Id = 2, PropertyName = "Seasons" },
-            new MainFilterCategoryModel { Id = 3, PropertyName = "Sizes" },
             new MainFilterCategoryModel { Id = 4, PropertyName = "Favorites" }
         };
 
-        private List<MyClosetItem> MockMyClosetSource = new List<MyClosetItem>
-        //private ObservableCollection<MyClosetItem> MockMyCloset = new ObservableCollection<MyClosetItem>
+        //private List<MyClosetItem> MockMyClosetSource = new List<MyClosetItem>
+        private ObservableCollection<MyClosetItem> MockMyClosetSource = new ObservableCollection<MyClosetItem>
         {
             new MyClosetItem
             {
                 Id = 1,
-                PictureUri = "fake_product_01.png",
+                PictureUri = "top_1.png",
                 Name = "Floral cap-sleeved blouse",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 2,
@@ -120,8 +119,8 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 2,
-                PictureUri = "fake_product_02.png",
-                Name = "Floral skirt",
+                PictureUri = "bottom_blue_corduroy_skirt_1.png",
+                Name = "Corduroy skirt",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 2,
                 SizeCategoryName = "Small",
@@ -133,8 +132,8 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 3,
-                PictureUri = "fake_product_03.png",
-                Name = "Black tea-length dress",
+                PictureUri = "dress_red_1.png",
+                Name = "Red long dress",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 3,
                 SizeCategoryName = "Medium",
@@ -146,7 +145,7 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 4,
-                PictureUri = "fake_product_04.png",
+                PictureUri = "outerwear_1.png",
                 Name = "London Fog rain coat",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 4,
@@ -159,7 +158,7 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 5,
-                PictureUri = "fake_product_05.png",
+                PictureUri = "footwear_1.png",
                 Name = "Black leather boots",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 2,
@@ -171,8 +170,8 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 6,
-                PictureUri = "fake_product_01.png",
-                Name = "White button-down blouse",
+                PictureUri = "top_white_blouse_1.png",
+                Name = "White dressy blouse",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 3,
                 SizeCategoryName = "Medium",
@@ -183,8 +182,8 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 7,
-                PictureUri = "fake_product_02.png",
-                Name = "White jean skirt",
+                PictureUri = "bottoms_1.png",
+                Name = "Blue Corduroy Skirt",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 4,
                 SizeCategoryName = "Large",
@@ -196,8 +195,8 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 8,
-                PictureUri = "fake_product_03.png",
-                Name = "Flannel long-sleeved dress",
+                PictureUri = "dress_1.png",
+                Name = "Long Green dress",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 2,
                 SizeCategoryName = "Small",
@@ -209,7 +208,7 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 9,
-                PictureUri = "fake_product_04.png",
+                PictureUri = "top_white_sweater_1.png",
                 Name = "White Sweater",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 3,
@@ -222,7 +221,20 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 10,
-                PictureUri = "fake_product_05.png",
+                PictureUri = "top_white_blouse_1.png",
+                Name = "White Blouse",
+                Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                SizeCategoryId = 3,
+                SizeCategoryName = "Medium",
+                SeasonCategoryId = 5,
+                SeasonCategoryName  = "Always in Season",
+                ApparelCategoryId = 6,
+                ApparelCategoryName = "Top"
+            },
+            new MyClosetItem
+            {
+                Id = 10,
+                PictureUri = "accessories_pearl_necklace_1.png",
                 Name = "Pearl Necklace",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 3,
@@ -235,7 +247,7 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 11,
-                PictureUri = "fake_product_05.png",
+                PictureUri = "purse_1.png",
                 Name = "Purse",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 4,
@@ -248,7 +260,7 @@ namespace sycXF.Services.MyCloset
             new MyClosetItem
             {
                 Id = 12,
-                PictureUri = "fake_product_05.png",
+                PictureUri = "bottoms_1.png",
                 Name = "Jeans",
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 2,
@@ -264,12 +276,13 @@ namespace sycXF.Services.MyCloset
         
        
 
-        public async Task<List<MyClosetItem>> GetMyClosetAsyncSource()
-        {
-            await Task.Delay(10);
+        //public async Task<List<MyClosetItem>> GetMyClosetAsyncSource()
+        //{
+        //    await Task.Delay(10);
 
-            return MockMyClosetSource;
-        }
+        //    return MockMyClosetSource;
+        //}
+
 
         public async Task<ObservableCollection<MainFilterCategoryModel>> GetMainFilterCategoriesAsync()
         {
@@ -298,6 +311,33 @@ namespace sycXF.Services.MyCloset
             await Task.Delay(10);
 
             return MockSizeCategories;
+        }
+
+        public async Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync()
+        {
+            await Task.Delay(10);
+
+            return MockMyClosetSource;
+        }
+
+        public async Task<ObservableCollection<MyClosetItem>> GetItemsByApparelAsync(string apparelType)
+        {
+            await Task.Delay(10);
+            var appType = apparelType.ToString();
+
+            return MockMyClosetSource
+                .Where(c => c.ApparelCategoryName == appType)
+                .ToObservableCollection();
+        }
+
+        public async Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string seasonType)
+        {
+            await Task.Delay(10);
+            var seasType = seasonType.ToString();
+
+            return MockMyClosetSource
+                .Where(c => c.SeasonCategoryName == seasType)
+                .ToObservableCollection();
         }
     }
 }

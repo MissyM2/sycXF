@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -41,13 +41,6 @@
     <None Remove="Resources\Default-Portrait.png" />
     <None Remove="Resources\Default-Portrait%402x.png" />
     <None Remove="Resources\eshop_logo.png" />
-    <None Remove="Resources\fake_campaign_01.png" />
-    <None Remove="Resources\fake_campaign_02.png" />
-    <None Remove="Resources\fake_product_01.png" />
-    <None Remove="Resources\fake_product_02.png" />
-    <None Remove="Resources\fake_product_03.png" />
-    <None Remove="Resources\fake_product_04.png" />
-    <None Remove="Resources\fake_product_05.png" />
     <None Remove="Resources\Icon-60%402x.png" />
     <None Remove="Resources\Icon-60%403x.png" />
     <None Remove="Resources\Icon-76.png" />
@@ -71,13 +64,6 @@
     <EmbeddedResource Include="Fonts\Montserrat-Regular.ttf" />
     <EmbeddedResource Include="Fonts\SourceSansPro-Regular.ttf" />
     <EmbeddedResource Include="Resources\banner.png" />
-    <EmbeddedResource Include="Resources\fake_campaign_01.png" />
-    <EmbeddedResource Include="Resources\fake_campaign_02.png" />
-    <EmbeddedResource Include="Resources\fake_product_01.png" />
-    <EmbeddedResource Include="Resources\fake_product_02.png" />
-    <EmbeddedResource Include="Resources\fake_product_03.png" />
-    <EmbeddedResource Include="Resources\fake_product_04.png" />
-    <EmbeddedResource Include="Resources\fake_product_05.png" />
     <EmbeddedResource Include="Resources\Logo.png" />
     <EmbeddedResource Include="Resources\noun-skirt-1202595.png" />
   </ItemGroup>

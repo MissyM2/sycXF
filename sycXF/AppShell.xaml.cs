@@ -25,6 +25,9 @@ namespace sycXF
         private void InitializeRouting()
         {
             Routing.RegisterRoute ("Settings", typeof (SettingsView));
+            Routing.RegisterRoute("ClosetRoute", typeof(MyClosetView));
+            Routing.RegisterRoute("ClosetItems", typeof(ClosetItemsView));
+            Routing.RegisterRoute("ClosetItemsSeasons", typeof(ClosetItemsSeasonsView));
         }
 
 

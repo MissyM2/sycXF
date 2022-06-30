@@ -1,17 +1,15 @@
-﻿using sycXF.Extensions;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using sycXF.Models.MyCloset;
 using sycXF.Services;
 using sycXF.Services.MyCloset;
 using sycXF.Services.Settings;
 using sycXF.Services.User;
 using sycXF.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace sycXF.ViewModels
@@ -27,6 +25,32 @@ namespace sycXF.ViewModels
         #endregion
 
         #region Properties
+
+        private ObservableCollection<MyClosetItem> _allItemsCollection;
+        public ObservableCollection<MyClosetItem> AllItemsCollection
+        {
+            get => _allItemsCollection;
+            set
+            {
+                if (value == _allItemsCollection) return;
+                _allItemsCollection = value;
+                RaisePropertyChanged(() => AllItemsCollection);
+            }
+        }
+
+        private int _itemCount;
+        public int ItemCount
+        {
+            get => _itemCount;
+            set
+            {
+                if (value == _itemCount) return;
+                _itemCount = value;
+                RaisePropertyChanged(() => ItemCount);
+
+
+            }
+        }
 
         // FilterCategory CV
         private ObservableCollection<MainFilterCategoryModel> _mainFilterCategoryCollection;
@@ -52,6 +76,29 @@ namespace sycXF.ViewModels
                 if (_selectedMainFilterCategory != value)
                 {
                     _selectedMainFilterCategory = value;
+                    IsVisibleCVApparelTypes = true;
+                    if (SelectedMainFilterCategory.PropertyName == "Categories")
+                    {
+                        IsVisibleCVApparelTypes = true;
+                        IsVisibleCVSeasons = false;
+                        IsVisibleCVFavorites = false;
+                    }
+                    else if (SelectedMainFilterCategory.PropertyName == "Seasons")
+                    {
+                        IsVisibleCVApparelTypes = false;
+                        IsVisibleCVSeasons = true;
+                        IsVisibleCVFavorites = false;
+                    }
+                    else if (SelectedMainFilterCategory.PropertyName == "Favorites")
+                    {
+                        IsVisibleCVApparelTypes = false;
+                        IsVisibleCVSeasons = false;
+                        IsVisibleCVFavorites = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("asdfasdf");
+                    }
                 }
             }
         }
@@ -65,45 +112,11 @@ namespace sycXF.ViewModels
                     if (SelectedMainFilterCategory == null)
                         return;
 
-                    IsVisibleCVApparelTypes = true;
-                    if (SelectedMainFilterCategory.PropertyName == "Categories")
-                    {
-                        IsVisibleCVApparelTypes = true;
-                        IsVisibleCVSeasons = false;
-                    }
-                    else if (SelectedMainFilterCategory.PropertyName == "Seasons")
-                    {
-                        IsVisibleCVApparelTypes = false;
-                        IsVisibleCVSeasons = true;
-
-                    }
-
-
-                    //var filteredItems = _source.Where(closetitem => closetitem.SeasonCategoryName == SelectedMainFilterCategory.PropertyName).ToList();
-                    //foreach (var closetitem in _source)
-                    //{
-                    //    if (!filteredItems.Contains(closetitem))
-                    //    {
-                    //        ClosetItems.Remove(closetitem);
-                    //    }
-                    //    else
-                    //    {
-                    //        if (!ClosetItems.Contains(closetitem))
-                    //        {
-                    //            ClosetItems.Add(closetitem);
-                    //        }
-                    //    }
-
-                    SelectedMainFilterCategory = null;
-                   // }
                 });
             }
         }
 
-
-
         // SeasonCategory filter
-
         private bool _isVisibleCVSeasons;
         public bool IsVisibleCVSeasons
         {
@@ -116,6 +129,7 @@ namespace sycXF.ViewModels
             }
         }
 
+        
         private ObservableCollection<SeasonCategory> _seasonCategoryCollection;
         public ObservableCollection<SeasonCategory> SeasonCategoryCollection
         {
@@ -127,6 +141,7 @@ namespace sycXF.ViewModels
                 RaisePropertyChanged(() => SeasonCategoryCollection);
             }
         }
+
         private SeasonCategory _selectedSeasonCategory;
         public SeasonCategory SelectedSeasonCategory
         {
@@ -147,36 +162,21 @@ namespace sycXF.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
                     if (SelectedSeasonCategory == null)
                         return;
 
-                   
-
-                    //var filteredItems = _source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
-                    //foreach (var closetitem in _source)
-                    //{
-                    //    if (!filteredItems.Contains(closetitem))
-                    //    {
-                    //        ClosetItems.Remove(closetitem);
-                    //    }
-                    //    else
-                    //    {
-                    //        if (!ClosetItems.Contains(closetitem))
-                    //        {
-                    //            ClosetItems.Add(closetitem);
-                    //        }
-                    //    }
-
+                    var dictionary = new Dictionary<string, string>();
+                    dictionary.Add("SeasonCategoryName", SelectedSeasonCategory.SeasonCategoryName);
+                    await NavigationService.NavigateToAsync("ClosetItemsSeasons", dictionary);
                     SelectedSeasonCategory = null;
-                    //}
+
                 });
             }
         }
 
         // ApparelCategory filter
-
         private bool _isVisibleCVApparelTypes;
         public bool IsVisibleCVApparelTypes
         {
@@ -202,6 +202,7 @@ namespace sycXF.ViewModels
                 RaisePropertyChanged(() => ApparelCategoryCollection);
             }
         }
+
         private ApparelCategory _selectedApparelCategory;
         public ApparelCategory SelectedApparelCategory
         {
@@ -218,41 +219,42 @@ namespace sycXF.ViewModels
             }
         }
 
+
         public ICommand ApparelCategorySelectedCommand
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
                     if (SelectedApparelCategory == null)
                         return;
 
-                  //var filteredItems = _source.Where(closetitem => closetitem.ApparelCategoryName == SelectedApparelCategory.ApparelCategoryName).ToList();
-                  //foreach (var closetitem in _source)
-                  //{
-                  //    if (!filteredItems.Contains(closetitem))
-                  //    {
-                  //        ClosetItems.Remove(closetitem);
-                  //    }
-                  //    else
-                  //    {
-                  //        if (!ClosetItems.Contains(closetitem))
-                  //        {
-                  //            ClosetItems.Add(closetitem);
-                  //        }
-                  //    }
+                    var dictionary = new Dictionary<string, string>();
+                    dictionary.Add("ApparelCategoryName", SelectedApparelCategory.ApparelCategoryName);
+                    dictionary.Add("ApparelCategoryTitle", SelectedApparelCategory.ApparelCategoryTitle);
 
-                  SelectedApparelCategory = null;
-                    //}
+                    await NavigationService.NavigateToAsync("ClosetItems", dictionary);
+
+                    SelectedApparelCategory = null;
                 });
-            }
         }
+    }
 
+    // Favorites filter
 
+    private bool _isVisibleCVFavorites;
+    public bool IsVisibleCVFavorites
+    {
+        get => _isVisibleCVFavorites;
+        set
+        {
+            if (value == _isVisibleCVFavorites) return;
+            _isVisibleCVFavorites = value;
+            RaisePropertyChanged(() => IsVisibleCVFavorites);
+        }
+    }
 
-
-
-
+   
         #endregion
 
 
@@ -268,15 +270,24 @@ namespace sycXF.ViewModels
 
         }
 
+
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
             IsBusy = true;
-            
+
+            AllItemsCollection = await _myClosetService.GetMyClosetAsync();
+
+            ItemCount = AllItemsCollection.Count;
+
             ApparelCategoryCollection = await _myClosetService.GetApparelCategoriesAsync();
+            
             MainFilterCategoryCollection = await _myClosetService.GetMainFilterCategoriesAsync();
-           // _selectedMainFilterCategory = MainFilterCategoryCollection.FirstOrDefault();
             
-            
+            SeasonCategoryCollection = await _myClosetService.GetSeasonCategoriesAsync();
+
+            //SelectedMainFilterCategory = MainFilterCategoryCollection.Skip(SelectedMenu).FirstOrDefault();
+
+
 
             IsBusy = false;
         }

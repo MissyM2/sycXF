@@ -34,8 +34,8 @@ namespace sycXF.ViewModels.Base
         static ViewModelLocator()
         {
             // Services - by default, TinyIoC will register interface registrations as singletons.
-            var settingsService = new SettingsService ();
-            var requestProvider = new RequestProvider ();
+            var settingsService = new SettingsService();
+            var requestProvider = new RequestProvider();
             Xamarin.Forms.DependencyService.RegisterSingleton<ISettingsService>(settingsService);
             Xamarin.Forms.DependencyService.RegisterSingleton<INavigationService>(new NavigationService(settingsService));
             Xamarin.Forms.DependencyService.RegisterSingleton<IDialogService>(new DialogService());
@@ -48,10 +48,12 @@ namespace sycXF.ViewModels.Base
             Xamarin.Forms.DependencyService.RegisterSingleton<IUserService>(new UserMockService());
 
             // View models - by default, TinyIoC will register concrete classes as multi-instance.
-            Xamarin.Forms.DependencyService.Register<MyClosetViewModel> ();
-            Xamarin.Forms.DependencyService.Register<LoginViewModel> ();
-            Xamarin.Forms.DependencyService.Register<MainViewModel> ();
-            Xamarin.Forms.DependencyService.Register<SettingsViewModel> ();
+            Xamarin.Forms.DependencyService.Register<MyClosetViewModel>();
+            Xamarin.Forms.DependencyService.Register<ClosetItemsViewModel>();
+            Xamarin.Forms.DependencyService.Register<ClosetItemsSeasonsViewModel>();
+            Xamarin.Forms.DependencyService.Register<LoginViewModel>();
+            Xamarin.Forms.DependencyService.Register<MainViewModel>();
+            Xamarin.Forms.DependencyService.Register<SettingsViewModel>();
         }
 
         public static void UpdateDependencies(bool useMockServices)
@@ -60,16 +62,16 @@ namespace sycXF.ViewModels.Base
             if (useMockServices)
             {
                 Xamarin.Forms.DependencyService.RegisterSingleton<IMyClosetService>(new MyClosetMockService());
-                Xamarin.Forms.DependencyService.RegisterSingleton<IUserService> (new UserMockService());
+                Xamarin.Forms.DependencyService.RegisterSingleton<IUserService>(new UserMockService());
 
                 UseMockService = true;
             }
             else
             {
-                var requestProvider = Xamarin.Forms.DependencyService.Get<IRequestProvider> ();
-                var fixUriService = Xamarin.Forms.DependencyService.Get<IFixUriService> ();
-                Xamarin.Forms.DependencyService.RegisterSingleton<IMyClosetService> (new MyClosetService(requestProvider, fixUriService));
-                Xamarin.Forms.DependencyService.RegisterSingleton<IUserService> (new UserService(requestProvider));
+                var requestProvider = Xamarin.Forms.DependencyService.Get<IRequestProvider>();
+                var fixUriService = Xamarin.Forms.DependencyService.Get<IFixUriService>();
+                Xamarin.Forms.DependencyService.RegisterSingleton<IMyClosetService>(new MyClosetService(requestProvider, fixUriService));
+                Xamarin.Forms.DependencyService.RegisterSingleton<IUserService>(new UserService(requestProvider));
 
                 UseMockService = false;
             }
@@ -99,7 +101,7 @@ namespace sycXF.ViewModels.Base
                 return;
             }
 
-            var viewModel = Activator.CreateInstance (viewModelType);
+            var viewModel = Activator.CreateInstance(viewModelType);
 
             view.BindingContext = viewModel;
         }

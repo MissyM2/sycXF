@@ -16,6 +16,7 @@
             <Color x:Key="WhiteColor">#ffffff</Color>
             <Color x:Key="BlackColor">#000000</Color>
             <Color x:Key="AccentColor">#00857D</Color>
+            <Color x:Key="PinkAccentColor">#C98573</Color>
             <Color x:Key="LightGreenColor">#83D01B</Color>
             <Color x:Key="GreenColor">#00A69C</Color>
             <Color x:Key="DarkGreenColor">#00857D</Color>

@@ -75,9 +75,10 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <Compile Include="Effects\CircleEffect.cs" />
+    <None Include="Resources\dress_1.png" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -86,7 +87,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PCLCrypto" Version="2.0.147" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
@@ -147,13 +148,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\noimage.png" />
     <BundleResource Include="Resources\eshop_logo.png" />
-    <BundleResource Include="Resources\fake_campaign_01.png" />
-    <BundleResource Include="Resources\fake_campaign_02.png" />
-    <BundleResource Include="Resources\fake_product_01.png" />
-    <BundleResource Include="Resources\fake_product_02.png" />
-    <BundleResource Include="Resources\fake_product_03.png" />
-    <BundleResource Include="Resources\fake_product_04.png" />
-    <BundleResource Include="Resources\fake_product_05.png" />
     <BundleResource Include="Resources\noun-skirt-1202595.png" />
     <BundleResource Include="Resources\noun-dress-2197992.png" />
     <BundleResource Include="Resources\Default-Portrait%402x.png" />
@@ -172,7 +166,6 @@
     <BundleResource Include="Resources\noun-scarf-3790978.png" />
     <BundleResource Include="Resources\noun-shoe-1202591.png" />
     <BundleResource Include="Resources\Icon-60%402x.png" />
-    <BundleResource Include="Resources\noun-skirt-1202595 %281%29.png" />
     <BundleResource Include="Resources\noun-sunny-2494509.png" />
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\noun-seasons-2293896.png" />
@@ -183,6 +176,26 @@
     <BundleResource Include="Resources\Default.png" />
     <BundleResource Include="Resources\Icon-Small-40.png" />
     <BundleResource Include="Resources\Icon-Small%402x.png" />
+    <BundleResource Include="Resources\purse_2.png" />
+    <BundleResource Include="Resources\purse_1.png" />
+    <BundleResource Include="Resources\outerwear_1.png" />
+    <BundleResource Include="Resources\bottoms_1.png" />
+    <BundleResource Include="Resources\top_1.png" />
+    <BundleResource Include="Resources\default_product.png" />
+    <BundleResource Include="Resources\Icon-60%403x.png" />
+    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
+    <BundleResource Include="Resources\Icon-Small%403x.png" />
+    <BundleResource Include="Resources\default_campaign.png" />
+    <BundleResource Include="Logo.png" />
+    <BundleResource Include="eshop_logo.png" />
+    <BundleResource Include="noimage.png" />
+    <BundleResource Include="Resources\accessories_pearl_necklace_1.png" />
+    <BundleResource Include="Resources\bottom_blue_corduroy_skirt_1.png" />
+    <BundleResource Include="Resources\top_white_blouse_1.png" />
+    <BundleResource Include="Resources\top_white_sweater_1.png" />
+    <BundleResource Include="Resources\footwear_1.png" />
+    <BundleResource Include="Resources\bottom_jeans_short_1.png" />
+    <BundleResource Include="Resources\dress_red_1.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\banner.png" />
