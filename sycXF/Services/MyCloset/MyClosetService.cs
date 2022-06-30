@@ -23,30 +23,7 @@ namespace sycXF.Services.MyCloset
             _fixUriService = fixUriService;
         }
 
-        public async Task<ObservableCollection<MyClosetItem>> FilterAsync(int catalogSeasonId, int catalogTypeId)
-        {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items/type/{catalogTypeId}/brand/{catalogSeasonId}");
-
-            MyClosetRoot catalog = await _requestProvider.GetAsync<MyClosetRoot>(uri);
-
-            if (catalog?.Data != null)
-                return catalog?.Data.ToObservableCollection();
-            else
-                return new ObservableCollection<MyClosetItem>();
-        }
-
-        public async Task<List<MyClosetItem>> GetMyClosetAsyncSource()
-        {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
-
-            List<MyClosetItem> myclosetitems = await _requestProvider.GetAsync<List<MyClosetItem>>(uri);
-
-            if (myclosetitems != null)
-                return myclosetitems;
-            else
-                return new List<MyClosetItem>();
-        }
-
+       
         public async Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync()
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
@@ -57,18 +34,6 @@ namespace sycXF.Services.MyCloset
                 return myclosetitems?.ToObservableCollection();
             else
                 return new ObservableCollection<MyClosetItem>();
-        }
-
-        public async Task<ObservableCollection<SeasonCategory>> GetSeasonCategoriesAsync()
-        {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogbrands");
-
-            IEnumerable<SeasonCategory> seasoncategories = await _requestProvider.GetAsync<IEnumerable<SeasonCategory>>(uri);
-
-            if (seasoncategories != null)
-                return seasoncategories?.ToObservableCollection();
-            else
-                return new ObservableCollection<SeasonCategory>();
         }
 
         public async Task<ObservableCollection<MainFilterCategoryModel>> GetMainFilterCategoriesAsync()
@@ -83,29 +48,20 @@ namespace sycXF.Services.MyCloset
                 return new ObservableCollection<MainFilterCategoryModel>();
         }
 
-        public async Task<ObservableCollection<ApparelCategory>> GetApparelCategoriesAsync()
+
+        public async Task<ObservableCollection<ItemCategory>> GetCategoriesAsync(string categoryType)
         {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogtypes");
+            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogbrands");
 
-            IEnumerable<ApparelCategory> apparelcategories = await _requestProvider.GetAsync<IEnumerable<ApparelCategory>>(uri);
+            IEnumerable<ItemCategory> categories = await _requestProvider.GetAsync<IEnumerable<ItemCategory>>(uri);
 
-            if (apparelcategories != null)
-                return apparelcategories.ToObservableCollection();
+            if (categories != null)
+                return categories?.ToObservableCollection();
             else
-                return new ObservableCollection<ApparelCategory>();
+                return new ObservableCollection<ItemCategory>();
         }
 
-        public async Task<ObservableCollection<SizeCategory>> GetSizeCategoriesAsync()
-        {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogtypes");
-
-            IEnumerable<SizeCategory> sizecategories = await _requestProvider.GetAsync<IEnumerable<SizeCategory>>(uri);
-
-            if (sizecategories != null)
-                return sizecategories.ToObservableCollection();
-            else
-                return new ObservableCollection<SizeCategory>();
-        }
+        
 
         public async Task<ObservableCollection<MyClosetItem>> GetItemsByApparelAsync(string apparelType)
         {
@@ -119,7 +75,7 @@ namespace sycXF.Services.MyCloset
                 return new ObservableCollection<MyClosetItem>();
         }
 
-        public async Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string seasonType)
+        public async Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string season)
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
 

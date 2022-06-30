@@ -16,69 +16,121 @@ namespace sycXF.Services.MyCloset
         private int newItemId = 0;
 
 
-        private ObservableCollection<SeasonCategory> MockSeasonCategories = new ObservableCollection<SeasonCategory>
+        private ObservableCollection<ItemCategory> MockItemCategories = new ObservableCollection<ItemCategory>
         {
-            new SeasonCategory { Id = 1, IconGlyph = "noun-snowflake-2098252.png", SeasonCategoryName = "Winter" },
-            new SeasonCategory { Id = 2, IconGlyph = "noun-sunny-2494509.png", SeasonCategoryName = "Spring" },
-            new SeasonCategory { Id = 3, IconGlyph = "noun-sun-2494511.png", SeasonCategoryName = "Summer" },
-            new SeasonCategory { Id = 4, IconGlyph = "noun-autumn-3789702.png", SeasonCategoryName = "Fall" },
-            new SeasonCategory { Id = 5, IconGlyph = "noun-dress-3013536.png", SeasonCategoryName = "Always" }
-        };
+            new ItemCategory
+            {
+                Id = 1,
+                CategoryType="Season",
+                CategoryName = "Winter",
+                CategoryTitle ="Winter",
+                IconGlyph = "noun-snowflake-2098252.png",
+                IconFamily = "FontAwesome-Regular",
+                PictureUri = "noun-shirt-3013538.png"
 
-        private ObservableCollection<ApparelCategory> MockApparelCategories = new ObservableCollection<ApparelCategory>
-        {
-            new ApparelCategory
+            },
+            new ItemCategory
+            {
+                Id = 2,
+                CategoryType="Season",
+                CategoryName = "Spring",
+                CategoryTitle ="Spring",
+                IconGlyph = "noun-sunny-2494509.png",
+                IconFamily = "FontAwesome-Regular",
+                PictureUri = "noun-shirt-3013538.png"
+
+            },
+            new ItemCategory
             {
                 Id = 3,
-                ApparelCategoryName = "Top",
-                ApparelCategoryTitle ="Tops",
+                CategoryType="Season",
+                CategoryName = "Summer",
+                CategoryTitle ="Summer",
+                IconGlyph = "noun-sun-2494511.png",
                 IconFamily = "FontAwesome-Regular",
-                IconGlyph = "noun-shirt-3013538.png",
                 PictureUri = "noun-shirt-3013538.png"
+
             },
-            new ApparelCategory
+            new ItemCategory
             {
                 Id = 4,
-                ApparelCategoryName = "Bottom",
-                ApparelCategoryTitle ="Bottoms",
+                CategoryType="Season",
+                CategoryName = "Fall",
+                CategoryTitle ="Fall",
+                IconGlyph = "noun-autumn-3789702.png",
                 IconFamily = "FontAwesome-Regular",
-                IconGlyph = "noun-jeans-3049748.png",
-                PictureUri = "noun-jeans-3049748.png"
+                PictureUri = "noun-shirt-3013538.png"
+
             },
-            new ApparelCategory
+            new ItemCategory
             {
                 Id = 5,
-                ApparelCategoryName = "Dress",
-                ApparelCategoryTitle ="Dresses",
-                IconFamily = "FontAwesome-Regular",
+                CategoryType="Season",
+                CategoryName = "Always",
+                CategoryTitle ="Always",
                 IconGlyph = "noun-dress-3013536.png",
+                IconFamily = "FontAwesome-Regular",
+                PictureUri = "noun-shirt-3013538.png"
+
+            },
+            new ItemCategory
+            {
+                Id = 3,
+                CategoryType="Apparel",
+                CategoryName = "Top",
+                CategoryTitle ="Tops",
+                IconGlyph = "noun-shirt-3013538.png",
+                IconFamily = "FontAwesome-Regular",
+                PictureUri = "noun-shirt-3013538.png"
+            },
+            new ItemCategory
+            {
+                Id = 4,
+                CategoryType="Apparel",
+                CategoryName = "Bottom",
+                CategoryTitle ="Bottoms",
+                IconGlyph = "noun-jeans-3049748.png",
+                IconFamily = "FontAwesome-Regular",
+                PictureUri = "noun-jeans-3049748.png"
+            },
+            new ItemCategory
+            {
+                Id = 5,
+                CategoryType="Apparel",
+                CategoryName = "Dress",
+                CategoryTitle ="Dresses",
+                IconGlyph = "noun-dress-3013536.png",
+                IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-dress-3013536.png"
             },
-            new ApparelCategory
+            new ItemCategory
             {
                 Id = 6,
-                ApparelCategoryName = "Outerwear",
-                ApparelCategoryTitle ="Outerwear",
-                IconFamily = "FontAwesome-Regular",
+                CategoryType="Apparel",
+                CategoryName = "Outerwear",
+                CategoryTitle ="Outerwear",
                 IconGlyph = "noun-puffer-vest-2200104.png",
+                IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-puffer-vest-2200104.png"
             },
-            new ApparelCategory
+            new ItemCategory
             {
                 Id = 7,
-                ApparelCategoryName = "Footwear",
-                ApparelCategoryTitle ="Footwear",
-                IconFamily = "FontAwesome-Regular",
+                CategoryType="Apparel",
+                CategoryName = "Footwear",
+                CategoryTitle ="Footwear",
                 IconGlyph = "noun-shoe-1202591.png",
+                IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-shoe-1202591.png"
             },
-            new ApparelCategory
+            new ItemCategory
             {
                 Id = 8,
-                ApparelCategoryName = "Accessory",
-                ApparelCategoryTitle ="Accessories",
-                IconFamily = "FontAwesome-Regular",
+                CategoryType="Apparel",
+                CategoryName = "Accessory",
+                CategoryTitle ="Accessories",
                 IconGlyph = "noun-scarf-3790978.png",
+                IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-scarf-3790978.png"
             }
         };
@@ -100,7 +152,6 @@ namespace sycXF.Services.MyCloset
             new MainFilterCategoryModel { Id = 4, PropertyName = "Favorites" }
         };
 
-        //private List<MyClosetItem> MockMyClosetSource = new List<MyClosetItem>
         private ObservableCollection<MyClosetItem> MockMyClosetSource = new ObservableCollection<MyClosetItem>
         {
             new MyClosetItem
@@ -111,10 +162,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 2,
                 SizeCategoryName = "Small",
-                SeasonCategoryId = 2,
-                SeasonCategoryName = "Spring",
-                ApparelCategoryId = 3,
-                ApparelCategoryName = "Top"
+                Season = "Spring",
+                ApparelType = "Top"
             },
             new MyClosetItem
             {
@@ -124,10 +173,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 2,
                 SizeCategoryName = "Small",
-                SeasonCategoryId = 3,
-                SeasonCategoryName  = "Summer",
-                ApparelCategoryId = 4,
-                ApparelCategoryName = "Bottom"
+                Season  = "Summer",
+                ApparelType = "Bottom"
             },
             new MyClosetItem
             {
@@ -137,10 +184,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 3,
                 SizeCategoryName = "Medium",
-                SeasonCategoryId = 1,
-                SeasonCategoryName  = "Winter",
-                ApparelCategoryId = 5,
-                ApparelCategoryName = "Dress"
+                Season  = "Winter",
+                ApparelType = "Dress"
             },
             new MyClosetItem
             {
@@ -150,10 +195,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 4,
                 SizeCategoryName = "Large",
-                SeasonCategoryId = 5,
-                SeasonCategoryName  = "Always in Season",
-                ApparelCategoryId = 6,
-                ApparelCategoryName = "Outerwear"
+                Season  = "Always",
+                ApparelType = "Outerwear"
             },
             new MyClosetItem
             {
@@ -163,9 +206,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 2,
                 SizeCategoryName = "Small",
-                SeasonCategoryName  = "Winter",
-                ApparelCategoryId = 7,
-                ApparelCategoryName = "Footwear"
+                Season  = "Winter",
+                ApparelType = "Footwear"
             },
             new MyClosetItem
             {
@@ -175,9 +217,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 3,
                 SizeCategoryName = "Medium",
-                SeasonCategoryName  = "Spring",
-                ApparelCategoryId = 3,
-                ApparelCategoryName = "Top"
+                Season  = "Spring",
+                ApparelType = "Top"
             },
             new MyClosetItem
             {
@@ -187,10 +228,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 4,
                 SizeCategoryName = "Large",
-                SeasonCategoryId = 3,
-                SeasonCategoryName  = "Summer",
-                ApparelCategoryId = 4,
-                ApparelCategoryName = "Bottom"
+                Season  = "Summer",
+                ApparelType = "Bottom"
             },
             new MyClosetItem
             {
@@ -200,10 +239,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 2,
                 SizeCategoryName = "Small",
-                SeasonCategoryId = 4,
-                SeasonCategoryName  = "Fall",
-                ApparelCategoryId = 5,
-                ApparelCategoryName = "Dress"
+                Season  = "Fall",
+                ApparelType = "Dress"
             },
             new MyClosetItem
             {
@@ -213,10 +250,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 3,
                 SizeCategoryName = "Medium",
-                SeasonCategoryId = 5,
-                SeasonCategoryName  = "Always in Season",
-                ApparelCategoryId = 6,
-                ApparelCategoryName = "Outerwear"
+                Season  = "Always",
+                ApparelType = "Outerwear"
             },
             new MyClosetItem
             {
@@ -226,10 +261,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 3,
                 SizeCategoryName = "Medium",
-                SeasonCategoryId = 5,
-                SeasonCategoryName  = "Always in Season",
-                ApparelCategoryId = 6,
-                ApparelCategoryName = "Top"
+                Season  = "Always",
+                ApparelType = "Top"
             },
             new MyClosetItem
             {
@@ -239,10 +272,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 3,
                 SizeCategoryName = "Medium",
-                SeasonCategoryId = 1,
-                SeasonCategoryName  = "Winter",
-                ApparelCategoryId = 8,
-                ApparelCategoryName = "Accessory"
+                Season  = "Winter",
+                ApparelType = "Accessory"
             },
             new MyClosetItem
             {
@@ -252,10 +283,8 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 4,
                 SizeCategoryName = "Large",
-                SeasonCategoryId = 2,
-                SeasonCategoryName  = "Spring",
-                ApparelCategoryId = 8,
-                ApparelCategoryName = "Accessory"
+                Season  = "Spring",
+                ApparelType = "Accessory"
             },
             new MyClosetItem
             {
@@ -265,53 +294,11 @@ namespace sycXF.Services.MyCloset
                 Description="a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
                 SizeCategoryId = 2,
                 SizeCategoryName = "Small",
-                SeasonCategoryId = 1,
-                SeasonCategoryName = "Winter",
-                ApparelCategoryId = 4,
-                ApparelCategoryName = "Bottom"
+                Season = "Winter",
+                ApparelType = "Bottom"
             }
 
         };
-
-        
-       
-
-        //public async Task<List<MyClosetItem>> GetMyClosetAsyncSource()
-        //{
-        //    await Task.Delay(10);
-
-        //    return MockMyClosetSource;
-        //}
-
-
-        public async Task<ObservableCollection<MainFilterCategoryModel>> GetMainFilterCategoriesAsync()
-        {
-            await Task.Delay(10);
-
-            return MockMainFilterCategories;
-        }
-
-
-        public async Task<ObservableCollection<SeasonCategory>> GetSeasonCategoriesAsync()
-        {
-            await Task.Delay(10);
-
-            return MockSeasonCategories;
-        }
-
-        public async Task<ObservableCollection<ApparelCategory>> GetApparelCategoriesAsync()
-        {
-            await Task.Delay(10);
-
-            return MockApparelCategories;
-        }
-
-        public async Task<ObservableCollection<SizeCategory>> GetSizeCategoriesAsync()
-        {
-            await Task.Delay(10);
-
-            return MockSizeCategories;
-        }
 
         public async Task<ObservableCollection<MyClosetItem>> GetMyClosetAsync()
         {
@@ -320,23 +307,39 @@ namespace sycXF.Services.MyCloset
             return MockMyClosetSource;
         }
 
+        public async Task<ObservableCollection<MainFilterCategoryModel>> GetMainFilterCategoriesAsync()
+        {
+            await Task.Delay(10);
+
+            return MockMainFilterCategories;
+        }
+
+        public async Task<ObservableCollection<ItemCategory>> GetCategoriesAsync(string categoryType)
+        {
+            await Task.Delay(10);
+
+            return MockItemCategories
+                .Where(c => c.CategoryType == categoryType)
+                .ToObservableCollection();
+        }
+
         public async Task<ObservableCollection<MyClosetItem>> GetItemsByApparelAsync(string apparelType)
         {
             await Task.Delay(10);
             var appType = apparelType.ToString();
 
             return MockMyClosetSource
-                .Where(c => c.ApparelCategoryName == appType)
+                .Where(c => c.ApparelType == appType)
                 .ToObservableCollection();
         }
 
-        public async Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string seasonType)
+        public async Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string season)
         {
             await Task.Delay(10);
-            var seasType = seasonType.ToString();
+            var seasType = season.ToString();
 
             return MockMyClosetSource
-                .Where(c => c.SeasonCategoryName == seasType)
+                .Where(c => c.Season == seasType)
                 .ToObservableCollection();
         }
     }

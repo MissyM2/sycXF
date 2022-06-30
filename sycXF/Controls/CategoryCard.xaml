@@ -1,50 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Grid
+    x:Class="sycXF.Controls.CategoryCard"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:sycXF.Models;assembly=sycXF"
-    x:DataType="models:MyCloset.SeasonCategory"
-    x:Class="sycXF.Controls.CategoryCard">
+    x:DataType="models:MyCloset.ItemCategory"
+    Padding="10">
 
-    <Grid.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="iOS, Android" Value="0" />
-            <On Platform="UWP, WinRT, WinPhone" Value="12, 0" />
-        </OnPlatform>
-    </Grid.Padding>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="2*" />
-    </Grid.ColumnDefinitions>
-               
-    <Frame Grid.Column="0"
-            BackgroundColor="Transparent"
-            HasShadow="False"
-            Padding="8"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            HeightRequest="80"
-            WidthRequest="80">
-        <Image Aspect="AspectFill"
-                Source="{Binding IconGlyph, TargetNullValue='default_product.png'}"
-                HeightRequest="60"
-                WidthRequest="60">
-            <!--<Image.Clip>
-                <EllipseGeometry Center="40,40"
-                                    RadiusX="40"
-                                    RadiusY="40"/>
-            </Image.Clip>-->
-        </Image>
+    <Frame Style="{StaticResource CategoryCard}">
+        <StackLayout Orientation="Horizontal">
+            <Image Source="{Binding IconGlyph, TargetNullValue='default_product.png'}"
+                   WidthRequest="66"/>
+            <StackLayout>
+                 <Label Text="{Binding CategoryTitle}"
+                        TextColor="{StaticResource DarkGreenColor}"
+                        FontSize="{StaticResource LargerSize}"/>
 
-    </Frame>
-            
-        <StackLayout Grid.Column="1"
-                    VerticalOptions="Center">
-            <Label Text="{Binding SeasonCategoryName}"
-                TextColor="{StaticResource DarkGreenColor}"
-                FontSize="{StaticResource LargerSize}"/>
+            </StackLayout>
         </StackLayout>
-                    
-    
+    </Frame>
 </Grid>
 

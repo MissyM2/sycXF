@@ -130,8 +130,8 @@ namespace sycXF.ViewModels
         }
 
         
-        private ObservableCollection<SeasonCategory> _seasonCategoryCollection;
-        public ObservableCollection<SeasonCategory> SeasonCategoryCollection
+        private ObservableCollection<ItemCategory> _seasonCategoryCollection;
+        public ObservableCollection<ItemCategory> SeasonCategoryCollection
         {
             get => _seasonCategoryCollection;
             set
@@ -142,8 +142,8 @@ namespace sycXF.ViewModels
             }
         }
 
-        private SeasonCategory _selectedSeasonCategory;
-        public SeasonCategory SelectedSeasonCategory
+        private ItemCategory _selectedSeasonCategory;
+        public ItemCategory SelectedSeasonCategory
         {
             get
             {
@@ -168,7 +168,7 @@ namespace sycXF.ViewModels
                         return;
 
                     var dictionary = new Dictionary<string, string>();
-                    dictionary.Add("SeasonCategoryName", SelectedSeasonCategory.SeasonCategoryName);
+                    dictionary.Add("SeasonCategoryName", SelectedSeasonCategory.CategoryName);
                     await NavigationService.NavigateToAsync("ClosetItemsSeasons", dictionary);
                     SelectedSeasonCategory = null;
 
@@ -191,8 +191,8 @@ namespace sycXF.ViewModels
             }
         }
 
-        private ObservableCollection<ApparelCategory> _apparelCategoryCollection;
-        public ObservableCollection<ApparelCategory> ApparelCategoryCollection
+        private ObservableCollection<ItemCategory> _apparelCategoryCollection;
+        public ObservableCollection<ItemCategory> ApparelCategoryCollection
         {
             get => _apparelCategoryCollection;
             set
@@ -203,8 +203,8 @@ namespace sycXF.ViewModels
             }
         }
 
-        private ApparelCategory _selectedApparelCategory;
-        public ApparelCategory SelectedApparelCategory
+        private ItemCategory _selectedApparelCategory;
+        public ItemCategory SelectedApparelCategory
         {
             get
             {
@@ -230,8 +230,8 @@ namespace sycXF.ViewModels
                         return;
 
                     var dictionary = new Dictionary<string, string>();
-                    dictionary.Add("ApparelCategoryName", SelectedApparelCategory.ApparelCategoryName);
-                    dictionary.Add("ApparelCategoryTitle", SelectedApparelCategory.ApparelCategoryTitle);
+                    dictionary.Add("ApparelCategoryName", SelectedApparelCategory.CategoryName);
+                    dictionary.Add("ApparelCategoryTitle", SelectedApparelCategory.CategoryTitle);
 
                     await NavigationService.NavigateToAsync("ClosetItems", dictionary);
 
@@ -279,11 +279,11 @@ namespace sycXF.ViewModels
 
             ItemCount = AllItemsCollection.Count;
 
-            ApparelCategoryCollection = await _myClosetService.GetApparelCategoriesAsync();
+            ApparelCategoryCollection = await _myClosetService.GetCategoriesAsync("Apparel");
             
             MainFilterCategoryCollection = await _myClosetService.GetMainFilterCategoriesAsync();
             
-            SeasonCategoryCollection = await _myClosetService.GetSeasonCategoriesAsync();
+            SeasonCategoryCollection = await _myClosetService.GetCategoriesAsync("Season");
 
             //SelectedMainFilterCategory = MainFilterCategoryCollection.Skip(SelectedMenu).FirstOrDefault();
 
