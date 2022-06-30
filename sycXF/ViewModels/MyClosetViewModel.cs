@@ -38,6 +38,18 @@ namespace sycXF.ViewModels
             }
         }
 
+        private string _queryType;
+        public string QueryType
+        {
+            get => _queryType;
+            set
+            {
+                if (value == _queryType) return;
+                _queryType = value;
+                RaisePropertyChanged(() => QueryType);
+            }
+        }
+
         private int _itemCount;
         public int ItemCount
         {
@@ -79,18 +91,21 @@ namespace sycXF.ViewModels
                     IsVisibleCVApparelTypes = true;
                     if (SelectedMainFilterCategory.PropertyName == "Categories")
                     {
+                        QueryType = "ApparelType";
                         IsVisibleCVApparelTypes = true;
                         IsVisibleCVSeasons = false;
                         IsVisibleCVFavorites = false;
                     }
                     else if (SelectedMainFilterCategory.PropertyName == "Seasons")
                     {
+                        QueryType = "Season";
                         IsVisibleCVApparelTypes = false;
                         IsVisibleCVSeasons = true;
                         IsVisibleCVFavorites = false;
                     }
                     else if (SelectedMainFilterCategory.PropertyName == "Favorites")
                     {
+                        QueryType = "Favorites";
                         IsVisibleCVApparelTypes = false;
                         IsVisibleCVSeasons = false;
                         IsVisibleCVFavorites = true;
@@ -142,39 +157,39 @@ namespace sycXF.ViewModels
             }
         }
 
-        private ItemCategory _selectedSeasonCategory;
-        public ItemCategory SelectedSeasonCategory
-        {
-            get
-            {
-                return _selectedSeasonCategory;
-            }
-            set
-            {
-                if (_selectedSeasonCategory != value)
-                {
-                    _selectedSeasonCategory = value;
-                }
-            }
-        }
+        //private ItemCategory _selectedSeasonCategory;
+        //public ItemCategory SelectedSeasonCategory
+        //{
+        //    get
+        //    {
+        //        return _selectedSeasonCategory;
+        //    }
+        //    set
+        //    {
+        //        if (_selectedSeasonCategory != value)
+        //        {
+        //            _selectedSeasonCategory = value;
+        //        }
+        //    }
+        //}
 
-        public ICommand SeasonCategorySelectedCommand
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    if (SelectedSeasonCategory == null)
-                        return;
+        //public ICommand SeasonCategorySelectedCommand
+        //{
+        //    get
+        //    {
+        //        return new Command(async () =>
+        //        {
+        //            if (SelectedSeasonCategory == null)
+        //                return;
 
-                    var dictionary = new Dictionary<string, string>();
-                    dictionary.Add("SeasonCategoryName", SelectedSeasonCategory.CategoryName);
-                    await NavigationService.NavigateToAsync("ClosetItemsSeasons", dictionary);
-                    SelectedSeasonCategory = null;
+        //            var dictionary = new Dictionary<string, string>();
+        //            dictionary.Add("SeasonCategoryName", SelectedSeasonCategory.CategoryName);
+        //            await NavigationService.NavigateToAsync("ClosetItemsSeasons", dictionary);
+        //            SelectedSeasonCategory = null;
 
-                });
-            }
-        }
+        //        });
+        //    }
+        //}
 
         // ApparelCategory filter
         private bool _isVisibleCVApparelTypes;
@@ -203,39 +218,41 @@ namespace sycXF.ViewModels
             }
         }
 
-        private ItemCategory _selectedApparelCategory;
-        public ItemCategory SelectedApparelCategory
+        private ItemCategory _selectedCategory;
+        public ItemCategory SelectedCategory
         {
             get
             {
-                return _selectedApparelCategory;
+                return _selectedCategory;
             }
             set
             {
-                if (_selectedApparelCategory != value)
+                if (_selectedCategory != value)
                 {
-                    _selectedApparelCategory = value;
+                    _selectedCategory = value;
                 }
             }
         }
 
 
-        public ICommand ApparelCategorySelectedCommand
+        public ICommand CategorySelectedCommand
         {
             get
             {
                 return new Command(async () =>
                 {
-                    if (SelectedApparelCategory == null)
+                    if (SelectedCategory == null)
                         return;
 
                     var dictionary = new Dictionary<string, string>();
-                    dictionary.Add("ApparelCategoryName", SelectedApparelCategory.CategoryName);
-                    dictionary.Add("ApparelCategoryTitle", SelectedApparelCategory.CategoryTitle);
+                    dictionary.Add("QueryType", QueryType);
+                    dictionary.Add("CategoryType", SelectedCategory.CategoryType);
+                    dictionary.Add("CategoryName", SelectedCategory.CategoryName);
+                    dictionary.Add("CategoryTitle", SelectedCategory.CategoryTitle);
 
                     await NavigationService.NavigateToAsync("ClosetItems", dictionary);
 
-                    SelectedApparelCategory = null;
+                    SelectedCategory = null;
                 });
         }
     }

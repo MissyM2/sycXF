@@ -323,24 +323,42 @@ namespace sycXF.Services.MyCloset
                 .ToObservableCollection();
         }
 
-        public async Task<ObservableCollection<MyClosetItem>> GetItemsByApparelAsync(string apparelType)
+        public async Task<ObservableCollection<MyClosetItem>> GetClosetItemsAsync(string queryType, string categoryName)
         {
             await Task.Delay(10);
-            var appType = apparelType.ToString();
+            var catName = categoryName.ToString();
 
-            return MockMyClosetSource
-                .Where(c => c.ApparelType == appType)
-                .ToObservableCollection();
+            if (queryType == "ApparelType")
+            {
+                return MockMyClosetSource
+                    .Where(c => c.ApparelType == catName)
+                    .ToObservableCollection();
+            }
+            else if (queryType == "Season")
+            {
+
+                return MockMyClosetSource
+                    .Where(c => c.Season == catName)
+                    .ToObservableCollection();
+
+            } else
+            {
+                return null;
+            }
+           
+
+            //get all items in closet
+            // pull only those with the category type (apparel or season
         }
 
-        public async Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string season)
-        {
-            await Task.Delay(10);
-            var seasType = season.ToString();
+        //public async Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string season)
+        //{
+        //    await Task.Delay(10);
+        //    var seasType = season.ToString();
 
-            return MockMyClosetSource
-                .Where(c => c.Season == seasType)
-                .ToObservableCollection();
-        }
+        //    return MockMyClosetSource
+        //        .Where(c => c.Season == seasType)
+        //        .ToObservableCollection();
+        //}
     }
 }

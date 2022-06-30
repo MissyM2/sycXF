@@ -63,7 +63,7 @@ namespace sycXF.Services.MyCloset
 
         
 
-        public async Task<ObservableCollection<MyClosetItem>> GetItemsByApparelAsync(string apparelType)
+        public async Task<ObservableCollection<MyClosetItem>> GetClosetItemsAsync(string queryType, string categoryName)
         {
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
 
@@ -75,17 +75,17 @@ namespace sycXF.Services.MyCloset
                 return new ObservableCollection<MyClosetItem>();
         }
 
-        public async Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string season)
-        {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
+        //public async Task<ObservableCollection<MyClosetItem>> GetItemsBySeasonAsync(string season)
+        //{
+        //    var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
 
-            IEnumerable<MyClosetItem> myclosetitems = await _requestProvider.GetAsync<IEnumerable<MyClosetItem>>(uri);
+        //    IEnumerable<MyClosetItem> myclosetitems = await _requestProvider.GetAsync<IEnumerable<MyClosetItem>>(uri);
 
-            if (myclosetitems != null)
-                return myclosetitems?.ToObservableCollection();
-            else
-                return new ObservableCollection<MyClosetItem>();
+        //    if (myclosetitems != null)
+        //        return myclosetitems?.ToObservableCollection();
+        //    else
+        //        return new ObservableCollection<MyClosetItem>();
 
-        }
+        //}
     }
 }

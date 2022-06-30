@@ -102,8 +102,8 @@
         <CollectionView x:Name="CVApparelCategories"
                         ItemsSource="{Binding ApparelCategoryCollection}"
                         SelectionMode="Single"
-                        SelectedItem="{Binding SelectedApparelCategory, Mode=TwoWay}"
-                        SelectionChangedCommand="{Binding ApparelCategorySelectedCommand, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                        SelectionChangedCommand="{Binding CategorySelectedCommand, Mode=TwoWay}"
                         SelectionChangedCommandParameter="{Binding .}"
                         IsVisible="{Binding IsVisibleCVApparelTypes}">
 
@@ -136,8 +136,8 @@
         <CollectionView x:Name="CVSeasonCategories"
                         ItemsSource="{Binding SeasonCategoryCollection}"
                         SelectionMode="Single"
-                        SelectedItem="{Binding SelectedSeasonCategory, Mode=TwoWay}"
-                        SelectionChangedCommand="{Binding SeasonCategorySelectedCommand, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                        SelectionChangedCommand="{Binding CategorySelectedCommand, Mode=TwoWay}"
                         SelectionChangedCommandParameter="{Binding .}"
                         IsVisible="{Binding IsVisibleCVSeasons}">
 

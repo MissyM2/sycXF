@@ -36,29 +36,57 @@ namespace sycXF.ViewModels
                 RaisePropertyChanged(() => MyClosetItemCollection);
             }
         }
-        private string _apparelName;
-        public string ApparelName
+
+        private string _queryType;
+        public string QueryType
         {
-            get => _apparelName;
+            get => _queryType;
             set
             {
-                if (value == _apparelName) return;
-                _apparelName = value;
-                RaisePropertyChanged(() => ApparelName);
+                if (value == _queryType) return;
+                _queryType = value;
+                RaisePropertyChanged(() => QueryType);
 
 
             }
         }
 
-        private string _apparelTitle;
-        public string ApparelTitle
+        private string _categoryType;
+        public string CategoryType
         {
-            get => _apparelTitle;
+            get => _categoryType;
             set
             {
-                if (value == _apparelTitle) return;
-                _apparelName = value;
-                RaisePropertyChanged(() => ApparelTitle);
+                if (value == _categoryType) return;
+                _categoryType = value;
+                RaisePropertyChanged(() => CategoryType);
+
+
+            }
+        }
+        private string _categoryName;
+        public string CategoryName
+        {
+            get => _categoryName;
+            set
+            {
+                if (value == _categoryName) return;
+                _categoryName = value;
+                RaisePropertyChanged(() => CategoryName);
+
+
+            }
+        }
+
+        private string _categoryTitle;
+        public string CategoryTitle
+        {
+            get => _categoryTitle;
+            set
+            {
+                if (value == _categoryTitle) return;
+                _categoryTitle = value;
+                RaisePropertyChanged(() => CategoryTitle);
 
 
             }
@@ -90,14 +118,18 @@ namespace sycXF.ViewModels
 
             foreach (KeyValuePair<string, string> kvp in query)
             {
-                if(kvp.Key == "ApparelCategoryName")
-                    _apparelName = kvp.Value;
-                if (kvp.Key == "ApparelCategoryTitle")
-                    _apparelTitle = kvp.Value;
+                if (kvp.Key == "QueryType")
+                    _queryType = kvp.Value;
+                else if (kvp.Key == "CategoryType")
+                    _categoryType = kvp.Value;
+                else if (kvp.Key == "CategoryName")
+                    _categoryName = kvp.Value;
+                else if (kvp.Key == "CategoryTitle")
+                    _categoryTitle = kvp.Value;
             }
 
 
-            MyClosetItemCollection = await _myClosetService.GetItemsByApparelAsync(ApparelName);
+            MyClosetItemCollection = await _myClosetService.GetClosetItemsAsync(QueryType, CategoryName);
             ItemCount = MyClosetItemCollection.Count;
 
             IsBusy = false;

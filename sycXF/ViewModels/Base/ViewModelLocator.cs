@@ -50,7 +50,6 @@ namespace sycXF.ViewModels.Base
             // View models - by default, TinyIoC will register concrete classes as multi-instance.
             Xamarin.Forms.DependencyService.Register<MyClosetViewModel>();
             Xamarin.Forms.DependencyService.Register<ClosetItemsViewModel>();
-            Xamarin.Forms.DependencyService.Register<ClosetItemsSeasonsViewModel>();
             Xamarin.Forms.DependencyService.Register<LoginViewModel>();
             Xamarin.Forms.DependencyService.Register<MainViewModel>();
             Xamarin.Forms.DependencyService.Register<SettingsViewModel>();
