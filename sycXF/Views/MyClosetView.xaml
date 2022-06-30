@@ -207,50 +207,7 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <!--<StackLayout BackgroundColor="AliceBlue" Padding="0" Margin="0">-->
-                        <Grid>
-                            <Grid.Padding>
-                                <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="iOS, Android" Value="0" />
-                                    <On Platform="UWP, WinRT, WinPhone" Value="12, 0" />
-                                </OnPlatform>
-                            </Grid.Padding>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="2*" />
-                            </Grid.ColumnDefinitions>
-               
-                            <Frame Grid.Column="0"
-                                    BackgroundColor="Transparent"
-                                    HasShadow="False"
-                                    Padding="8"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    HeightRequest="80"
-                                    WidthRequest="80">
-                                <Image Aspect="AspectFill"
-                                        Source="{Binding IconGlyph, TargetNullValue='default_product.png'}"
-                                        HeightRequest="60"
-                                        WidthRequest="60">
-                                    <!--<Image.Clip>
-                                        <EllipseGeometry Center="40,40"
-                                                            RadiusX="40"
-                                                            RadiusY="40"/>
-                                    </Image.Clip>-->
-                                </Image>
-
-                            </Frame>
-            
-                                <StackLayout Grid.Column="1"
-                                            VerticalOptions="Center">
-                                    <Label Text="{Binding SeasonCategoryName}"
-                                        TextColor="{StaticResource DarkGreenColor}"
-                                        FontSize="{StaticResource LargerSize}"/>
-                                </StackLayout>
-                    
-                        </Grid>
-                            
-                    <!--</StackLayout>-->
+                    <controls:CategoryCard />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
