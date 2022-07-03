@@ -118,22 +118,12 @@
                 </CollectionView.ItemsLayout>
 
             <CollectionView.Header>
-                <FlexLayout Direction="Row"
-                            JustifyContent="SpaceBetween"
-                            BackgroundColor="{StaticResource LighterGrayColor}"
-                            Padding="12,20,12,20"
-                            Margin="0,0,0,20">
-                    <Label Text="Browse By Apparel Type"
-                           FontSize="{StaticResource LargerSize}"/>
-                    <Label Text="{Binding ItemCount, StringFormat='{} See all {0} items'}"
-                               FontSize="{StaticResource LargerSize}"/>
-                   
-                </FlexLayout>
+                <controls:CategoryHeaderControl/>
             </CollectionView.Header>
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <controls:CategoryCard />
+                        <controls:CategoryCardControl />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
         </CollectionView>
@@ -152,22 +142,12 @@
                 </CollectionView.ItemsLayout>
 
             <CollectionView.Header>
-                <FlexLayout Direction="Row"
-                            JustifyContent="SpaceBetween"
-                            BackgroundColor="{StaticResource LighterGrayColor}"
-                            Padding="12,20,12,20"
-                            Margin="0,0,0,20">
-                    <Label Text="Browse By Season"
-                           FontSize="{StaticResource LargerSize}"/>
-                    <Label Text="{Binding ItemCount, StringFormat='{} See all {0} items'}"
-                               FontSize="{StaticResource LargerSize}"/>
-                            
-                </FlexLayout>
+                <controls:CategoryHeaderControl/>
             </CollectionView.Header>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <controls:CategoryCard />
+                    <controls:CategoryCardControl />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
@@ -278,6 +258,9 @@
       
                     </Image>
                 </Frame>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddItemTapCommand}" />
+                </Frame.GestureRecognizers>
             </Frame>
        
     </AbsoluteLayout>

@@ -53,6 +53,7 @@ namespace sycXF.ViewModels.Base
             Xamarin.Forms.DependencyService.Register<LoginViewModel>();
             Xamarin.Forms.DependencyService.Register<MainViewModel>();
             Xamarin.Forms.DependencyService.Register<SettingsViewModel>();
+            Xamarin.Forms.DependencyService.Register<AddItemViewModel>();
         }
 
         public static void UpdateDependencies(bool useMockServices)

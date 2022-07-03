@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<FlexLayout
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="sycXF.Controls.CategoryHeaderControl"
+    Direction="Row"
+    JustifyContent="SpaceBetween"
+    BackgroundColor="{StaticResource LighterGrayColor}"
+    Padding="12,20,12,20"
+    Margin="0,0,0,20">
+
+     <Label Text="{Binding HeaderTextLabel}"
+            FontSize="{StaticResource LargerSize}"/>
+    <Label Text="{Binding ItemCount, StringFormat='{} See all {0} items'}"
+           FontSize="{StaticResource LargerSize}"/>
+
+</FlexLayout>
+

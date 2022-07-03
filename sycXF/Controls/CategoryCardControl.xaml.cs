@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace sycXF.Controls
 {
-    public partial class CategoryCard : Grid
+    public partial class CategoryCardControl : Grid
     {
-        public CategoryCard()
+        public CategoryCardControl()
         {
             InitializeComponent();
         }

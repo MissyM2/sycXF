@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Grid
-    x:Class="sycXF.Controls.CategoryCard"
+    x:Class="sycXF.Controls.CategoryCardControl"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Padding="10">
+    Padding="5"
+    Margin="0">
 
-    <Frame Style="{StaticResource CategoryCard}">
+    <Frame Style="{StaticResource CategoryCard}" Padding="10,0,0,0">
         <StackLayout Orientation="Horizontal">
             <Image Source="{Binding IconGlyph, TargetNullValue='default_product.png'}"
                    WidthRequest="66"/>
-            <StackLayout>
+            <StackLayout VerticalOptions="Center">
                  <Label Text="{Binding CategoryTitle}"
                         TextColor="{StaticResource DarkGreenColor}"
                         FontSize="{StaticResource LargerSize}"/>

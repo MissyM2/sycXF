@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:ContentPageBase
+    x:Class="sycXF.Views.AddItemView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModelBase="clr-namespace:sycXF.ViewModels.Base;assembly=sycXF"
+    xmlns:views="clr-namespace:sycXF.Views;assembly=sycXF"
+    xmlns:controls="clr-namespace:sycXF.Controls"
+    Title="AddItem"
+    x:Name="AddItemName"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+        <AbsoluteLayout Margin="0" Padding="0">
+           <StackLayout AbsoluteLayout.LayoutBounds="{OnIdiom Phone='0,0,1,1', Tablet='0.5,0.28,0.8,0.9'}"
+                        AbsoluteLayout.LayoutFlags="All">
+
+                <CollectionView x:Name="CVApparelCategories"
+                        ItemsSource="{Binding ApparelCategoryCollection}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                        SelectionChangedCommand="{Binding CategorySelectedCommand, Mode=TwoWay}"
+                        SelectionChangedCommandParameter="{Binding .}"
+                        IsVisible="{Binding IsVisibleCVApparelTypes}">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.Header>
+                    <controls:CategoryHeaderControl/>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CategoryCardControl />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+            </StackLayout>
+        </AbsoluteLayout>
+            
+
+</views:ContentPageBase>
+

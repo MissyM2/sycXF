@@ -64,6 +64,18 @@ namespace sycXF.ViewModels
             }
         }
 
+        private string _headerTextLabel;
+        public string HeaderTextLabel
+        {
+            get => _headerTextLabel;
+            set
+            {
+                if (value == _headerTextLabel) return;
+                _headerTextLabel = value;
+                RaisePropertyChanged(() => HeaderTextLabel);
+            }
+        }
+
         // FilterCategory CV
         private ObservableCollection<MainFilterCategoryModel> _mainFilterCategoryCollection;
         public ObservableCollection<MainFilterCategoryModel> MainFilterCategoryCollection
@@ -95,6 +107,8 @@ namespace sycXF.ViewModels
                         IsVisibleCVApparelTypes = true;
                         IsVisibleCVSeasons = false;
                         IsVisibleCVFavorites = false;
+
+                        HeaderTextLabel = "Browse By Apparel Types";
                     }
                     else if (SelectedMainFilterCategory.PropertyName == "Seasons")
                     {
@@ -102,6 +116,8 @@ namespace sycXF.ViewModels
                         IsVisibleCVApparelTypes = false;
                         IsVisibleCVSeasons = true;
                         IsVisibleCVFavorites = false;
+
+                        HeaderTextLabel = "Browse By Seasons";
                     }
                     else if (SelectedMainFilterCategory.PropertyName == "Favorites")
                     {
@@ -109,6 +125,8 @@ namespace sycXF.ViewModels
                         IsVisibleCVApparelTypes = false;
                         IsVisibleCVSeasons = false;
                         IsVisibleCVFavorites = true;
+
+                        HeaderTextLabel = "Browse By Favorites";
                     }
                     else
                     {
@@ -140,6 +158,7 @@ namespace sycXF.ViewModels
             {
                 if (value == _isVisibleCVSeasons) return;
                 _isVisibleCVSeasons = value;
+                _headerTextLabel = "Browse By Season";
                 RaisePropertyChanged(() => IsVisibleCVSeasons);
             }
         }
@@ -181,7 +200,6 @@ namespace sycXF.ViewModels
             set
             {
                 if (value == _apparelCategoryCollection) return;
-                _apparelCategoryCollection = value;
                 RaisePropertyChanged(() => ApparelCategoryCollection);
             }
         }
@@ -222,24 +240,35 @@ namespace sycXF.ViewModels
 
                     SelectedCategory = null;
                 });
+            }
         }
-    }
 
-    // Favorites filter
+        // Favorites filter
 
-    private bool _isVisibleCVFavorites;
-    public bool IsVisibleCVFavorites
-    {
-        get => _isVisibleCVFavorites;
-        set
+        private bool _isVisibleCVFavorites;
+        public bool IsVisibleCVFavorites
         {
-            if (value == _isVisibleCVFavorites) return;
-            _isVisibleCVFavorites = value;
-            RaisePropertyChanged(() => IsVisibleCVFavorites);
+            get => _isVisibleCVFavorites;
+            set
+            {
+                if (value == _isVisibleCVFavorites) return;
+                _isVisibleCVFavorites = value;
+                RaisePropertyChanged(() => IsVisibleCVFavorites);
+            }
         }
-    }
 
-   
+        public ICommand AddItemTapCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                  {
+                      await NavigationService.NavigateToAsync("AddItemRoute");
+                  });
+            }
+        }
+
+
         #endregion
 
 
@@ -252,6 +281,7 @@ namespace sycXF.ViewModels
             _settingsService = DependencyService.Get<ISettingsService>();
             _userService = DependencyService.Get<IUserService>();
             _dialogService = DependencyService.Get<IDialogService>();
+
 
         }
 
@@ -276,6 +306,5 @@ namespace sycXF.ViewModels
 
             IsBusy = false;
         }
-
     }
 }

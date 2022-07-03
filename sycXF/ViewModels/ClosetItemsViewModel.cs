@@ -24,6 +24,18 @@ namespace sycXF.ViewModels
 
         #endregion
 
+        private string _headerTextLabel;
+        public string HeaderTextLabel
+        {
+            get => _headerTextLabel;
+            set
+            {
+                if (value == _headerTextLabel) return;
+                _headerTextLabel = value;
+                RaisePropertyChanged(() => HeaderTextLabel);
+            }
+        }
+
         // Closet Items
         private ObservableCollection<ClosetItemModel> _myClosetItemCollection;
         public ObservableCollection<ClosetItemModel> ClosetItemCollection
