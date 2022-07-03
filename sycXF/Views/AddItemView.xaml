@@ -13,11 +13,12 @@
            <StackLayout AbsoluteLayout.LayoutBounds="{OnIdiom Phone='0,0,1,1', Tablet='0.5,0.28,0.8,0.9'}"
                         AbsoluteLayout.LayoutFlags="All">
 
-                <CollectionView x:Name="CVApparelCategories"
+            <!-- CV Apparel Type-->
+            <CollectionView x:Name="CVApparelCategories"
                         ItemsSource="{Binding ApparelCategoryCollection}"
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
-                        SelectionChangedCommand="{Binding CategorySelectedCommand, Mode=TwoWay}"
+                        SelectionChangedCommand="{Binding ApparelTypeSelectedCommand, Mode=TwoWay}"
                         SelectionChangedCommandParameter="{Binding .}"
                         IsVisible="{Binding IsVisibleCVApparelTypes}">
 
@@ -34,7 +35,31 @@
                         <controls:CategoryCardControl />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-        </CollectionView>
+            </CollectionView>
+
+            <!-- CV Seasons-->
+            <CollectionView x:Name="CVSeasonCategories"
+                            ItemsSource="{Binding SeasonCategoryCollection}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedSeason, Mode=TwoWay}"
+                            SelectionChangedCommand="{Binding SeasonSelectedCommand, Mode=TwoWay}"
+                            SelectionChangedCommandParameter="{Binding .}"
+                            IsVisible="{Binding IsVisibleCVSeasons}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+
+                <CollectionView.Header>
+                    <controls:CategoryHeaderControl/>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CategoryCardControl />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
 
             </StackLayout>

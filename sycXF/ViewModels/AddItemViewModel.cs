@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using sycXF.Models.Closet;
 using sycXF.Services;
 using sycXF.Services.Closet;
@@ -12,7 +13,7 @@ using Xamarin.Forms;
 
 namespace sycXF.ViewModels
 {
-    public class AddItemViewModel :ViewModelBase
+    public class AddItemViewModel : ViewModelBase
     {
         #region Services
         private IClosetService _myClosetService;
@@ -22,21 +23,94 @@ namespace sycXF.ViewModels
         #endregion
 
         #region Properties
+        // selected items for saving to db
+        private string _selectedApparelType;
+        public string SelectedApparelType
+        {
+            get
+            {
+                return _selectedApparelType;
+            }
+            set
+            {
+                if (_selectedApparelType != value)
+                {
+                    _selectedApparelType = value;
+                }
+            }
+        }
+
+        private string _selectedSeason;
+        public string SelectedSeason
+        {
+            get
+            {
+                return _selectedSeason;
+            }
+            set
+            {
+                if (_selectedSeason != value)
+                {
+                    _selectedSeason = value;
+                }
+            }
+        }
+
+        private string _selectedSize;
+        public string SelectedSize
+        {
+            get
+            {
+                return _selectedSize;
+            }
+            set
+            {
+                if (_selectedSize != value)
+                {
+                    _selectedSize = value;
+                }
+            }
+        }
 
         //// ApparelCategory
-        //private bool _isVisibleCVApparelTypes;
-        //public bool IsVisibleCVApparelTypes
-        //{
-        //    get => _isVisibleCVApparelTypes;
-        //    set
-        //    {
-        //        if (_isVisibleCVApparelTypes != value)
-        //        {
-        //            _isVisibleCVApparelTypes = value;
-        //            RaisePropertyChanged(() => IsVisibleCVApparelTypes);
-        //        }
-        //    }
-        //}
+        private bool _isVisibleCVSeasons;
+        public bool IsVisibleCVSeasons
+        {
+            get => _isVisibleCVSeasons;
+            set
+            {
+                if (value == _isVisibleCVSeasons) return;
+                _isVisibleCVSeasons = value;
+                RaisePropertyChanged(() => IsVisibleCVSeasons);
+            }
+        }
+
+        private bool _isVisibleCVApparelTypes;
+        public bool IsVisibleCVApparelTypes
+        {
+            get => _isVisibleCVApparelTypes;
+            set
+            {
+                if (_isVisibleCVApparelTypes != value)
+                {
+                    _isVisibleCVApparelTypes = value;
+                    RaisePropertyChanged(() => IsVisibleCVApparelTypes);
+                }
+            }
+        }
+
+        private bool _isVisibleNameDesc;
+        public bool IsVisibleNameDesc
+        {
+            get => _isVisibleNameDesc;
+            set
+            {
+                if (value == _isVisibleNameDesc) return;
+                _isVisibleNameDesc = value;
+                _headerTextLabel = "Add Name and Description";
+                RaisePropertyChanged(() => IsVisibleNameDesc);
+            }
+        }
 
         private string _headerTextLabel;
         public string HeaderTextLabel
@@ -59,8 +133,21 @@ namespace sycXF.ViewModels
                 if (value == _apparelCategoryCollection) return;
                 _apparelCategoryCollection = value;
 
-                HeaderTextLabel = "Which apparel type are you adding?";
+                IsVisibleCVApparelTypes = true;
+                IsVisibleCVSeasons = false;
                 RaisePropertyChanged(() => ApparelCategoryCollection);
+            }
+        }
+
+        private ObservableCollection<ItemCategoryModel> _seasonCategoryCollection;
+        public ObservableCollection<ItemCategoryModel> SeasonCategoryCollection
+        {
+            get => _seasonCategoryCollection;
+            set
+            {
+                if (value == _seasonCategoryCollection) return;
+                _seasonCategoryCollection = value;
+                RaisePropertyChanged(() => SeasonCategoryCollection);
             }
         }
 
@@ -81,27 +168,41 @@ namespace sycXF.ViewModels
         }
 
 
-        //public ICommand CategorySelectedCommand
-        //{
-        //    get
-        //    {
-        //        return new Command(async () =>
-        //        {
-        //            if (SelectedCategory == null)
-        //                return;
+        public ICommand ApparelTypeSelectedCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedApparelType == null)
+                        return;
 
-        //            var dictionary = new Dictionary<string, string>();
-        //            dictionary.Add("QueryType", QueryType);
-        //            dictionary.Add("CategoryType", SelectedCategory.CategoryType);
-        //            dictionary.Add("CategoryName", SelectedCategory.CategoryName);
-        //            dictionary.Add("CategoryTitle", SelectedCategory.CategoryTitle);
+                    IsVisibleCVApparelTypes = false;
+                    IsVisibleCVSeasons = true;
 
-        //            await NavigationService.NavigateToAsync("ClosetItems", dictionary);
 
-        //            SelectedCategory = null;
-        //        });
-        //    }
-        //}
+                    SelectedApparelType = null;
+                });
+            }
+        }
+
+        public ICommand SeasonSelectedCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedSeason == null)
+                        return;
+
+                    IsVisibleCVApparelTypes = false;
+                    IsVisibleCVSeasons = true;
+
+
+                    SelectedSeason = null;
+                });
+            }
+        }
 
         #endregion
 
@@ -113,6 +214,8 @@ namespace sycXF.ViewModels
             _myClosetService = DependencyService.Get<IClosetService>();
             _userService = DependencyService.Get<IUserService>();
             _dialogService = DependencyService.Get<IDialogService>();
+            
+            //IsVisibleCVApparelTypes = false;
 
         }
 
@@ -122,7 +225,7 @@ namespace sycXF.ViewModels
             IsBusy = true;
 
             ApparelCategoryCollection = await _myClosetService.GetCategoriesAsync("Apparel");
-
+            SeasonCategoryCollection = await _myClosetService.GetCategoriesAsync("Season");
             IsBusy = false;
         }
 
