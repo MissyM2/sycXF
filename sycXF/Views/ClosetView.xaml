@@ -37,8 +37,14 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-     <StackLayout Margin="0" Padding="0">
+     <AbsoluteLayout Margin="0" Padding="0">
 
+        
+        <StackLayout AbsoluteLayout.LayoutBounds="{OnIdiom Phone='0,0,1,1', Tablet='0.5,0.28,0.8,0.9'}"
+                     AbsoluteLayout.LayoutFlags="All">
+
+
+        
         <CollectionView x:Name="CVMainFilterCategories"
                         ItemsSource="{Binding MainFilterCategoryCollection}"
                         SelectedItem="{Binding SelectedMainFilterCategory, Mode=TwoWay}"
@@ -245,7 +251,35 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
         </CollectionView>-->
-    
-    </StackLayout>
+        </StackLayout>
+            <Frame x:Name="outerFrame"
+                   AbsoluteLayout.LayoutBounds="{OnIdiom Phone='0.94,0.96,0.17,0.1', Tablet='0.5,0.28,0.8,0.9'}"
+                   AbsoluteLayout.LayoutFlags="All"
+                   Padding="0"
+                   CornerRadius="35"
+                   HasShadow="false"
+                   HorizontalOptions="FillAndExpand"
+                   OutlineColor="{StaticResource AccentColor}"
+                   BackgroundColor="{Binding Source={RelativeSource Self}, Path=OutlineColor}" 
+                   >
+                <Frame x:Name="innerFrame"
+                       Padding="10"
+                       Margin="1"
+                       CornerRadius="35"
+                       HorizontalOptions="FillAndExpand"
+                       HasShadow="false"
+                       OutlineColor="{Binding Source={x:Reference outerFrame}, Path=OutlineColor}" 
+                       BackgroundColor="{StaticResource WhiteColor}">
+
+
+            
+                    <Image Aspect="AspectFit"
+                           Source="{StaticResource AddIconLightImageSource}">
+      
+                    </Image>
+                </Frame>
+            </Frame>
+       
+    </AbsoluteLayout>
     
 </views:ContentPageBase>

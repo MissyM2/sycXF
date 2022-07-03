@@ -117,6 +117,7 @@
                 x:Key="SettingsIconImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"
                 Glyph="{StaticResource SettingsIcon}" />
+
             <FontImageSource
                 x:Key="SettingsIconLightImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"
@@ -164,7 +165,8 @@
                 x:Key="AddIconLightImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"
                 Glyph="{StaticResource AddIcon}"
-                Color="#83D01B" />
+                Color="{StaticResource AccentColor}"
+                Size="30"/>
             <FontImageSource
                 x:Key="CircleIconImageSource"
                 FontFamily="{StaticResource FontAwesomeSolid}"
