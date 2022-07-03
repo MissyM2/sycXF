@@ -39,7 +39,6 @@ namespace sycXF.ViewModels.Base
         }
 
         private bool _isBusy;
-
         public bool IsBusy
         {
             get => _isBusy;
@@ -48,6 +47,18 @@ namespace sycXF.ViewModels.Base
             {
                 _isBusy = value;
                 OnPropertyChanged(nameof(IsBusy));
+            }
+        }
+
+        private bool _isNotBusy;
+        public bool IsNotBusy
+        {
+            get => _isNotBusy;
+
+            set
+            {
+                _isNotBusy = value;
+                OnPropertyChanged(nameof(IsNotBusy));
             }
         }
 

@@ -24,55 +24,9 @@ namespace sycXF.ViewModels
 
         #region Properties
         // selected items for saving to db
-        private string _selectedApparelType;
-        public string SelectedApparelType
-        {
-            get
-            {
-                return _selectedApparelType;
-            }
-            set
-            {
-                if (_selectedApparelType != value)
-                {
-                    _selectedApparelType = value;
-                }
-            }
-        }
+        
 
-        private string _selectedSeason;
-        public string SelectedSeason
-        {
-            get
-            {
-                return _selectedSeason;
-            }
-            set
-            {
-                if (_selectedSeason != value)
-                {
-                    _selectedSeason = value;
-                }
-            }
-        }
-
-        private string _selectedSize;
-        public string SelectedSize
-        {
-            get
-            {
-                return _selectedSize;
-            }
-            set
-            {
-                if (_selectedSize != value)
-                {
-                    _selectedSize = value;
-                }
-            }
-        }
-
-        //// ApparelCategory
+        // IsVisible properties
         private bool _isVisibleCVSeasons;
         public bool IsVisibleCVSeasons
         {
@@ -95,6 +49,20 @@ namespace sycXF.ViewModels
                 {
                     _isVisibleCVApparelTypes = value;
                     RaisePropertyChanged(() => IsVisibleCVApparelTypes);
+                }
+            }
+        }
+
+        private bool _isVisibleCVSizes;
+        public bool IsVisibleCVSizes
+        {
+            get => _isVisibleCVSizes;
+            set
+            {
+                if (_isVisibleCVSizes != value)
+                {
+                    _isVisibleCVSizes = value;
+                    RaisePropertyChanged(() => IsVisibleCVSizes);
                 }
             }
         }
@@ -124,6 +92,7 @@ namespace sycXF.ViewModels
             }
         }
 
+        // Collections
         private ObservableCollection<ItemCategoryModel> _apparelCategoryCollection;
         public ObservableCollection<ItemCategoryModel> ApparelCategoryCollection
         {
@@ -135,6 +104,7 @@ namespace sycXF.ViewModels
 
                 IsVisibleCVApparelTypes = true;
                 IsVisibleCVSeasons = false;
+                IsVisibleCVSizes = false;
                 RaisePropertyChanged(() => ApparelCategoryCollection);
             }
         }
@@ -151,22 +121,37 @@ namespace sycXF.ViewModels
             }
         }
 
-        private ItemCategoryModel _selectedCategory;
-        public ItemCategoryModel SelectedCategory
+        private ObservableCollection<ItemCategoryModel> _sizeCategoryCollection;
+        public ObservableCollection<ItemCategoryModel> SizeCategoryCollection
         {
-            get
-            {
-                return _selectedCategory;
-            }
+            get => _sizeCategoryCollection;
             set
             {
-                if (_selectedCategory != value)
-                {
-                    _selectedCategory = value;
-                }
+                if (value == _sizeCategoryCollection) return;
+                _sizeCategoryCollection = value;
+
+                RaisePropertyChanged(() => SizeCategoryCollection);
             }
         }
 
+
+        // selections and associated commands
+        private ItemCategoryModel _selectedApparelType;
+        public ItemCategoryModel SelectedApparelType
+        {
+            get
+            {
+                return _selectedApparelType;
+            }
+            set
+            {
+                if (_selectedApparelType != value)
+                {
+                    _selectedApparelType = value;
+
+                }
+            }
+        }
 
         public ICommand ApparelTypeSelectedCommand
         {
@@ -176,13 +161,30 @@ namespace sycXF.ViewModels
                 {
                     if (SelectedApparelType == null)
                         return;
-
                     IsVisibleCVApparelTypes = false;
                     IsVisibleCVSeasons = true;
-
+                    IsVisibleCVSizes = false;
+                    IsVisibleNameDesc = false;
 
                     SelectedApparelType = null;
                 });
+            }
+        }
+
+        private ItemCategoryModel _selectedSeason;
+        public ItemCategoryModel SelectedSeason
+        {
+            get
+            {
+                return _selectedSeason;
+            }
+            set
+            {
+                if (_selectedSeason != value)
+                {
+                    _selectedSeason = value;
+
+                }
             }
         }
 
@@ -194,15 +196,66 @@ namespace sycXF.ViewModels
                 {
                     if (SelectedSeason == null)
                         return;
-
                     IsVisibleCVApparelTypes = false;
-                    IsVisibleCVSeasons = true;
-
+                    IsVisibleCVSeasons = false;
+                    IsVisibleCVSizes = true;
+                    IsVisibleNameDesc = false;
 
                     SelectedSeason = null;
                 });
             }
         }
+
+
+        private ItemCategoryModel _selectedSize;
+        public ItemCategoryModel SelectedSize
+        {
+            get
+            {
+                return _selectedSize;
+            }
+            set
+            {
+                if (_selectedSize != value)
+                {
+                    _selectedSize = value;
+
+                }
+            }
+        }
+
+        public ICommand SizeSelectedCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (SelectedSize == null)
+                        return;
+                    IsVisibleCVApparelTypes = false;
+                    IsVisibleCVSeasons = false;
+                    IsVisibleCVSizes = false;
+                    IsVisibleNameDesc = true;
+
+
+                    SelectedSize = null;
+                });
+            }
+        }
+
+        public ICommand NavToAddPictureCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await NavigationService.NavigateToAsync("AddPhotoRoute");
+                });
+            }
+        }
+
+
+
 
         #endregion
 
@@ -226,6 +279,8 @@ namespace sycXF.ViewModels
 
             ApparelCategoryCollection = await _myClosetService.GetCategoriesAsync("Apparel");
             SeasonCategoryCollection = await _myClosetService.GetCategoriesAsync("Season");
+            SizeCategoryCollection = await _myClosetService.GetCategoriesAsync("Size");
+
             IsBusy = false;
         }
 

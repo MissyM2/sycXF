@@ -19,6 +19,7 @@
     <PackageReference Include="PCLCrypto" Version="2.0.147" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
+    <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.CommunityToolkit" />
@@ -56,6 +57,7 @@
     <None Remove="Xamarin.Forms.PancakeView" />
     <None Remove="ReleaseNotes\" />
     <None Remove="Resources\noun-skirt-1202595.png" />
+    <None Remove="Xam.Plugin.Media" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\Font_Awesome_5_Free-Regular-400.otf" />
@@ -97,6 +99,12 @@
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controls\AddClosetItemButton.xaml.cs">
       <DependentUpon>AddClosetItemButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\CategoryHeaderControl.xaml.cs">
+      <DependentUpon>CategoryHeaderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddPhotoView.xaml.cs">
+      <DependentUpon>AddPhotoView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

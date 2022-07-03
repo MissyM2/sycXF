@@ -54,6 +54,7 @@ namespace sycXF.ViewModels.Base
             Xamarin.Forms.DependencyService.Register<MainViewModel>();
             Xamarin.Forms.DependencyService.Register<SettingsViewModel>();
             Xamarin.Forms.DependencyService.Register<AddItemViewModel>();
+            Xamarin.Forms.DependencyService.Register<AddPhotoViewModel>();
         }
 
         public static void UpdateDependencies(bool useMockServices)

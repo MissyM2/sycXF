@@ -17,7 +17,7 @@
             <CollectionView x:Name="CVApparelCategories"
                         ItemsSource="{Binding ApparelCategoryCollection}"
                         SelectionMode="Single"
-                        SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedApparelType, Mode=TwoWay}"
                         SelectionChangedCommand="{Binding ApparelTypeSelectedCommand, Mode=TwoWay}"
                         SelectionChangedCommandParameter="{Binding .}"
                         IsVisible="{Binding IsVisibleCVApparelTypes}">
@@ -60,6 +60,51 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <!-- CV Size-->
+            <CollectionView x:Name="CVSizeCategories"
+                            ItemsSource="{Binding SizeCategoryCollection}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedSize, Mode=TwoWay}"
+                            SelectionChangedCommand="{Binding SizeSelectedCommand, Mode=TwoWay}"
+                            SelectionChangedCommandParameter="{Binding .}"
+                            IsVisible="{Binding IsVisibleCVSizes}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+
+                <CollectionView.Header>
+                    <controls:CategoryHeaderControl/>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CategoryCardControl />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Add Name -->
+            <StackLayout IsVisible="{Binding IsVisibleNameDesc}">
+                <Label Text="Add a name for your item."/>
+                <Entry Placeholder="My First item..."
+                       PlaceholderColor="LightPink"
+                       MaxLength="12"
+                       ClearButtonVisibility="WhileEditing"
+                       Keyboard="Text"
+                       ReturnType="Go"/>
+
+                 <Entry Placeholder="Description..."
+                       PlaceholderColor="LightPink"
+                       MaxLength="12"
+                       ClearButtonVisibility="WhileEditing"
+                       Keyboard="Text"
+                       ReturnType="Go"/>
+
+                <Button Text="Finished.  Add Picture"
+                        Command="{Binding NavToAddPictureCommand}"/>
+            </StackLayout>
 
 
             </StackLayout>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:ContentPageBase
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModelBase="clr-namespace:sycXF.ViewModels.Base;assembly=sycXF"
+    xmlns:views="clr-namespace:sycXF.Views;assembly=sycXF"
+    x:Class="sycXF.Views.AddPhotoView">
+
+    <views:ContentPageBase.Content>
+
+        <AbsoluteLayout Margin="0" Padding="0">
+
+            <Frame AbsoluteLayout.LayoutBounds="0.5,0.5,0.9,0.8"
+                   AbsoluteLayout.LayoutFlags="All">
+                <StackLayout>
+                
+                         <Button x:Name="takePhoto" Text="Take Photo" Command="{Binding TakePhotoCommand}"/>
+                          <!-- <Button x:Name="pickPhoto" Text="Pick Photo" Command="{Binding PickPhotoCommand}"/>  -->
+                         <!-- <Button x:Name="takeVideo" Text="Take Video" Command="{Binding TakeVideoCommand}"/> -->
+                          <!--<Button x:Name="pickVideo" Text="Pick Video" Command="{Binding PickVideoCommand}"/> -->
+
+                          <!--<Image x:Name="image"
+                                 Source="{Binding PhotoPath}"
+                                 HeightRequest="100"
+                                 />--> 
+
+
+                        <!--<Image Source="{Binding SelectedItemInfo.ImageUrl}"
+                               WidthRequest="100"
+                               HeightRequest="100" />-->
+
+                
+                </StackLayout>   
+            </Frame>
+
+        </AbsoluteLayout>
+
+    </views:ContentPageBase.Content>
+</views:ContentPageBase>
+

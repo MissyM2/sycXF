@@ -138,7 +138,7 @@ namespace sycXF.Services.Closet
                 Id = 12,
                 CategoryType="Size",
                 CategoryName = "XSmall",
-                CategoryTitle ="",
+                CategoryTitle ="XSmall",
                 IconGlyph = "noun-scarf-3790978.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-scarf-3790978.png"
@@ -148,7 +148,7 @@ namespace sycXF.Services.Closet
                Id = 13,
                 CategoryType="Size",
                 CategoryName = "Small",
-                CategoryTitle ="",
+                CategoryTitle ="Small",
                 IconGlyph = "noun-scarf-3790978.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-scarf-3790978.png"
@@ -158,7 +158,7 @@ namespace sycXF.Services.Closet
                 Id = 14,
                 CategoryType="Size",
                 CategoryName = "Medium",
-                CategoryTitle ="",
+                CategoryTitle ="Medium",
                 IconGlyph = "noun-scarf-3790978.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-scarf-3790978.png"
@@ -168,7 +168,7 @@ namespace sycXF.Services.Closet
                 Id = 15,
                 CategoryType="Size",
                 CategoryName = "Large",
-                CategoryTitle ="",
+                CategoryTitle ="Large",
                 IconGlyph = "noun-scarf-3790978.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-scarf-3790978.png"
@@ -176,9 +176,9 @@ namespace sycXF.Services.Closet
             new ItemCategoryModel
             {
                 Id = 16,
-                 CategoryType="Size",
+                CategoryType="Size",
                 CategoryName = "XLarge",
-                CategoryTitle ="",
+                CategoryTitle ="XLarge",
                 IconGlyph = "noun-scarf-3790978.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-scarf-3790978.png"
@@ -186,9 +186,9 @@ namespace sycXF.Services.Closet
             new ItemCategoryModel
             {
                 Id = 17,
-                 CategoryType="Size",
+                CategoryType="Size",
                 CategoryName = "XSmall",
-                CategoryTitle ="",
+                CategoryTitle ="XSmall",
                 IconGlyph = "noun-scarf-3790978.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-scarf-3790978.png"

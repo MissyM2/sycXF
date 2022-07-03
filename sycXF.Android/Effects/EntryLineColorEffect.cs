@@ -19,7 +19,7 @@ namespace sycXF.Android.Effects
             try
             {
                 control = Control as EditText;
-                UpdateLineColor();
+                //UpdateLineColor();
             }
             catch (Exception ex)
             {
@@ -32,27 +32,27 @@ namespace sycXF.Android.Effects
             control = null;
         }
 
-        protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
-        {
-            if (args.PropertyName == LineColorBehavior.LineColorProperty.PropertyName)
-            {
-                UpdateLineColor();
-            }
-        }
+        //protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
+        //{
+        //    if (args.PropertyName == LineColorBehavior.LineColorProperty.PropertyName)
+        //    {
+        //        UpdateLineColor();
+        //    }
+        //}
 
-        private void UpdateLineColor()
-        {
-            try
-            {
-                if (control != null)
-                {
-                    control.Background.SetColorFilter(LineColorBehavior.GetLineColor(Element).ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcAtop);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
+        //private void UpdateLineColor()
+        //{
+        //    try
+        //    {
+        //        if (control != null)
+        //        {
+        //            control.Background.SetColorFilter(LineColorBehavior.GetLineColor(Element).ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcAtop);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //}
     }
 }

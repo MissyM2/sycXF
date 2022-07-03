@@ -1,10 +1,12 @@
+using System;
+
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using System;
+using Android.OS;
+using Plugin.CurrentActivity;
 using Xamarin.Forms.Platform.Android;
 
 namespace sycXF.Droid.Activities
@@ -22,8 +24,11 @@ namespace sycXF.Droid.Activities
             
 
             base.OnCreate(bundle);
+            CrossCurrentActivity.Current.Init(this, bundle);
 
             Xamarin.Essentials.Platform.Init (this, bundle);
+
+            
 
             SupportActionBar.SetDisplayShowHomeEnabled(true); // Show or hide the default home button
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
@@ -31,6 +36,7 @@ namespace sycXF.Droid.Activities
             SupportActionBar.SetDisplayShowTitleEnabled(false);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
 
             LoadApplication(new App());
 
@@ -50,9 +56,11 @@ namespace sycXF.Droid.Activities
             base.OnTrimMemory(level);
         }
 
-        public override void OnRequestPermissionsResult (int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult (int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult (requestCode, permissions, grantResults);
+
+            //Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult (requestCode, permissions, grantResults);
         }

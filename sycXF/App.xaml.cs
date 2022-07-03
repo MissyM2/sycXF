@@ -30,6 +30,7 @@ namespace sycXF
             _settingsService = ViewModelLocator.Resolve<ISettingsService>();
             if (!_settingsService.UseMocks)
                 ViewModelLocator.UpdateDependencies(_settingsService.UseMocks);
+            Plugin.Media.CrossMedia.Current.Initialize();
         }
 
         private Task InitNavigation()
