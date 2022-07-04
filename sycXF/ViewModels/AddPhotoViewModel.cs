@@ -89,15 +89,26 @@ namespace sycXF.ViewModels
             _userService = DependencyService.Get<IUserService>();
             _dialogService = DependencyService.Get<IDialogService>();
 
+            
+
+        }
+
+        public override async Task InitializeAsync(IDictionary<string, string> query)
+        {
+            IsBusy = true;
+            foreach (KeyValuePair<string, string> kvp in query)
+            {
+                Console.WriteLine("Key={0}, Value = {1}", kvp.Key, kvp.Value);
+            }
         }
 
 
 
 
 
-        //  ***  Photos Methods ***
+            //  ***  Photos Methods ***
 
-        private byte[] ConvertStreamtoByte(Stream stream)
+            private byte[] ConvertStreamtoByte(Stream stream)
         {
             byte[] ImageBytes;
             using (var memoryStream = new System.IO.MemoryStream())

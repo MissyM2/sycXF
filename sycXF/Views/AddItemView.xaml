@@ -6,6 +6,7 @@
     xmlns:viewModelBase="clr-namespace:sycXF.ViewModels.Base;assembly=sycXF"
     xmlns:views="clr-namespace:sycXF.Views;assembly=sycXF"
     xmlns:controls="clr-namespace:sycXF.Controls"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="AddItem"
     x:Name="AddItemName"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -88,19 +89,38 @@
             <!-- Add Name -->
             <StackLayout IsVisible="{Binding IsVisibleNameDesc}">
                 <Label Text="Add a name for your item."/>
-                <Entry Placeholder="My First item..."
+                
+                <Entry Text="{Binding ItemName, Mode=TwoWay}"
+                       Placeholder="My First item..."
                        PlaceholderColor="LightPink"
                        MaxLength="12"
                        ClearButtonVisibility="WhileEditing"
                        Keyboard="Text"
-                       ReturnType="Go"/>
+                       ReturnType="Go">
+					<Entry.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS, Android" Value="{StaticResource EntryStyle}" />
+                            <On Platform="UWP, WinRT, WinPhone" Value="{StaticResource UwpEntryStyle}" />
+                        </OnPlatform>
+                    </Entry.Style>
+                    
+                </Entry>
 
-                 <Entry Placeholder="Description..."
+                <Entry Text="{Binding ItemDesc, Mode=TwoWay}"
+                       Placeholder="Description..."
                        PlaceholderColor="LightPink"
                        MaxLength="12"
                        ClearButtonVisibility="WhileEditing"
                        Keyboard="Text"
-                       ReturnType="Go"/>
+                       ReturnType="Go">
+					<Entry.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS, Android" Value="{StaticResource EntryStyle}" />
+                            <On Platform="UWP, WinRT, WinPhone" Value="{StaticResource UwpEntryStyle}" />
+                        </OnPlatform>
+                    </Entry.Style>
+                    
+                </Entry>
 
                 <Button Text="Finished.  Add Picture"
                         Command="{Binding NavToAddPictureCommand}"/>

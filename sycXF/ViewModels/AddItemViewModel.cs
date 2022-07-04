@@ -8,6 +8,7 @@ using sycXF.Services;
 using sycXF.Services.Closet;
 using sycXF.Services.Settings;
 using sycXF.Services.User;
+using sycXF.Validations;
 using sycXF.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -15,16 +16,61 @@ namespace sycXF.ViewModels
 {
     public class AddItemViewModel : ViewModelBase
     {
+        
         #region Services
         private IClosetService _myClosetService;
         private IUserService _userService;
         private IDialogService _dialogService;
+        private ISettingsService _settingsService;
 
         #endregion
 
         #region Properties
-        // selected items for saving to db
-        
+
+        private bool _isMock;
+        public bool IsMock
+        {
+            get => _isMock;
+            set
+            {
+                _isMock = value;
+                RaisePropertyChanged(() => IsMock);
+            }
+        }
+
+        private bool _isValid;
+        public bool IsValid
+        {
+            get => _isValid;
+            set
+            {
+                _isValid = value;
+                RaisePropertyChanged(() => IsValid);
+            }
+        }
+
+        private string _itemName;
+        public string ItemName
+        {
+            get => _itemName;
+            set
+            {
+                _itemName = value;
+                RaisePropertyChanged(() => ItemName);
+            }
+        }
+
+        private string _itemDesc;
+        public string ItemDesc
+        {
+            get => _itemDesc;
+            set
+            {
+                _itemDesc = value;
+                RaisePropertyChanged(() => ItemDesc);
+            }
+        }
+
 
         // IsVisible properties
         private bool _isVisibleCVSeasons;
@@ -148,7 +194,7 @@ namespace sycXF.ViewModels
                 if (_selectedApparelType != value)
                 {
                     _selectedApparelType = value;
-
+                    
                 }
             }
         }
@@ -165,8 +211,6 @@ namespace sycXF.ViewModels
                     IsVisibleCVSeasons = true;
                     IsVisibleCVSizes = false;
                     IsVisibleNameDesc = false;
-
-                    SelectedApparelType = null;
                 });
             }
         }
@@ -183,7 +227,8 @@ namespace sycXF.ViewModels
                 if (_selectedSeason != value)
                 {
                     _selectedSeason = value;
-
+                    
+                    
                 }
             }
         }
@@ -200,8 +245,6 @@ namespace sycXF.ViewModels
                     IsVisibleCVSeasons = false;
                     IsVisibleCVSizes = true;
                     IsVisibleNameDesc = false;
-
-                    SelectedSeason = null;
                 });
             }
         }
@@ -219,6 +262,7 @@ namespace sycXF.ViewModels
                 if (_selectedSize != value)
                 {
                     _selectedSize = value;
+                    
 
                 }
             }
@@ -237,8 +281,7 @@ namespace sycXF.ViewModels
                     IsVisibleCVSizes = false;
                     IsVisibleNameDesc = true;
 
-
-                    SelectedSize = null;
+                    //SelectedSize = null;
                 });
             }
         }
@@ -249,7 +292,18 @@ namespace sycXF.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await NavigationService.NavigateToAsync("AddPhotoRoute");
+                    var dictionary = new Dictionary<string, string>();
+                    dictionary.Add("ApparelType", SelectedApparelType.CategoryName);
+                    dictionary.Add("Season", SelectedSeason.CategoryName);
+                    dictionary.Add("Size", SelectedSize.CategoryName);
+                    dictionary.Add("Name", ItemName);
+                    dictionary.Add("Description", ItemDesc);
+
+                    foreach (KeyValuePair<string, string> kvp in dictionary)
+                    {
+                        Console.WriteLine("Key={0}, Value = {1}", kvp.Key, kvp.Value);
+                    }
+                    await NavigationService.NavigateToAsync("AddPhotoRoute", dictionary);
                 });
             }
         }
@@ -264,12 +318,13 @@ namespace sycXF.ViewModels
         {
             this.MultipleInitialization = true;
 
+            _settingsService = DependencyService.Get<ISettingsService>();
             _myClosetService = DependencyService.Get<IClosetService>();
             _userService = DependencyService.Get<IUserService>();
             _dialogService = DependencyService.Get<IDialogService>();
-            
-            //IsVisibleCVApparelTypes = false;
 
+            //InvalidateMock();
+            //AddValidations();
         }
 
 
@@ -283,6 +338,38 @@ namespace sycXF.ViewModels
 
             IsBusy = false;
         }
+
+        //private bool Validate()
+        //{
+        //    //bool isValidItemName = ValidateItemName();
+        //    //bool isValidItemDesc= ValidateItemDesc();
+        //    bool isValidItemName = true;
+        //    bool isValidItemDesc= true;
+
+
+        //    return isValidItemName && isValidItemDesc;
+        //}
+
+        //private bool ValidateItemName()
+        //{
+        //    return _itemName.Validate();
+        //}
+
+        //private bool ValidateItemDesc()
+        //{
+        //    return _itemDesc.Validate();
+        //}
+
+        //private void AddValidations()
+        //{
+        //    _itemName.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "An item name is required." });
+        //    _itemDesc.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A description is required." });
+        //}
+
+        //public void InvalidateMock()
+        //{
+        //    IsMock = _settingsService.UseMocks;
+        //}
 
     }
 }
