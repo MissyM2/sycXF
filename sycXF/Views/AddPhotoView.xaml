@@ -4,7 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModelBase="clr-namespace:sycXF.ViewModels.Base;assembly=sycXF"
     xmlns:views="clr-namespace:sycXF.Views;assembly=sycXF"
-    x:Class="sycXF.Views.AddPhotoView">
+    x:Class="sycXF.Views.AddPhotoView"
+    Title="AddPhoto"
+    x:Name="AddPhotoName"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true">
 
     <views:ContentPageBase.Content>
 
@@ -15,14 +18,14 @@
                 <StackLayout>
                 
                          <Button x:Name="takePhoto" Text="Take Photo" Command="{Binding TakePhotoCommand}"/>
-                          <!-- <Button x:Name="pickPhoto" Text="Pick Photo" Command="{Binding PickPhotoCommand}"/>  -->
+                          <Button x:Name="pickPhoto" Text="Pick Photo" Command="{Binding PickPhotoCommand}"/> 
                          <!-- <Button x:Name="takeVideo" Text="Take Video" Command="{Binding TakeVideoCommand}"/> -->
                           <!--<Button x:Name="pickVideo" Text="Pick Video" Command="{Binding PickVideoCommand}"/> -->
 
-                          <!--<Image x:Name="image"
+                          <Image x:Name="image"
                                  Source="{Binding PhotoPath}"
                                  HeightRequest="100"
-                                 />--> 
+                                 />
 
 
                         <!--<Image Source="{Binding SelectedItemInfo.ImageUrl}"

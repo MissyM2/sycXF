@@ -79,12 +79,36 @@ namespace sycXF.ViewModels
 
         #region Commands
 
+        public ICommand TakePhotoCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await _dialogService.ShowAlertAsync("asdf", "TPhotoCommand", "OK");
+                    await TakePhoto();
+                });
+            }
+        }
+
+        public ICommand PickPhotoCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await PickPhoto();
+                });
+            }
+        }
         //public ICommand TakePhotoCommand { get => new Command(async () => await TakePhoto(), () => IsNotBusy); }
-        public ICommand PickPhotoCommand { get => new Command(async () => await PickPhoto(), () => IsNotBusy); }
+        //public ICommand TakePhotoCommand { get => new Command(async () => await TakePhoto() }
+        //public ICommand PickPhotoCommand { get => new Command(async () => await PickPhoto(), () => IsNotBusy); }
         #endregion
 
         public AddPhotoViewModel()
         {
+            this.MultipleInitialization = true;
 
             _userService = DependencyService.Get<IUserService>();
             _dialogService = DependencyService.Get<IDialogService>();
@@ -93,14 +117,16 @@ namespace sycXF.ViewModels
 
         }
 
-        public override async Task InitializeAsync(IDictionary<string, string> query)
-        {
-            IsBusy = true;
-            foreach (KeyValuePair<string, string> kvp in query)
-            {
-                Console.WriteLine("Key={0}, Value = {1}", kvp.Key, kvp.Value);
-            }
-        }
+        //public override async Task InitializeAsync(IDictionary<string, string> query)
+        //{
+        //    IsBusy = true;
+        //    foreach (KeyValuePair<string, string> kvp in query)
+        //    {
+        //        Console.WriteLine("fgsdfgsdfgKey={0}, Value = {1}", kvp.Key, kvp.Value);
+        //    }
+
+        //    IsBusy = false;
+        //}
 
 
 
