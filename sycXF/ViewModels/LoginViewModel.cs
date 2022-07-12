@@ -1,7 +1,5 @@
 ﻿using sycXF.Extensions;
 using sycXF.Models.User;
-using sycXF.Services.Identity;
-using sycXF.Services.OpenUrl;
 using sycXF.Services.Settings;
 using sycXF.Validations;
 using sycXF.ViewModels.Base;
@@ -25,14 +23,10 @@ namespace sycXF.ViewModels
         private string _authUrl;
 
         private ISettingsService _settingsService;
-        private IOpenUrlService _openUrlService;
-        private IIdentityService _identityService;
 
         public LoginViewModel()
         {
             _settingsService = DependencyService.Get<ISettingsService> ();
-            _openUrlService = DependencyService.Get<IOpenUrlService> ();
-            _identityService = DependencyService.Get<IIdentityService> ();
 
             _userName = new ValidatableObject<string>();
             _password = new ValidatableObject<string>();
@@ -109,7 +103,7 @@ namespace sycXF.ViewModels
 
         public ICommand NavigateCommand => new Command<string>(async (url) => await NavigateAsync(url));
 
-        public ICommand SettingsCommand => new Command(async () => await SettingsAsync());
+       // public ICommand SettingsCommand => new Command(async () => await SettingsAsync());
 
         public ICommand ValidateUserNameCommand => new Command(() => ValidateUserName());
 
@@ -168,7 +162,7 @@ namespace sycXF.ViewModels
 
             await Task.Delay(10);
 
-            LoginUrl = _identityService.CreateAuthorizationRequest();
+            //LoginUrl = _identityService.CreateAuthorizationRequest();
 
             IsValid = true;
             IsLogin = true;
@@ -177,66 +171,69 @@ namespace sycXF.ViewModels
 
         private Task RegisterAsync()
         {
-            return _openUrlService.OpenUrl(GlobalSetting.Instance.RegisterWebsite);
+            //return _openUrlService.OpenUrl(GlobalSetting.Instance.RegisterWebsite);
+            throw new NotImplementedException();
         }
 
         private void Logout()
         {
-            var authIdToken = _settingsService.AuthIdToken;
-            var logoutRequest = _identityService.CreateLogoutRequest(authIdToken);
+            //var authIdToken = _settingsService.AuthIdToken;
+            //var logoutRequest = _identityService.CreateLogoutRequest(authIdToken);
 
-            if (!string.IsNullOrEmpty(logoutRequest))
-            {
+            //if (!string.IsNullOrEmpty(logoutRequest))
+            //{
                 // Logout
-                LoginUrl = logoutRequest;
-            }
+                //LoginUrl = logoutRequest;
+            //}
 
-            if (_settingsService.UseMocks)
-            {
-                _settingsService.AuthAccessToken = string.Empty;
-                _settingsService.AuthIdToken = string.Empty;
-            }
+            //if (_settingsService.UseMocks)
+            //{
+                //_settingsService.AuthAccessToken = string.Empty;
+                //_settingsService.AuthIdToken = string.Empty;
+            //}
 
         }
 
         private async Task NavigateAsync(string url)
         {
-            var unescapedUrl = System.Net.WebUtility.UrlDecode(url);
+            throw new NotImplementedException();
 
-            if (unescapedUrl.Equals(GlobalSetting.Instance.LogoutCallback))
-            {
-                _settingsService.AuthAccessToken = string.Empty;
-                _settingsService.AuthIdToken = string.Empty;
-                IsLogin = false;
-                LoginUrl = _identityService.CreateAuthorizationRequest();
-            }
-            else if (unescapedUrl.Contains(GlobalSetting.Instance.Callback))
-            {
-                var authResponse = new AuthorizeResponse(url);
-                if (!string.IsNullOrWhiteSpace(authResponse.Code))
-                {
-                    var userToken = await _identityService.GetTokenAsync(authResponse.Code);
-                    string accessToken = userToken.AccessToken;
+            //var unescapedUrl = System.Net.WebUtility.UrlDecode(url);
 
-                    if (!string.IsNullOrWhiteSpace(accessToken))
-                    {
-                        _settingsService.AuthAccessToken = accessToken;
-                        _settingsService.AuthIdToken = authResponse.IdentityToken;
-                        await NavigationService.NavigateToAsync ("//Main/Closet");
-                    }
-                }
-            }
+            //if (unescapedUrl.Equals(GlobalSetting.Instance.LogoutCallback))
+            //{
+            //_settingsService.AuthAccessToken = string.Empty;
+            //_settingsService.AuthIdToken = string.Empty;
+            //IsLogin = false;
+            //LoginUrl = _identityService.CreateAuthorizationRequest();
+            //}
+            //else if (unescapedUrl.Contains(GlobalSetting.Instance.Callback))
+            //{
+            // var authResponse = new AuthorizeResponse(url);
+            //if (!string.IsNullOrWhiteSpace(authResponse.Code))
+            //{
+            //var userToken = await _identityService.GetTokenAsync(authResponse.Code);
+            //string accessToken = userToken.AccessToken;
+
+            //if (!string.IsNullOrWhiteSpace(accessToken))
+            //{
+            //_settingsService.AuthAccessToken = accessToken;
+            //_settingsService.AuthIdToken = authResponse.IdentityToken;
+            // await NavigationService.NavigateToAsync ("//Main/Closet");
+            //}
+            //}
+            //}
         }
 
-        private Task SettingsAsync()
-        {
-            return NavigationService.NavigateToAsync(
-                "Settings",
-                new Dictionary<string, string>
-                {
-                    { "reset", "true" },
-                });
-        }
+        //private Task SettingsAsync()
+        //{
+        //    return NavigationService.NavigateToAsync(
+        //        "Settings",
+        //        new Dictionary<string, string>
+        //        {
+        //            { "reset", "true" },
+        //        });
+        //}
 
         private bool Validate()
         {

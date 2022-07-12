@@ -16,15 +16,11 @@ namespace sycXF
 
             var settingsService = ViewModelLocator.Resolve<ISettingsService> ();
 
-            if (string.IsNullOrEmpty (settingsService.AuthAccessToken))
-            {
-                this.GoToAsync ("//Login");
-            }
+            this.GoToAsync ("//Login");
         }
 
         private void InitializeRouting()
         {
-            Routing.RegisterRoute ("Settings", typeof (SettingsView));
             Routing.RegisterRoute("ClosetRoute", typeof(ClosetView));
             Routing.RegisterRoute("ClosetItems", typeof(ClosetItemsView));
             Routing.RegisterRoute("AddItemRoute", typeof(AddItemView));

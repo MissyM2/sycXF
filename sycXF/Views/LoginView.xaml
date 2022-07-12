@@ -157,7 +157,7 @@
                         Text="REGISTER"
                         TextColor="Gray"/>
                 </Grid>
-                <StackLayout  
+                <!--<StackLayout  
                   Grid.Column="2"
                   Orientation="Horizontal"
                   HorizontalOptions="Center">
@@ -168,7 +168,7 @@
                             Command="{Binding SettingsCommand}"
                             NumberOfTapsRequired="1" />
                     </StackLayout.GestureRecognizers>
-                </StackLayout>
+                </StackLayout>-->
             </Grid>
             <!-- INFO -->
             <Label
@@ -322,12 +322,7 @@
                 Grid.Column="2"
                 Grid.Row="1"
                 Style="{StaticResource SettingsPanelStyle}">
-                <Image Style="{StaticResource SettingsImageStyle}" Source="{StaticResource SettingsIconLightImageSource}" />
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer
-                        Command="{Binding SettingsCommand}"
-                        NumberOfTapsRequired="1" />
-                </Grid.GestureRecognizers>
+                <Label Text="Settigs go here"/>
             </Grid>
             <!-- WEBVIEW -->
             <WebView     

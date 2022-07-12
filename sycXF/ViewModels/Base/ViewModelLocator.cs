@@ -1,9 +1,5 @@
 ﻿using sycXF.Services.Closet;
 using sycXF.Services.Dependency;
-using sycXF.Services.FixUri;
-using sycXF.Services.Identity;
-using sycXF.Services.OpenUrl;
-using sycXF.Services.RequestProvider;
 using sycXF.Services.Settings;
 using sycXF.Services.User;
 using sycXF.Services;
@@ -35,15 +31,10 @@ namespace sycXF.ViewModels.Base
         {
             // Services - by default, TinyIoC will register interface registrations as singletons.
             var settingsService = new SettingsService();
-            var requestProvider = new RequestProvider();
             Xamarin.Forms.DependencyService.RegisterSingleton<ISettingsService>(settingsService);
             Xamarin.Forms.DependencyService.RegisterSingleton<INavigationService>(new NavigationService(settingsService));
             Xamarin.Forms.DependencyService.RegisterSingleton<IDialogService>(new DialogService());
-            Xamarin.Forms.DependencyService.RegisterSingleton<IOpenUrlService>(new OpenUrlService());
-            Xamarin.Forms.DependencyService.RegisterSingleton<IRequestProvider>(requestProvider);
-            Xamarin.Forms.DependencyService.RegisterSingleton<IIdentityService>(new IdentityService(requestProvider));
             Xamarin.Forms.DependencyService.RegisterSingleton<IDependencyService>(new Services.Dependency.DependencyService());
-            Xamarin.Forms.DependencyService.RegisterSingleton<IFixUriService>(new FixUriService(settingsService));
             Xamarin.Forms.DependencyService.RegisterSingleton<IClosetService>(new ClosetMockService());
             Xamarin.Forms.DependencyService.RegisterSingleton<IUserService>(new UserMockService());
 
@@ -69,11 +60,10 @@ namespace sycXF.ViewModels.Base
             }
             else
             {
-                var requestProvider = Xamarin.Forms.DependencyService.Get<IRequestProvider>();
-                var fixUriService = Xamarin.Forms.DependencyService.Get<IFixUriService>();
-                //Xamarin.Forms.DependencyService.RegisterSingleton<IClosetService>(new ClosetService(requestProvider, fixUriService));
                 Xamarin.Forms.DependencyService.RegisterSingleton<IClosetService>(new ClosetService());
-                Xamarin.Forms.DependencyService.RegisterSingleton<IUserService>(new UserService(requestProvider));
+
+                // use the user mock service until i figure out how to use something else
+                Xamarin.Forms.DependencyService.RegisterSingleton<IUserService>(new UserMockService());
 
                 UseMockService = false;
             }

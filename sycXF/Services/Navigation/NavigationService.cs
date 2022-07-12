@@ -24,9 +24,9 @@ namespace sycXF.Services
 
         public Task InitializeAsync()
         {
-            if (string.IsNullOrEmpty(_settingsService.AuthAccessToken))
-                return NavigateToAsync("//Login");
-            else
+            //if (string.IsNullOrEmpty(_settingsService.AuthAccessToken))
+            //    return NavigateToAsync("//Login");
+            //else
                 return NavigateToAsync("//Main/Closet");
         }
 
