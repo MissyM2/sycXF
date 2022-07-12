@@ -17,7 +17,7 @@ namespace sycXF.Services.Settings
         private const string IdGatewayShoppingBase = "url_shopping";
         private readonly string AccessTokenDefault = string.Empty;
         private readonly string IdTokenDefault = string.Empty;
-        private readonly bool UseMocksDefault = true;
+        private readonly bool UseMocksDefault = false;
         private readonly string UrlIdentityDefault = GlobalSetting.Instance.BaseIdentityEndpoint;
         private readonly string UrlGatewayMarketingDefault = GlobalSetting.Instance.BaseGatewayMarketingEndpoint;
         private readonly string UrlGatewayShoppingDefault = GlobalSetting.Instance.BaseGatewayShoppingEndpoint;

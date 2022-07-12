@@ -15,6 +15,93 @@ namespace sycXF.Services.Closet
         private Random RandomGenerator = new Random();
         private int newItemId = 0;
 
+        // closet item services
+        public Task AddClosetItem(string name, string description, string pictureUri, string size, string season, string apparelType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveClosetItem(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ObservableCollection<ClosetItemModel>> GetClosetAsync()
+        {
+            await Task.Delay(10);
+
+            return MockClosetSource;
+        }
+
+        public async Task<ObservableCollection<ClosetItemModel>> GetClosetItemsAsync(string queryType, string categoryName)
+        {
+            await Task.Delay(10);
+            var catName = categoryName.ToString();
+
+            if (queryType == "ApparelType")
+            {
+                return MockClosetSource
+                    .Where(c => c.ApparelType == catName)
+                    .ToObservableCollection();
+            }
+            else if (queryType == "Season")
+            {
+
+                return MockClosetSource
+                    .Where(c => c.Season == catName)
+                    .ToObservableCollection();
+
+            } else
+            {
+                return null;
+            }
+        }
+
+        // main filter category services
+
+        public Task AddMainFilterCategory(string propertyName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveMainFilterCategory(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ObservableCollection<MainFilterCategoryModel>> GetMainFilterCategoriesAsync()
+        {
+            await Task.Delay(10);
+
+            return MockMainFilterCategories;
+        }
+
+       // item category services
+
+        public Task AddItemCategory(string categoryType, string categoryName, string iconGlyph, string iconFamily, string pictureUri, byte[] imgContent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveItemCategory(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ObservableCollection<ItemCategoryModel>> GetCategoriesAsync(string categoryType)
+        {
+            await Task.Delay(10);
+
+            return MockItemCategories
+                .Where(c => c.CategoryType == categoryType)
+                .ToObservableCollection();
+        }
+
+
+
+
+
+        // Mock Data
 
         private ObservableCollection<ItemCategoryModel> MockItemCategories = new ObservableCollection<ItemCategoryModel>
         {
@@ -337,53 +424,6 @@ namespace sycXF.Services.Closet
 
         };
 
-        public async Task<ObservableCollection<ClosetItemModel>> GetClosetAsync()
-        {
-            await Task.Delay(10);
 
-            return MockClosetSource;
-        }
-
-        public async Task<ObservableCollection<MainFilterCategoryModel>> GetMainFilterCategoriesAsync()
-        {
-            await Task.Delay(10);
-
-            return MockMainFilterCategories;
-        }
-
-        public async Task<ObservableCollection<ItemCategoryModel>> GetCategoriesAsync(string categoryType)
-        {
-            await Task.Delay(10);
-
-            return MockItemCategories
-                .Where(c => c.CategoryType == categoryType)
-                .ToObservableCollection();
-        }
-
-        public async Task<ObservableCollection<ClosetItemModel>> GetClosetItemsAsync(string queryType, string categoryName)
-        {
-            await Task.Delay(10);
-            var catName = categoryName.ToString();
-
-            if (queryType == "ApparelType")
-            {
-                return MockClosetSource
-                    .Where(c => c.ApparelType == catName)
-                    .ToObservableCollection();
-            }
-            else if (queryType == "Season")
-            {
-
-                return MockClosetSource
-                    .Where(c => c.Season == catName)
-                    .ToObservableCollection();
-
-            } else
-            {
-                return null;
-            }
-        }
-
-      
     }
 }

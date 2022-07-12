@@ -71,7 +71,8 @@ namespace sycXF.ViewModels.Base
             {
                 var requestProvider = Xamarin.Forms.DependencyService.Get<IRequestProvider>();
                 var fixUriService = Xamarin.Forms.DependencyService.Get<IFixUriService>();
-                Xamarin.Forms.DependencyService.RegisterSingleton<IClosetService>(new ClosetService(requestProvider, fixUriService));
+                //Xamarin.Forms.DependencyService.RegisterSingleton<IClosetService>(new ClosetService(requestProvider, fixUriService));
+                Xamarin.Forms.DependencyService.RegisterSingleton<IClosetService>(new ClosetService());
                 Xamarin.Forms.DependencyService.RegisterSingleton<IUserService>(new UserService(requestProvider));
 
                 UseMockService = false;

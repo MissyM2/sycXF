@@ -1,78 +1,175 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using sycXF.Models.Closet;
-using sycXF.Services.RequestProvider;
-using sycXF.Extensions;
 using System.Collections.Generic;
-using sycXF.Services.FixUri;
-using sycXF.Helpers;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Threading.Tasks;
+using SQLite;
+using sycXF.Models.Closet;
+using Xamarin.Essentials;
 
 namespace sycXF.Services.Closet
 {
     public class ClosetService : IClosetService
     {
-        private readonly IRequestProvider _requestProvider;
-        private readonly IFixUriService _fixUriService;
-		
-        private const string ApiUrlBase = "c/api/v1/catalog";
+        SQLiteAsyncConnection sycXFdb;
 
-        public ClosetService(IRequestProvider requestProvider, IFixUriService fixUriService)
+        async Task Init()
         {
-            _requestProvider = requestProvider;
-            _fixUriService = fixUriService;
+            if (sycXFdb != null)
+                return;
+
+            // Get an absolute path to the database file
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "sycXF.db");
+            Console.WriteLine("What is databasePath? " + databasePath);
+
+            sycXFdb = new SQLiteAsyncConnection(databasePath);
+
+            await sycXFdb.CreateTableAsync<ClosetItemModel>();
+            await sycXFdb.CreateTableAsync<ClosetRootModel>();
+            await sycXFdb.CreateTableAsync<ItemCategoryModel>();
+            await sycXFdb.CreateTableAsync<MainFilterCategoryModel>();
         }
 
-       
+        // closet services
+        public async Task AddClosetItem(string name,
+            string description,
+            string pictureUri,
+            string size,
+            string season,
+            string apparelType
+            )
+        {
+            await Init();
+
+            var closetItem = new ClosetItemModel
+            {
+                Name = name,
+                Description = description,
+                PictureUri = pictureUri,
+                Size = size,
+                Season = season,
+                ApparelType = apparelType
+            };
+
+            var id = await sycXFdb.InsertAsync(closetItem);
+        }
+
+
+        public async Task RemoveClosetItem(int id)
+        {
+
+            await Init();
+
+            await sycXFdb.DeleteAsync<ClosetItemModel>(id);
+        }
+
         public async Task<ObservableCollection<ClosetItemModel>> GetClosetAsync()
         {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
+            await Init();
 
-            IEnumerable<ClosetItemModel> myclosetitems = await _requestProvider.GetAsync<IEnumerable<ClosetItemModel>>(uri);
+            var myClosetItemsList = await sycXFdb.Table<ClosetItemModel>().ToListAsync();
 
-            if (myclosetitems != null)
-                return myclosetitems?.ToObservableCollection();
-            else
-                return new ObservableCollection<ClosetItemModel>();
+            ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(myClosetItemsList);
+
+            return myClosetItems;
+        }
+
+        public async Task<ObservableCollection<ClosetItemModel>> GetClosetItemsAsync(string queryType, string categoryName)
+        {
+            await Init();
+
+            var myClosetItemsList = await sycXFdb.Table<ClosetItemModel>().ToListAsync();
+            ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(myClosetItemsList);
+
+            return myClosetItems;
+        }
+
+        public async Task<ClosetItemModel> GetClosetItem(int id)
+        {
+            await Init();
+
+            var closetItem = await sycXFdb.Table<ClosetItemModel>()
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            return closetItem;
+        }
+
+        // main filter categories services
+        public async Task AddMainFilterCategory(string propertyName)
+        {
+            await Init();
+
+            var mainFilterCategory = new MainFilterCategoryModel
+            {
+                PropertyName = propertyName
+            };
+
+            var id = await sycXFdb.InsertAsync(mainFilterCategory);
+        }
+
+        public async Task RemoveMainFilterCategory(int id)
+        {
+
+            await Init();
+
+            await sycXFdb.DeleteAsync<MainFilterCategoryModel>(id);
         }
 
         public async Task<ObservableCollection<MainFilterCategoryModel>> GetMainFilterCategoriesAsync()
         {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogbrands");
+            await Init();
 
-            IEnumerable<MainFilterCategoryModel> mainfiltercategories = await _requestProvider.GetAsync<IEnumerable<MainFilterCategoryModel>>(uri);
+            var mainFilterCategoriesList = await sycXFdb.Table<MainFilterCategoryModel>().ToListAsync();
 
-            if (mainfiltercategories != null)
-                return mainfiltercategories?.ToObservableCollection();
-            else
-                return new ObservableCollection<MainFilterCategoryModel>();
+            ObservableCollection<MainFilterCategoryModel> mainFilterCategories = new ObservableCollection<MainFilterCategoryModel>(mainFilterCategoriesList);
+
+            return mainFilterCategories;
         }
 
+        // item category services
+        public async Task AddItemCategory(
+            string categoryType,
+            string categoryName,
+            string iconGlyph,
+            string iconFamily,
+            string pictureUri,
+            byte[] imgContent
+            )
+        {
+            await Init();
+
+            var itemCategory = new ItemCategoryModel
+            {
+                CategoryType = categoryType,
+                CategoryName = categoryName,
+                IconGlyph = iconGlyph,
+                IconFamily = iconFamily,
+                PictureUri = pictureUri,
+                ImgContent = imgContent
+            };
+
+            var id = await sycXFdb.InsertAsync(itemCategory);
+        }
+
+        public async Task RemoveItemCategory(int id)
+        {
+
+            await Init();
+
+            await sycXFdb.DeleteAsync<ItemCategoryModel>(id);
+        }
 
         public async Task<ObservableCollection<ItemCategoryModel>> GetCategoriesAsync(string categoryType)
         {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/catalogbrands");
+            await Init();
 
-            IEnumerable<ItemCategoryModel> categories = await _requestProvider.GetAsync<IEnumerable<ItemCategoryModel>>(uri);
+            var itemCategoriesList = await sycXFdb.Table<ItemCategoryModel>().ToListAsync();
 
-            if (categories != null)
-                return categories?.ToObservableCollection();
-            else
-                return new ObservableCollection<ItemCategoryModel>();
+            ObservableCollection<ItemCategoryModel> itemCategories = new ObservableCollection<ItemCategoryModel>(itemCategoriesList);
+
+            return itemCategories;
         }
 
-        
 
-        public async Task<ObservableCollection<ClosetItemModel>> GetClosetItemsAsync(string queryType, string categoryName)
-        {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, $"{ApiUrlBase}/items");
-
-            IEnumerable<ClosetItemModel> myclosetitems = await _requestProvider.GetAsync<IEnumerable<ClosetItemModel>>(uri);
-
-            if (myclosetitems != null)
-                return myclosetitems?.ToObservableCollection();
-            else
-                return new ObservableCollection<ClosetItemModel>();
-        }
     }
 }
