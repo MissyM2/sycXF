@@ -5,6 +5,7 @@ using sycXF.Services.Database;
 using sycXF.Models.Closet;
 using sycXF.Controllers;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace sycXF.Controllers
 {
@@ -84,14 +85,30 @@ namespace sycXF.Controllers
 
             
         }
-//huh? aren't these the same?  not using string parameters
+//huh? aren't these the same?  not using string parameters:  NEED MOCKS
         public async Task<ObservableCollection<ClosetItemModel>> GetClosetItems(string queryType, string categoryName)
         {
-
             var myClosetItemsList = await _closetItemRepository.GetAllAsync();
-            ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(myClosetItemsList);
 
-            return myClosetItems;
+            if (queryType == "Season")
+            {
+                var result = myClosetItemsList.Where(w => w.Season.Equals(categoryName));
+                ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(result);
+                return myClosetItems;
+            }
+             else
+            {
+                var result = myClosetItemsList.Where(w => w.Season.Equals(categoryName));
+                ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(result);
+                return myClosetItems;
+            }
+
+            
+            
+            //var result = myClosetItemsList.Where(w => w..Equals(queryType) && w.CategoryName.Equals(categoryName));
+            //ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(myClosetItemsList);
+
+            //return myClosetItems;
         }
 
         public async Task<ObservableCollection<ItemCategoryModel>> GetAllItemCategories()

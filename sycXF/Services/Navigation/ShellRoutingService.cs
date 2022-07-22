@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using sycXF.ViewModels.Base;
 using Xamarin.Forms;
@@ -37,14 +38,6 @@ namespace sycXF.Services.Navigation
         {
             Application.Current.MainPage = new LoginShell();
         }
-
-
-
-
-
-
-
-
 
         private Task GoToAsync<TViewModel>(string routePrefix, string parameters) where TViewModel : BaseViewModel
         {

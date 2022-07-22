@@ -13,6 +13,12 @@ namespace sycXF.Views
 			InitializeComponent ();
 			BindingContext = App.Container.Resolve<ClosetItemsViewModel>();
 		}
-	}
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await (BindingContext as ClosetItemsViewModel).InitializeAsync(null);
+        }
+    }
 }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using sycXF.Controllers;
@@ -87,15 +88,10 @@ namespace sycXF.ViewModels
         {
             IsRefreshing = true;
 
-            //var closetItems = await _closetController.GetClosetItems();
-            AllItemsCollection = await _closetController.GetClosetItems();
-            //AllItemsCollection = new ObservableCollection<ClosetItemModel>(closetItems);
+            AllItemsCollection = await _closetController.GetClosetItems("", "");
 
             CategoryCollection = await _closetController.GetAllItemCategories();
-            Console.WriteLine("CategoryCollection.Count is " + CategoryCollection.Count);
-            
 
-            
             var mainFilterCategories = await _closetController.GetAllMainFilterCategories();
             MainFilterCategoryCollection = new ObservableCollection<MainFilterCategoryModel>(mainFilterCategories);
 
@@ -151,14 +147,28 @@ namespace sycXF.ViewModels
                     if (SelectedCategory == null)
                         return;
 
-                    var dictionary = new Dictionary<string, string>();
-                    //dictionary.Add("QueryType", QueryType);
-                    //dictionary.Add("CategoryType", SelectedCategory.CategoryType);
-                    //dictionary.Add("CategoryName", SelectedCategory.CategoryName);
-                    //dictionary.Add("CategoryTitle", SelectedCategory.CategoryTitle);
+                    var routeParameters = new Dictionary<string, string>();
+                    routeParameters.Add("QueryType", QueryType);
+                    routeParameters.Add("CategoryType", SelectedCategory.CategoryType);
+                    routeParameters.Add("CategoryName", SelectedCategory.CategoryName);
+                    routeParameters.Add("CategoryTitle", SelectedCategory.CategoryTitle);
 
-                    //await _navigationService.PushAsync<ClosetItemViewModel>(dictionary);
-                    await _navigationService.PushAsync<ClosetItemsViewModel>();
+                    var route = new StringBuilder();
+
+                    if (routeParameters != null)
+                    {
+                        foreach (var routeParameter in routeParameters)
+                        {
+                            route.Append($"{routeParameter.Key}={routeParameter.Value}&");
+                            Console.WriteLine("What is route after adding new key? " + route);
+                        }
+                        route.Remove(route.Length - 1, 1);
+                    }
+
+                    Console.WriteLine("What is final route? " + route.ToString());
+
+                    await _navigationService.PushAsync<ClosetItemsViewModel>(route.ToString());
+                    //await _navigationService.PushAsync<ClosetItemsViewModel>();
 
                     SelectedCategory = null;
                 });

@@ -15,7 +15,6 @@ namespace sycXF.Controllers
         //    string apparelType
         //    );
         //Task RemoveClosetItem(int id);
-        Task<ObservableCollection<ClosetItemModel>> GetClosetItems();
         Task<ObservableCollection<ClosetItemModel>> GetClosetItems(string queryType, string categoryName);
         Task<ObservableCollection<ItemCategoryModel>> GetAllItemCategories();
         Task<ObservableCollection<MainFilterCategoryModel>> GetAllMainFilterCategories();

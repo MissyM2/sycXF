@@ -11,7 +11,11 @@ using Xamarin.Forms;
 
 namespace sycXF.ViewModels
 {
-	public class ClosetItemsViewModel: BaseViewModel
+    [QueryProperty("QueryType", "QueryType")]
+    [QueryProperty("CategoryType", "CategoryType")]
+    [QueryProperty("CategoryName", "CategoryName")]
+    [QueryProperty("CategoryTitle", "CategoryTitle")]
+    public class ClosetItemsViewModel: BaseViewModel
     {
 
         #region Services
@@ -20,6 +24,8 @@ namespace sycXF.ViewModels
         private IDialogService _dialogService;
 
         #endregion
+
+        #region Properties
 
         private string _headerTextLabel;
         public string HeaderTextLabel
@@ -75,11 +81,16 @@ namespace sycXF.ViewModels
             set { SetProperty(ref _itemCount, value); }
         }
 
+        #endregion
+
         public ClosetItemsViewModel(INavigationService navigationService,
             IClosetController closetController)
         {
             _navigationService = navigationService;
             _closetController = closetController;
+
+      
+            //ItemCount = ClosetItemCollection.Count;
 
         }
 
@@ -87,21 +98,8 @@ namespace sycXF.ViewModels
         {
             IsBusy = true;
 
-            //foreach (KeyValuePair<string, string> kvp in query)
-            //{
-            //    if (kvp.Key == "QueryType")
-            //        _queryType = kvp.Value;
-            //    else if (kvp.Key == "CategoryType")
-            //        _categoryType = kvp.Value;
-            //    else if (kvp.Key == "CategoryName")
-            //        _categoryName = kvp.Value;
-            //    else if (kvp.Key == "CategoryTitle")
-            //        _categoryTitle = kvp.Value;
-            //}
-
-
-            //ClosetItemCollection = await _closetItemService.GetClosetItemsAsync(QueryType, CategoryName);
-            //ItemCount = ClosetItemCollection.Count;
+            ClosetItemCollection = await _closetController.GetClosetItems(QueryType, CategoryName);
+            ItemCount = ClosetItemCollection.Count;
 
             IsBusy = false;
         }

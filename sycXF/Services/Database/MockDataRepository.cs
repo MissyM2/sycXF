@@ -23,8 +23,8 @@ namespace sycXF.Services.Database
             {
                 Id = 1,
                 PictureUri = "top_1.png",
-                Name = "Floral cap-sleeved blouse",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Name = "Floral cap-sleeved blouseM",
+                Description = "Small, Spring, Top M",
                 Size = "Small",
                 Season = "Spring",
                 ApparelType = "Top"
@@ -34,7 +34,7 @@ namespace sycXF.Services.Database
                 Id = 2,
                 PictureUri = "bottom_blue_corduroy_skirt_1.png",
                 Name = "Corduroy skirt",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Small, Summer, Bottom M",
                 Size = "Small",
                 Season = "Summer",
                 ApparelType = "Bottom"
@@ -44,7 +44,7 @@ namespace sycXF.Services.Database
                 Id = 3,
                 PictureUri = "dress_red_1.png",
                 Name = "Red long dress",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Medium, Winter, Dress M",
                 Size = "Medium",
                 Season = "Winter",
                 ApparelType = "Dress"
@@ -54,7 +54,7 @@ namespace sycXF.Services.Database
                 Id = 4,
                 PictureUri = "outerwear_1.png",
                 Name = "London Fog rain coat",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Large, Always, Outerwear M",
                 Size = "Large",
                 Season = "Always",
                 ApparelType = "Outerwear"
@@ -64,7 +64,7 @@ namespace sycXF.Services.Database
                 Id = 5,
                 PictureUri = "footwear_1.png",
                 Name = "Black leather boots",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Small, Winter, Footwear M",
                 Size = "Small",
                 Season = "Winter",
                 ApparelType = "Footwear"
@@ -74,7 +74,7 @@ namespace sycXF.Services.Database
                 Id = 6,
                 PictureUri = "top_white_blouse_1.png",
                 Name = "White dressy blouse",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Medium, Spring, Top M",
                 Size = "Medium",
                 Season = "Spring",
                 ApparelType = "Top"
@@ -84,7 +84,7 @@ namespace sycXF.Services.Database
                 Id = 7,
                 PictureUri = "bottoms_1.png",
                 Name = "Blue Corduroy Skirt",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Large, Summer, Bottom M",
                 Size = "Large",
                 Season = "Summer",
                 ApparelType = "Bottom"
@@ -94,7 +94,7 @@ namespace sycXF.Services.Database
                 Id = 8,
                 PictureUri = "dress_1.png",
                 Name = "Long Green dress",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Small, Fall, Dress M",
                 Size = "Small",
                 Season = "Fall",
                 ApparelType = "Dress"
@@ -104,7 +104,7 @@ namespace sycXF.Services.Database
                 Id = 9,
                 PictureUri = "top_white_sweater_1.png",
                 Name = "White Sweater",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Medium, Always, Outerwear M",
                 Size = "Medium",
                 Season = "Always",
                 ApparelType = "Outerwear"
@@ -114,7 +114,7 @@ namespace sycXF.Services.Database
                 Id = 10,
                 PictureUri = "top_white_blouse_1.png",
                 Name = "White Blouse",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Medium, Always, Top M",
                 Size = "Medium",
                 Season = "Always",
                 ApparelType = "Top"
@@ -124,7 +124,7 @@ namespace sycXF.Services.Database
                 Id = 10,
                 PictureUri = "accessories_pearl_necklace_1.png",
                 Name = "Pearl Necklace",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Medium, Winter, Accessory M",
                 Size = "Medium",
                 Season = "Winter",
                 ApparelType = "Accessory"
@@ -134,7 +134,7 @@ namespace sycXF.Services.Database
                 Id = 11,
                 PictureUri = "purse_1.png",
                 Name = "Purse",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Large, Spring, Accessory M",
                 Size = "Large",
                 Season = "Spring",
                 ApparelType = "Accessory"
@@ -144,7 +144,7 @@ namespace sycXF.Services.Database
                 Id = 12,
                 PictureUri = "bottoms_1.png",
                 Name = "Jeans",
-                Description = "a;lsdkfj;alskdfj;alskdjf;alskdjf;aslkdjf",
+                Description = "Small, Winter, Bottom M",
                 Size = "Small",
                 Season = "Winter",
                 ApparelType = "Bottom"
