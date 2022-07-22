@@ -8,7 +8,6 @@
     x:DataType="viewmodels:ClosetItemsViewModel"
     Title="Closet"
     x:Name="ClosetViewName"
-    viewModelBase:ViewModelLocator.AutoWireViewModel="true"
     x:Class="sycXF.Views.ClosetItemsView">
     <ContentPage.Resources>
         <ResourceDictionary>

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using sycXF.ViewModels.Base;
 using sycXF.Services;
-using sycXF.Services.User;
 using sycXF.Validations;
 using Xamarin.Forms;
 
@@ -17,11 +16,10 @@ using System.Linq;
 
 namespace sycXF.ViewModels
 {
-    public class AddPhotoViewModel : ViewModelBase
+    public class AddPhotoViewModel :  BaseViewModel
     {
 
         private IDialogService _dialogService;
-        private IUserService _userService;
 
         #region Properties
 
@@ -29,48 +27,28 @@ namespace sycXF.ViewModels
         public ValidatableObject<string> ItemName
         {
             get => _itemName;
-            set
-            {
-                _itemName = value;
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref _itemName, value); }
         }
 
         private ImageSource _imgSource;
         public ImageSource ImgSource
         {
             get { return _imgSource; }
-            set
-            {
-                _imgSource = value;
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref _imgSource, value); }
         }
 
         string photoPath;
         public string PhotoPath
         {
             get => photoPath;
-            set
-            {
-                if (photoPath == value)
-                    return;
-                photoPath = value;
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref photoPath, value); }
         }
 
         byte[] photoArray;
         public byte[] PhotoArray
         {
             get => photoArray;
-            set
-            {
-                if (photoArray == value)
-                    return;
-                photoArray = value;
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref photoArray, value); }
         }
 
         //private ImageSource selectedImage = ImageSource.FromResource(ImageManager.SelectedImage, typeof(AddAssetPageModel).GetTypeInfo().Assembly);
@@ -108,9 +86,7 @@ namespace sycXF.ViewModels
 
         public AddPhotoViewModel()
         {
-            this.MultipleInitialization = true;
 
-            _userService = DependencyService.Get<IUserService>();
             _dialogService = DependencyService.Get<IDialogService>();
 
             

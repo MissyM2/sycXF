@@ -1,14 +1,10 @@
-﻿using System;
-using Newtonsoft.Json;
-using SQLite;
+﻿using Newtonsoft.Json;
+using sycXF.Services.Database;
 
 namespace sycXF.Models.Closet
 {
-    public class MainFilterCategoryModel
+    public class MainFilterCategoryModel : BaseDatabaseItem
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
         [JsonProperty("PropertyName")]
         public string PropertyName { get; set; }
     }

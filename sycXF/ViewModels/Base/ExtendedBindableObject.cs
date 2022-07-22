@@ -1,38 +1,26 @@
 ﻿using System;
-using System.Linq.Expressions;
-using System.Reflection;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace sycXF.ViewModels.Base
 {
     public abstract class ExtendedBindableObject : BindableObject
     {
-        public void RaisePropertyChanged<T>(Expression<Func<T>> property)
+        protected bool SetProperty<T>(ref T backingStore, T value,
+                  [CallerMemberName] string propertyName = "",
+                  Action onChanged = null)
         {
-            var name = GetMemberInfo(property).Name;
-            OnPropertyChanged(name);
-        }
-
-        public void RaisePropertyChanged ([CallerMemberName] string callerMemberName = null)
-        {
-            OnPropertyChanged (callerMemberName);
-        }
-
-        private MemberInfo GetMemberInfo(Expression expression)
-        {
-            MemberExpression operand;
-            LambdaExpression lambdaExpression = (LambdaExpression)expression;
-            if (lambdaExpression.Body as UnaryExpression != null)
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
             {
-                UnaryExpression body = (UnaryExpression)lambdaExpression.Body;
-                operand = (MemberExpression)body.Operand;
+                return false;
             }
-            else
-            {
-                operand = (MemberExpression)lambdaExpression.Body;
-            }
-            return operand.Member;
+            backingStore = value;
+            onChanged?.Invoke();
+
+            OnPropertyChanged(propertyName);
+            return true;
         }
     }
 }

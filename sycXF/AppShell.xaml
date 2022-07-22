@@ -27,18 +27,17 @@
         <BackButtonBehavior TextOverride="" />
     </Shell.BackButtonBehavior>
 
-    <FlyoutItem >
+    <!--<FlyoutItem >
         <ShellContent ContentTemplate="{DataTemplate views:LoginView}" Route="Login" />
-    </FlyoutItem>
+    </FlyoutItem>-->
 
-    <TabBar Route="Main">
+    <!--<TabBar Route="Main">-->
         <ShellContent Title="My Closet"
                       Route="Closet"
-                      Icon="{StaticResource ClosetIconImageSource}"
                       ContentTemplate="{DataTemplate views:ClosetView}" />
-        <ShellContent Title="Share Closet"
+        <!--<ShellContent Title="Share Closet"
                       Route="ShareCloset"
                       Icon="{StaticResource ProfileIconImageSource}"
-                      ContentTemplate="{DataTemplate views:ProfileView}" />
-    </TabBar>
+                      ContentTemplate="{DataTemplate views:ProfileView}" />-->
+    <!--</TabBar>-->
 </Shell>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:ContentPageBase
+<ContentPage
     x:Class="sycXF.Views.ClosetView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -9,8 +9,7 @@
     xmlns:model="clr-namespace:sycXF.Models.Closet;assembly=sycXF"
     xmlns:controls="clr-namespace:sycXF.Controls;assembly=sycXF"
     Title="Closet"
-    x:Name="ClosetViewName"
-    viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+    x:Name="ClosetViewName">
 
      <ContentPage.Resources>
         <ResourceDictionary>
@@ -104,14 +103,14 @@
             </CollectionView>
 
 
-         <!-- CV Apparel Types-->
-        <CollectionView x:Name="CVApparelCategories"
-                        ItemsSource="{Binding ApparelCategoryCollection}"
+         <!-- CV Type Categories-->
+        <CollectionView x:Name="CVTypeCategories"
+                        ItemsSource="{Binding TypeCategoryCollection}"
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
                         SelectionChangedCommand="{Binding CategorySelectedCommand, Mode=TwoWay}"
                         SelectionChangedCommandParameter="{Binding .}"
-                        IsVisible="{Binding IsVisibleCVApparelTypes}">
+                        IsVisible="{Binding IsVisibleCVTypes}">
 
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical"/>
@@ -158,7 +157,7 @@
              <Label Text="Favorites go here"/>
          </StackLayout>
 
-        <!--<CollectionView x:Name="CVFavoritesCategories"
+        <CollectionView x:Name="CVFavoritesCategories"
                         ItemsSource="{Binding FavoritesCategoryCollection}"
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedFavoriteCategory, Mode=TwoWay}"
@@ -230,7 +229,7 @@
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-        </CollectionView>-->
+        </CollectionView>
         </StackLayout>
             <Frame x:Name="outerFrame"
                    AbsoluteLayout.LayoutBounds="{OnIdiom Phone='0.94,0.96,0.17,0.1', Tablet='0.5,0.28,0.8,0.9'}"
@@ -265,4 +264,4 @@
        
     </AbsoluteLayout>
     
-</views:ContentPageBase>
+</ContentPage>

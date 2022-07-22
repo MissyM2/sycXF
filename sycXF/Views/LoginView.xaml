@@ -9,7 +9,6 @@
                 xmlns:behaviors="clr-namespace:sycXF.Behaviors;assembly=sycXF"
                 xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
                 xmlns:viewmodels="clr-namespace:sycXF.ViewModels"
-                viewModelBase:ViewModelLocator.AutoWireViewModel="true"
                 x:DataType="viewmodels:LoginViewModel"
                 Shell.FlyoutBehavior="Disabled"
                 Shell.NavBarIsVisible="False"
@@ -260,8 +259,160 @@
                 </Grid.GestureRecognizers>
             </Grid>
         </Grid>
+
+        
         <!-- AUTH -->
         <Grid
+            x:Name="LoginPanelAuth"
+            IsVisible="{Binding IsMock, Converter={StaticResource InverseBoolConverter}}"
+            Padding="0"
+            ColumnSpacing="0"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <!-- LOGIN / REGISTER / SETTINGS -->
+            <Grid   
+                Grid.Row="0"
+                Margin="48, 24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackLayout  
+                  Grid.Column="0"
+                  Orientation="Horizontal"
+                  HorizontalOptions="Center">
+                    <Label     
+                        Text="["
+                        TextColor="{StaticResource LightGreenColor}"/>
+                    <Label
+                        Text="LOGIN"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="]"
+                        TextColor="{StaticResource LightGreenColor}"/>
+                </StackLayout>
+                <Grid
+                  Grid.Column="1"
+                  HorizontalOptions="Center">
+                    <Label
+                        Text="REGISTER"
+                        TextColor="Gray"/>
+                </Grid>
+                <!--<StackLayout  
+                  Grid.Column="2"
+                  Orientation="Horizontal"
+                  HorizontalOptions="Center">
+                    <Label
+                        Text="SETTINGS"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SettingsCommand}"
+                            NumberOfTapsRequired="1" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>-->
+            </Grid>
+            <!-- INFO -->
+            <Label
+              Grid.Row="1"
+              Text="ARE YOU REGISTERED?"
+              Style="{StaticResource TitleLabelStyle}"/>
+            <!-- LOGIN FORM -->
+            <StackLayout   
+                Grid.Row="3"
+                Margin="24">
+                <Label
+                  Text="User name or email"
+                  Style="{StaticResource HeaderLabelStyle}" />
+                <Entry Text="{Binding UserName.Value, Mode=TwoWay}">
+					<Entry.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS, Android" Value="{StaticResource EntryStyle}" />
+                            <On Platform="UWP, WinRT, WinPhone" Value="{StaticResource UwpEntryStyle}" />
+                        </OnPlatform>
+                    </Entry.Style>
+                    <Entry.Behaviors>
+						<xct:EventToCommandBehavior
+							EventName="TextChanged"
+							Command="{Binding ValidateUserNameCommand}" />
+					</Entry.Behaviors>
+					<Entry.Triggers>
+						<DataTrigger 
+							TargetType="Entry"
+							Binding="{Binding UserName.IsValid}"
+							Value="False">
+							<Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+						</DataTrigger>
+					</Entry.Triggers>
+                </Entry>
+				<Label 
+					Text="{Binding UserName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+					Style="{StaticResource ValidationErrorLabelStyle}" />
+                <Label
+                  Text="Password"
+                  Style="{StaticResource HeaderLabelStyle}"/>
+                <Entry
+                  IsPassword="True"
+                  Text="{Binding Password.Value, Mode=TwoWay}">
+                    <Entry.Style>
+                        <OnPlatform x:TypeArguments="Style">
+                            <On Platform="iOS, Android" Value="{StaticResource EntryStyle}" />
+                            <On Platform="UWP, WinRT, WinPhone" Value="{StaticResource UwpEntryStyle}" />
+                        </OnPlatform>
+                    </Entry.Style>
+					<Entry.Behaviors>
+						<xct:EventToCommandBehavior
+							EventName="TextChanged"
+							Command="{Binding ValidatePasswordCommand}" />
+					</Entry.Behaviors>
+					<Entry.Triggers>
+						<DataTrigger 
+							TargetType="Entry"
+							Binding="{Binding Password.IsValid}"
+							Value="False">
+							<Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+						</DataTrigger>
+					</Entry.Triggers>
+                </Entry>
+				<Label 
+					Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+					Style="{StaticResource ValidationErrorLabelStyle}" />
+            </StackLayout>
+            <Frame CornerRadius="16" HasShadow="False" Padding="0" IsClippedToBounds="True"
+                   HorizontalOptions="Center"
+                   Grid.Row="2" >
+                <Image
+                    Source="eshop_logo.png"
+                    Aspect="AspectFit" />
+            </Frame>
+            <!-- LOGIN BUTTON -->
+            <Grid
+                BackgroundColor="{StaticResource LightGreenColor}"
+                Grid.Row="4"
+                Padding="0"
+                ColumnSpacing="0"
+                RowSpacing="0">
+                <Label
+                  Text="[ LOGIN ]"
+                  Style="{StaticResource LoginButtonStyle}"/>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding MockSignInCommand}"
+                        NumberOfTapsRequired="1" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </Grid>
+
+
+
+
+        <!--<Grid
           ColumnSpacing="0"
           RowSpacing="0"
           IsVisible="{Binding IsMock, Converter={StaticResource InverseBoolConverter}}">
@@ -274,7 +425,7 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="64" />
             </Grid.ColumnDefinitions>
-            <!-- BANNER -->
+             BANNER 
             <Image
                 x:Name="Banner"
                 Grid.Row="0"
@@ -289,7 +440,7 @@
                 Grid.ColumnSpan="3"
                 BackgroundColor="{StaticResource BlackColor}"
                 Opacity="0.5"/>
-            <!-- LOG IN BUTTON -->
+             LOG IN BUTTON 
             <Grid
                 Grid.Column="0"
                 Grid.Row="1"
@@ -303,7 +454,7 @@
                         NumberOfTapsRequired="1" />
                 </Grid.GestureRecognizers>
             </Grid>
-            <!-- REGISTER BUTTON -->
+             REGISTER BUTTON 
             <Grid
                 Grid.Column="1"
                 Grid.Row="1"
@@ -317,14 +468,14 @@
                         NumberOfTapsRequired="1" />
                 </Grid.GestureRecognizers>
             </Grid>
-            <!-- SETTINGS -->
+             SETTINGS 
             <Grid
                 Grid.Column="2"
                 Grid.Row="1"
                 Style="{StaticResource SettingsPanelStyle}">
                 <Label Text="Settigs go here"/>
             </Grid>
-            <!-- WEBVIEW -->
+             WEBVIEW 
             <WebView     
                 Source="{Binding LoginUrl}"
                 Grid.Column="0"
@@ -339,7 +490,7 @@
                         Command="{Binding NavigateCommand}" />
                 </WebView.Behaviors>
             </WebView>
-        </Grid>
+        </Grid>-->
         <!-- INDICATOR -->
         <ActivityIndicator      
           Color="{StaticResource LightGreenColor}"

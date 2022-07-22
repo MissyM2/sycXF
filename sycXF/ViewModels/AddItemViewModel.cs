@@ -3,27 +3,52 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using sycXF.Controllers;
 using sycXF.Models.Closet;
 using sycXF.Services;
-using sycXF.Services.Closet;
-using sycXF.Services.Settings;
-using sycXF.Services.User;
+using sycXF.Services.Navigation;
 using sycXF.Validations;
 using sycXF.ViewModels.Base;
 using Xamarin.Forms;
 
 namespace sycXF.ViewModels
 {
-    public class AddItemViewModel : ViewModelBase
+    public class AddItemViewModel : BaseViewModel
     {
-        
+
         #region Services
-        private IClosetService _myClosetService;
-        private IUserService _userService;
+        private INavigationService _navigationService;
+        private IClosetController _closetController;
         private IDialogService _dialogService;
-        private ISettingsService _settingsService;
 
         #endregion
+
+        public AddItemViewModel(IClosetController closetController,
+            INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+            _closetController = closetController;
+            //this.MultipleInitialization = true;
+
+            //_settingsService = DependencyService.Get<ISettingsService>();
+            //_closetItemService = DependencyService.Get<IClosetItemService>();
+            //_mainFilterService = DependencyService.Get<IMainFilterCategoryService>();
+            //_itemCategoryService = DependencyService.Get<IItemCategoryService>();
+            //_userService = DependencyService.Get<IUserService>();
+            //_dialogService = DependencyService.Get<IDialogService>();
+
+            //InvalidateMock();
+            //AddValidations();
+        }
+
+
+        public override async Task InitializeAsync(IDictionary<string, string> query)
+        {
+
+            await GetApparelCollection();
+            await GetSeasonCollection();
+            //await GetSizeCollection();
+        }
 
         #region Properties
 
@@ -31,44 +56,29 @@ namespace sycXF.ViewModels
         public bool IsMock
         {
             get => _isMock;
-            set
-            {
-                _isMock = value;
-                RaisePropertyChanged(() => IsMock);
-            }
+            set {SetProperty(ref _isMock, value); }
+
         }
 
         private bool _isValid;
         public bool IsValid
         {
             get => _isValid;
-            set
-            {
-                _isValid = value;
-                RaisePropertyChanged(() => IsValid);
-            }
+            set { SetProperty(ref _isValid, value); }
         }
 
         private string _itemName;
         public string ItemName
         {
             get => _itemName;
-            set
-            {
-                _itemName = value;
-                RaisePropertyChanged(() => ItemName);
-            }
+            set { SetProperty(ref _itemName, value); } 
         }
 
         private string _itemDesc;
         public string ItemDesc
         {
             get => _itemDesc;
-            set
-            {
-                _itemDesc = value;
-                RaisePropertyChanged(() => ItemDesc);
-            }
+            set { SetProperty(ref _itemDesc, value); }
         }
 
 
@@ -77,40 +87,21 @@ namespace sycXF.ViewModels
         public bool IsVisibleCVSeasons
         {
             get => _isVisibleCVSeasons;
-            set
-            {
-                if (value == _isVisibleCVSeasons) return;
-                _isVisibleCVSeasons = value;
-                RaisePropertyChanged(() => IsVisibleCVSeasons);
-            }
+            set { SetProperty(ref _isVisibleCVSeasons, value); }
         }
 
         private bool _isVisibleCVApparelTypes;
         public bool IsVisibleCVApparelTypes
         {
             get => _isVisibleCVApparelTypes;
-            set
-            {
-                if (_isVisibleCVApparelTypes != value)
-                {
-                    _isVisibleCVApparelTypes = value;
-                    RaisePropertyChanged(() => IsVisibleCVApparelTypes);
-                }
-            }
+            set { SetProperty(ref _isVisibleCVApparelTypes, value); }
         }
 
         private bool _isVisibleCVSizes;
         public bool IsVisibleCVSizes
         {
             get => _isVisibleCVSizes;
-            set
-            {
-                if (_isVisibleCVSizes != value)
-                {
-                    _isVisibleCVSizes = value;
-                    RaisePropertyChanged(() => IsVisibleCVSizes);
-                }
-            }
+            set { SetProperty(ref _isVisibleCVSizes, value); }
         }
 
         private bool _isVisibleNameDesc;
@@ -119,10 +110,8 @@ namespace sycXF.ViewModels
             get => _isVisibleNameDesc;
             set
             {
-                if (value == _isVisibleNameDesc) return;
-                _isVisibleNameDesc = value;
+                SetProperty(ref _isVisibleNameDesc, value);
                 _headerTextLabel = "Add Name and Description";
-                RaisePropertyChanged(() => IsVisibleNameDesc);
             }
         }
 
@@ -130,12 +119,7 @@ namespace sycXF.ViewModels
         public string HeaderTextLabel
         {
             get => _headerTextLabel;
-            set
-            {
-                if (value == _headerTextLabel) return;
-                _headerTextLabel = value;
-                RaisePropertyChanged(() => HeaderTextLabel);
-            }
+            set { SetProperty(ref _headerTextLabel, value); }
         }
 
         // Collections
@@ -145,13 +129,11 @@ namespace sycXF.ViewModels
             get => _apparelCategoryCollection;
             set
             {
-                if (value == _apparelCategoryCollection) return;
-                _apparelCategoryCollection = value;
+                SetProperty(ref _apparelCategoryCollection, value);
 
                 IsVisibleCVApparelTypes = true;
                 IsVisibleCVSeasons = false;
                 IsVisibleCVSizes = false;
-                RaisePropertyChanged(() => ApparelCategoryCollection);
             }
         }
 
@@ -159,25 +141,14 @@ namespace sycXF.ViewModels
         public ObservableCollection<ItemCategoryModel> SeasonCategoryCollection
         {
             get => _seasonCategoryCollection;
-            set
-            {
-                if (value == _seasonCategoryCollection) return;
-                _seasonCategoryCollection = value;
-                RaisePropertyChanged(() => SeasonCategoryCollection);
-            }
+            set { SetProperty(ref _seasonCategoryCollection, value); }
         }
 
         private ObservableCollection<ItemCategoryModel> _sizeCategoryCollection;
         public ObservableCollection<ItemCategoryModel> SizeCategoryCollection
         {
             get => _sizeCategoryCollection;
-            set
-            {
-                if (value == _sizeCategoryCollection) return;
-                _sizeCategoryCollection = value;
-
-                RaisePropertyChanged(() => SizeCategoryCollection);
-            }
+            set { SetProperty(ref _sizeCategoryCollection, value); }
         }
 
 
@@ -199,6 +170,7 @@ namespace sycXF.ViewModels
             }
         }
 
+        #region Commands
         public ICommand ApparelTypeSelectedCommand
         {
             get
@@ -215,24 +187,6 @@ namespace sycXF.ViewModels
             }
         }
 
-        private ItemCategoryModel _selectedSeason;
-        public ItemCategoryModel SelectedSeason
-        {
-            get
-            {
-                return _selectedSeason;
-            }
-            set
-            {
-                if (_selectedSeason != value)
-                {
-                    _selectedSeason = value;
-                    
-                    
-                }
-            }
-        }
-
         public ICommand SeasonSelectedCommand
         {
             get
@@ -246,25 +200,6 @@ namespace sycXF.ViewModels
                     IsVisibleCVSizes = true;
                     IsVisibleNameDesc = false;
                 });
-            }
-        }
-
-
-        private ItemCategoryModel _selectedSize;
-        public ItemCategoryModel SelectedSize
-        {
-            get
-            {
-                return _selectedSize;
-            }
-            set
-            {
-                if (_selectedSize != value)
-                {
-                    _selectedSize = value;
-                    
-
-                }
             }
         }
 
@@ -303,10 +238,50 @@ namespace sycXF.ViewModels
                     {
                         Console.WriteLine("Key={0}, Value = {1}", kvp.Key, kvp.Value);
                     }
-                    await NavigationService.NavigateToAsync("AddPhotoRoute", dictionary);
+                    await _navigationService.PushAsync<AddItemViewModel>();
                 });
             }
         }
+
+        #endregion
+
+        private ItemCategoryModel _selectedSeason;
+        public ItemCategoryModel SelectedSeason
+        {
+            get
+            {
+                return _selectedSeason;
+            }
+            set
+            {
+                if (_selectedSeason != value)
+                {
+                    _selectedSeason = value;
+                    
+                    
+                }
+            }
+        }
+
+        private ItemCategoryModel _selectedSize;
+        public ItemCategoryModel SelectedSize
+        {
+            get
+            {
+                return _selectedSize;
+            }
+            set
+            {
+                if (_selectedSize != value)
+                {
+                    _selectedSize = value;
+                    
+
+                }
+            }
+        }
+
+        
 
 
 
@@ -314,29 +289,23 @@ namespace sycXF.ViewModels
         #endregion
 
 
-        public AddItemViewModel()
+        
+
+        //private Task GetSizeCollection()
+        //{
+        //    IsBusy = true;
+        //    var items = await _itemCategoryService.GetItemCategoriesAsync("Apparel");
+        //    IsBusy = false;
+        //}
+
+        private Task GetSeasonCollection()
         {
-            this.MultipleInitialization = true;
-
-            _settingsService = DependencyService.Get<ISettingsService>();
-            _myClosetService = DependencyService.Get<IClosetService>();
-            _userService = DependencyService.Get<IUserService>();
-            _dialogService = DependencyService.Get<IDialogService>();
-
-            //InvalidateMock();
-            //AddValidations();
+            throw new NotImplementedException();
         }
 
-
-        public override async Task InitializeAsync(IDictionary<string, string> query)
+        private Task GetApparelCollection()
         {
-            IsBusy = true;
-
-            ApparelCategoryCollection = await _myClosetService.GetCategoriesAsync("Apparel");
-            SeasonCategoryCollection = await _myClosetService.GetCategoriesAsync("Season");
-            SizeCategoryCollection = await _myClosetService.GetCategoriesAsync("Size");
-
-            IsBusy = false;
+            throw new NotImplementedException();
         }
 
         //private bool Validate()

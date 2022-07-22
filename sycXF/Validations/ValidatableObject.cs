@@ -16,31 +16,19 @@ namespace sycXF.Validations
 		public List<string> Errors
         {
             get => _errors;
-            set
-            {
-                _errors = value;
-                RaisePropertyChanged(() => Errors);
-            }
+            set { SetProperty(ref _errors, value); }
         }
 
         public T Value
         {
             get => _value;
-            set
-            {
-                _value = value;
-                RaisePropertyChanged(() => Value);
-            }
+            set { SetProperty(ref _value, value); }
         }
 
         public bool IsValid
         {
             get => _isValid;
-            set
-            {
-                _isValid = value;
-                RaisePropertyChanged(() => IsValid);
-            }
+            set { SetProperty(ref _isValid, value); }
         }
 
         public ValidatableObject()

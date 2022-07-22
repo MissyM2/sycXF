@@ -1,19 +1,15 @@
-﻿using sycXF.Extensions;
-using sycXF.Models.User;
-using sycXF.Services.Settings;
-using sycXF.Validations;
+﻿using sycXF.Validations;
 using sycXF.ViewModels.Base;
-using IdentityModel.Client;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using sycXF.Services.Navigation;
+using System.Collections.Generic;
 
 namespace sycXF.ViewModels
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : BaseViewModel
     {
         private ValidatableObject<string> _userName;
         private ValidatableObject<string> _password;
@@ -22,77 +18,52 @@ namespace sycXF.ViewModels
         private bool _isLogin;
         private string _authUrl;
 
-        private ISettingsService _settingsService;
+        private INavigationService _navigationService;
 
-        public LoginViewModel()
+        public LoginViewModel(INavigationService navigationService)
         {
-            _settingsService = DependencyService.Get<ISettingsService> ();
+            _navigationService = navigationService;
 
             _userName = new ValidatableObject<string>();
             _password = new ValidatableObject<string>();
 
-            InvalidateMock();
             AddValidations();
         }
 
         public ValidatableObject<string> UserName
         {
             get => _userName;
-            set
-            {
-                _userName = value;
-                RaisePropertyChanged(() => UserName);
-            }
+            set { SetProperty(ref _userName, value); }
         }
 
         public ValidatableObject<string> Password
         {
             get => _password;
-            set
-            {
-                _password = value;
-                RaisePropertyChanged(() => Password);
-            }
+            set { SetProperty(ref _password, value); }
         }
 
         public bool IsMock
         {
             get => _isMock;
-            set
-            {
-                _isMock = value;
-                RaisePropertyChanged(() => IsMock);
-            }
+            set { SetProperty(ref _isMock, value); }
         }
 
         public bool IsValid
         {
             get => _isValid;
-            set
-            {
-                _isValid = value;
-                RaisePropertyChanged(() => IsValid);
-            }
+            set { SetProperty(ref _isValid, value); }
         }
 
         public bool IsLogin
         {
             get => _isLogin;
-            set
-            {
-                _isLogin = value;
-                RaisePropertyChanged(() => IsLogin);
-            }
+            set { SetProperty(ref _isLogin, value); }
         }
 
         public string LoginUrl
         {
             get => _authUrl;
-            set
-            {
-                _authUrl = value;
-                RaisePropertyChanged(() => LoginUrl);
-            }
+            set { SetProperty(ref _authUrl, value); }
         }
 
         public ICommand MockSignInCommand => new Command(async () => await MockSignInAsync());
@@ -111,17 +82,17 @@ namespace sycXF.ViewModels
 
         public override Task InitializeAsync (IDictionary<string, string> query)
         {
-            var logout = query.GetValueAsBool ("Logout");
+            //var logout = query.GetValueAsBool ("Logout");
 
-            if(logout.ContainsKeyAndValue && logout.Value == true)
-            {
-                Logout ();
-            }
+            //if(logout.ContainsKeyAndValue && logout.Value == true)
+            //{
+            //    Logout ();
+            //}
 
             return Task.CompletedTask;
         }
 
-        private async Task MockSignInAsync()
+        private Task MockSignInAsync()
         {
             IsBusy = true;
             //IsValid = true;
@@ -150,7 +121,10 @@ namespace sycXF.ViewModels
             //{
             //    _settingsService.AuthAccessToken = GlobalSetting.Instance.AuthToken;
 
-                await NavigationService.NavigateToAsync ("//Main/Closet");
+                 _navigationService.GoToMainFlow();
+                 _navigationService.InsertAsRoot<ClosetViewModel>();
+            return Task.CompletedTask;
+            
             //}
 
             //IsBusy = false;
@@ -259,9 +233,5 @@ namespace sycXF.ViewModels
             _password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A password is required." });
         }
 
-        public void InvalidateMock()
-        {
-            IsMock = _settingsService.UseMocks;
-        }
     }
 }

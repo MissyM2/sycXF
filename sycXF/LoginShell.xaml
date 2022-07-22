@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:auth="clr-namespace:sycXF.Views"
+    x:Class="sycXF.LoginShell">
+
+    <ShellContent Route="OnboardingViewModel"
+                  ContentTemplate="{DataTemplate auth:OnboardingView}">
+    </ShellContent>
+
+    <ShellContent Route="LoginViewModel"
+                  ContentTemplate="{DataTemplate auth:LoginView}">
+    </ShellContent>
+
+    <ShellContent Route="RegisterViewModel"
+                  ContentTemplate="{DataTemplate auth:RegisterView}">
+    </ShellContent>
+</Shell>
+

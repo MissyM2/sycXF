@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
+using sycXF.Controllers;
 using sycXF.Models.Closet;
 using sycXF.Services;
-using sycXF.Services.Closet;
-using sycXF.Services.Settings;
-using sycXF.Services.User;
+using sycXF.Services.Navigation;
 using sycXF.ViewModels.Base;
 using Xamarin.Forms;
 
 namespace sycXF.ViewModels
 {
-	public class ClosetItemsViewModel: ViewModelBase
+	public class ClosetItemsViewModel: BaseViewModel
     {
 
         #region Services
-        private IClosetService _myClosetService;
-        private IUserService _userService;
+        private IClosetController _closetController;
+        private INavigationService _navigationService;
         private IDialogService _dialogService;
 
         #endregion
@@ -30,9 +27,8 @@ namespace sycXF.ViewModels
             get => _headerTextLabel;
             set
             {
-                if (value == _headerTextLabel) return;
+                SetProperty(ref _headerTextLabel, value);
                 _headerTextLabel = value;
-                RaisePropertyChanged(() => HeaderTextLabel);
             }
         }
 
@@ -41,86 +37,49 @@ namespace sycXF.ViewModels
         public ObservableCollection<ClosetItemModel> ClosetItemCollection
         {
             get => _myClosetItemCollection;
-            set
-            {
-                if (value == _myClosetItemCollection) return;
-                _myClosetItemCollection = value;
-                RaisePropertyChanged(() => ClosetItemCollection);
-            }
+            set { SetProperty(ref _myClosetItemCollection, value); }
         }
 
         private string _queryType;
         public string QueryType
         {
             get => _queryType;
-            set
-            {
-                if (value == _queryType) return;
-                _queryType = value;
-                RaisePropertyChanged(() => QueryType);
-
-
-            }
+            set { SetProperty(ref _queryType, value); }
         }
 
         private string _categoryType;
         public string CategoryType
         {
             get => _categoryType;
-            set
-            {
-                if (value == _categoryType) return;
-                _categoryType = value;
-                RaisePropertyChanged(() => CategoryType);
-
-
-            }
+            set { SetProperty(ref _categoryType, value); }
         }
+
         private string _categoryName;
         public string CategoryName
         {
             get => _categoryName;
-            set
-            {
-                if (value == _categoryName) return;
-                _categoryName = value;
-                RaisePropertyChanged(() => CategoryName);
-
-
-            }
+            set { SetProperty(ref _categoryName, value); }
         }
 
         private string _categoryTitle;
         public string CategoryTitle
         {
             get => _categoryTitle;
-            set
-            {
-                if (value == _categoryTitle) return;
-                _categoryTitle = value;
-                RaisePropertyChanged(() => CategoryTitle);
-
-
-            }
+            set { SetProperty(ref _categoryTitle, value); }
         }
 
         private int _itemCount;
         public int ItemCount
         {
             get => _itemCount;
-            set
-            {
-                if (value == _itemCount) return;
-                _itemCount = value;
-                RaisePropertyChanged(() => ItemCount);
-
-
-            }
+            set { SetProperty(ref _itemCount, value); }
         }
 
-        public ClosetItemsViewModel()
+        public ClosetItemsViewModel(INavigationService navigationService,
+            IClosetController closetController)
         {
-            _myClosetService = DependencyService.Get<IClosetService>();
+            _navigationService = navigationService;
+            _closetController = closetController;
 
         }
 
@@ -128,21 +87,21 @@ namespace sycXF.ViewModels
         {
             IsBusy = true;
 
-            foreach (KeyValuePair<string, string> kvp in query)
-            {
-                if (kvp.Key == "QueryType")
-                    _queryType = kvp.Value;
-                else if (kvp.Key == "CategoryType")
-                    _categoryType = kvp.Value;
-                else if (kvp.Key == "CategoryName")
-                    _categoryName = kvp.Value;
-                else if (kvp.Key == "CategoryTitle")
-                    _categoryTitle = kvp.Value;
-            }
+            //foreach (KeyValuePair<string, string> kvp in query)
+            //{
+            //    if (kvp.Key == "QueryType")
+            //        _queryType = kvp.Value;
+            //    else if (kvp.Key == "CategoryType")
+            //        _categoryType = kvp.Value;
+            //    else if (kvp.Key == "CategoryName")
+            //        _categoryName = kvp.Value;
+            //    else if (kvp.Key == "CategoryTitle")
+            //        _categoryTitle = kvp.Value;
+            //}
 
 
-            ClosetItemCollection = await _myClosetService.GetClosetItemsAsync(QueryType, CategoryName);
-            ItemCount = ClosetItemCollection.Count;
+            //ClosetItemCollection = await _closetItemService.GetClosetItemsAsync(QueryType, CategoryName);
+            //ItemCount = ClosetItemCollection.Count;
 
             IsBusy = false;
         }

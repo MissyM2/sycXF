@@ -1,5 +1,7 @@
 ﻿using sycXF.Models.Navigation;
+using sycXF.Services.Navigation;
 using sycXF.ViewModels.Base;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -7,20 +9,23 @@ using Xamarin.Forms;
 
 namespace sycXF.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : BaseViewModel
     {
+        private INavigationService _navigationService;
+
         public ICommand SettingsCommand => new Command(async () => await SettingsAsync());
 
-        public override Task InitializeAsync(IDictionary<string, string> query)
+        public MainViewModel(INavigationService navigationService)
         {
-            IsBusy = true;
 
-            return base.InitializeAsync(query);
+            _navigationService = navigationService;
+
         }
 
         private async Task SettingsAsync()
         {
-            await NavigationService.NavigateToAsync("Settings");
+            //await _navigationService.PushAsync<SettingsViewModel>();
+            Console.WriteLine("settings async");
         }
     }
 }

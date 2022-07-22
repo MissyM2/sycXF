@@ -1,14 +1,10 @@
-﻿using System;
-using Newtonsoft.Json;
-using SQLite;
+﻿using Newtonsoft.Json;
+using sycXF.Services.Database;
 
 namespace sycXF.Models.Closet
 {
-    public class ItemCategoryModel
+    public class ItemCategoryModel : BaseDatabaseItem
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
         [JsonProperty("CategoryType")]
         public string CategoryType { get; set; }
 

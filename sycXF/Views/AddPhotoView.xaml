@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<views:ContentPageBase
+<ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewModelBase="clr-namespace:sycXF.ViewModels.Base;assembly=sycXF"
-    xmlns:views="clr-namespace:sycXF.Views;assembly=sycXF"
     x:Class="sycXF.Views.AddPhotoView"
     Title="AddPhoto"
-    x:Name="AddPhotoName"
-    viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+    x:Name="AddPhotoName">
 
-    <views:ContentPageBase.Content>
+    <ContentPage.Content>
 
         <AbsoluteLayout Margin="0" Padding="0">
 
@@ -38,6 +35,6 @@
 
         </AbsoluteLayout>
 
-    </views:ContentPageBase.Content>
-</views:ContentPageBase>
+    </ContentPage.Content>
+</ContentPage>
 

@@ -1,13 +1,10 @@
 ﻿using Newtonsoft.Json;
-using SQLite;
+using sycXF.Services.Database;
 
 namespace sycXF.Models.Closet
 {
-    public class ClosetItemModel
+    public class ClosetItemModel : BaseDatabaseItem
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
         [JsonProperty("Name")]
         public string Name { get; set; }
 

@@ -1,17 +1,16 @@
 ﻿using Newtonsoft.Json;
+using sycXF.Services.Database;
 
 namespace sycXF.Models.User
 {
-    public class UserInfo
+    public class UserInfoModel : BaseDatabaseItem
     {
-        [JsonProperty("sub")]
-        public string UserId { get; set; }
 
         [JsonProperty("preferred_username")]
         public string PreferredUsername { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("first_name")]
+        public string FirstName { get; set; }
 
         [JsonProperty("last_name")]
         public string LastName { get; set; }
@@ -51,5 +50,7 @@ namespace sycXF.Models.User
 
         [JsonProperty("phone_number_verified")]
         public bool PhoneNumberVerified { get; set; }
+
+        public string HashedPassword { get; set; }
     }
 }

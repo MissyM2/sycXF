@@ -13,13 +13,15 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
-    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.2" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
     <PackageReference Include="PCLCrypto" Version="2.0.147" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+    <PackageReference Include="Autofac" Version="6.4.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.CommunityToolkit" />
@@ -58,6 +60,13 @@
     <None Remove="ReleaseNotes\" />
     <None Remove="Resources\noun-skirt-1202595.png" />
     <None Remove="Xam.Plugin.Media" />
+    <None Remove="sqlite-net-pcl" />
+    <None Remove="Services\Data\" />
+    <None Remove="Autofac" />
+    <None Remove="Services\Navigation\" />
+    <None Remove="Controllers\" />
+    <None Remove="Security\" />
+    <None Remove="Settings\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\Font_Awesome_5_Free-Regular-400.otf" />
@@ -72,6 +81,10 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="ReleaseNotes\" />
+    <Folder Include="Services\Navigation\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Security\" />
+    <Folder Include="Settings\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default.png" />
