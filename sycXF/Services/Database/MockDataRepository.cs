@@ -356,7 +356,7 @@ namespace sycXF.Services.Database
 
             var items = new List<MainFilterCategoryModel>();
 
-            items.Add(new MainFilterCategoryModel() { Id = 1, PropertyName = "Categories" });
+            items.Add(new MainFilterCategoryModel() { Id = 1, PropertyName = "Types" });
             items.Add(new MainFilterCategoryModel() { Id = 2, PropertyName = "Seasons" });
             items.Add(new MainFilterCategoryModel() { Id = 4, PropertyName = "Favorites" });
 
