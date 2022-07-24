@@ -14,6 +14,9 @@ namespace sycXF.Models.Closet
         [JsonProperty("CategoryTitle")]
         public string CategoryTitle { get; set; }
 
+        [JsonProperty("CategoryCount")]
+        public int CategoryCount { get; set; }
+
         [JsonProperty("IconGlyph")]
         public string IconGlyph { get; set; }
 

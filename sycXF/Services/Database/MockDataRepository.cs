@@ -27,7 +27,7 @@ namespace sycXF.Services.Database
                 Description = "Small, Spring, Top M",
                 Size = "Small",
                 Season = "Spring",
-                ApparelType = "Top"
+                Type = "Top"
             });
             items.Add(new ClosetItemModel()
             {
@@ -37,7 +37,7 @@ namespace sycXF.Services.Database
                 Description = "Small, Summer, Bottom M",
                 Size = "Small",
                 Season = "Summer",
-                ApparelType = "Bottom"
+                Type = "Bottom"
             });
             items.Add(new ClosetItemModel()
             {
@@ -47,7 +47,7 @@ namespace sycXF.Services.Database
                 Description = "Medium, Winter, Dress M",
                 Size = "Medium",
                 Season = "Winter",
-                ApparelType = "Dress"
+                Type = "Dress"
             });
             items.Add(new ClosetItemModel()
             {
@@ -57,7 +57,7 @@ namespace sycXF.Services.Database
                 Description = "Large, Always, Outerwear M",
                 Size = "Large",
                 Season = "Always",
-                ApparelType = "Outerwear"
+                Type = "Outerwear"
             });
             items.Add(new ClosetItemModel()
             {
@@ -67,7 +67,7 @@ namespace sycXF.Services.Database
                 Description = "Small, Winter, Footwear M",
                 Size = "Small",
                 Season = "Winter",
-                ApparelType = "Footwear"
+                Type = "Footwear"
             });
             items.Add(new ClosetItemModel()
             {
@@ -77,7 +77,7 @@ namespace sycXF.Services.Database
                 Description = "Medium, Spring, Top M",
                 Size = "Medium",
                 Season = "Spring",
-                ApparelType = "Top"
+                Type = "Top"
             });
             items.Add(new ClosetItemModel()
             {
@@ -87,7 +87,7 @@ namespace sycXF.Services.Database
                 Description = "Large, Summer, Bottom M",
                 Size = "Large",
                 Season = "Summer",
-                ApparelType = "Bottom"
+                Type = "Bottom"
             });
             items.Add(new ClosetItemModel()
             {
@@ -97,7 +97,7 @@ namespace sycXF.Services.Database
                 Description = "Small, Fall, Dress M",
                 Size = "Small",
                 Season = "Fall",
-                ApparelType = "Dress"
+                Type = "Dress"
             });
             items.Add(new ClosetItemModel()
             {
@@ -107,7 +107,7 @@ namespace sycXF.Services.Database
                 Description = "Medium, Always, Outerwear M",
                 Size = "Medium",
                 Season = "Always",
-                ApparelType = "Outerwear"
+                Type = "Outerwear"
             });
             items.Add(new ClosetItemModel()
             {
@@ -117,7 +117,7 @@ namespace sycXF.Services.Database
                 Description = "Medium, Always, Top M",
                 Size = "Medium",
                 Season = "Always",
-                ApparelType = "Top"
+                Type = "Top"
             });
             items.Add(new ClosetItemModel()
             {
@@ -127,7 +127,7 @@ namespace sycXF.Services.Database
                 Description = "Medium, Winter, Accessory M",
                 Size = "Medium",
                 Season = "Winter",
-                ApparelType = "Accessory"
+                Type = "Accessory"
             });
             items.Add(new ClosetItemModel()
             {
@@ -137,7 +137,7 @@ namespace sycXF.Services.Database
                 Description = "Large, Spring, Accessory M",
                 Size = "Large",
                 Season = "Spring",
-                ApparelType = "Accessory"
+                Type = "Accessory"
             });
             items.Add(new ClosetItemModel()
             {
@@ -147,7 +147,7 @@ namespace sycXF.Services.Database
                 Description = "Small, Winter, Bottom M",
                 Size = "Small",
                 Season = "Winter",
-                ApparelType = "Bottom"
+                Type = "Bottom"
             });
 
             return items;
@@ -167,8 +167,8 @@ namespace sycXF.Services.Database
             {
                 Id = 1,
                 CategoryType = "Season",
-                CategoryName = "WinterM",
-                CategoryTitle = "WinterM",
+                CategoryName = "Winter",
+                CategoryTitle = "Winter",
                 IconGlyph = "noun-snowflake-2098252.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-shirt-3013538.png"
@@ -178,8 +178,8 @@ namespace sycXF.Services.Database
             {
                 Id = 2,
                 CategoryType = "Season",
-                CategoryName = "SpringM",
-                CategoryTitle = "SpringM",
+                CategoryName = "Spring",
+                CategoryTitle = "Spring",
                 IconGlyph = "noun-sunny-2494509.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-shirt-3013538.png"
@@ -189,8 +189,8 @@ namespace sycXF.Services.Database
             {
                 Id = 3,
                 CategoryType = "Season",
-                CategoryName = "SummerM",
-                CategoryTitle = "SummerM",
+                CategoryName = "Summer",
+                CategoryTitle = "Summer",
                 IconGlyph = "noun-sun-2494511.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-shirt-3013538.png"
@@ -200,8 +200,8 @@ namespace sycXF.Services.Database
             {
                 Id = 4,
                 CategoryType = "Season",
-                CategoryName = "FallM",
-                CategoryTitle = "FallM",
+                CategoryName = "Fall",
+                CategoryTitle = "Fall",
                 IconGlyph = "noun-autumn-3789702.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-shirt-3013538.png"
@@ -211,8 +211,8 @@ namespace sycXF.Services.Database
             {
                 Id = 5,
                 CategoryType = "Season",
-                CategoryName = "AlwaysM",
-                CategoryTitle = "AlwaysM",
+                CategoryName = "Always",
+                CategoryTitle = "Always",
                 IconGlyph = "noun-dress-3013536.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-shirt-3013538.png"
@@ -222,8 +222,8 @@ namespace sycXF.Services.Database
             {
                 Id = 6,
                 CategoryType = "Type",
-                CategoryName = "TopM",
-                CategoryTitle = "TopsM",
+                CategoryName = "Top",
+                CategoryTitle = "Tops",
                 IconGlyph = "noun-shirt-3013538.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-shirt-3013538.png"
@@ -232,8 +232,8 @@ namespace sycXF.Services.Database
             {
                 Id = 7,
                 CategoryType = "Type",
-                CategoryName = "BottomM",
-                CategoryTitle = "BottomsM",
+                CategoryName = "Bottom",
+                CategoryTitle = "Bottoms",
                 IconGlyph = "noun-jeans-3049748.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-jeans-3049748.png"
@@ -242,8 +242,8 @@ namespace sycXF.Services.Database
             {
                 Id = 8,
                 CategoryType = "Type",
-                CategoryName = "DressM",
-                CategoryTitle = "DressesM",
+                CategoryName = "Dress",
+                CategoryTitle = "Dresses",
                 IconGlyph = "noun-dress-3013536.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-dress-3013536.png"
@@ -252,8 +252,8 @@ namespace sycXF.Services.Database
             {
                 Id = 9,
                 CategoryType = "Type",
-                CategoryName = "OuterwearM",
-                CategoryTitle = "OuterwearM",
+                CategoryName = "Outerwear",
+                CategoryTitle = "Outerwear",
                 IconGlyph = "noun-puffer-vest-2200104.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-puffer-vest-2200104.png"
@@ -262,8 +262,8 @@ namespace sycXF.Services.Database
             {
                 Id = 10,
                 CategoryType = "Type",
-                CategoryName = "FootwearM",
-                CategoryTitle = "FootwearM",
+                CategoryName = "Footwear",
+                CategoryTitle = "Footwear",
                 IconGlyph = "noun-shoe-1202591.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-shoe-1202591.png"
@@ -272,8 +272,8 @@ namespace sycXF.Services.Database
             {
                 Id = 11,
                 CategoryType = "Type",
-                CategoryName = "AccessoryM",
-                CategoryTitle = "AccessoriesM",
+                CategoryName = "Accessory",
+                CategoryTitle = "Accessories",
                 IconGlyph = "noun-scarf-3790978.png",
                 IconFamily = "FontAwesome-Regular",
                 PictureUri = "noun-scarf-3790978.png"

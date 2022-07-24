@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using sycXF.Controllers;
 using sycXF.Models.Closet;
 using sycXF.Services;
@@ -14,7 +15,7 @@ namespace sycXF.ViewModels
     [QueryProperty("QueryType", "QueryType")]
     [QueryProperty("CategoryType", "CategoryType")]
     [QueryProperty("CategoryName", "CategoryName")]
-    [QueryProperty("CategoryTitle", "CategoryTitle")]
+    [QueryProperty("CategoryTitle", "SelectedCategory.CategoryTitle")]
     public class ClosetItemsViewModel: BaseViewModel
     {
 
@@ -26,6 +27,9 @@ namespace sycXF.ViewModels
         #endregion
 
         #region Properties
+
+        const int RefreshDuration = 2;
+        int itemNumber = 1;
 
         private string _headerTextLabel;
         public string HeaderTextLabel
@@ -81,7 +85,16 @@ namespace sycXF.ViewModels
             set { SetProperty(ref _itemCount, value); }
         }
 
+        private bool _isRefreshing;
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set { SetProperty(ref _isRefreshing, value); }
+        }
+
         #endregion
+
+        public ICommand RefreshCommand => new Command(async () => await RefreshItemsAsync());
 
         public ClosetItemsViewModel(INavigationService navigationService,
             IClosetController closetController)
@@ -89,20 +102,37 @@ namespace sycXF.ViewModels
             _navigationService = navigationService;
             _closetController = closetController;
 
-      
-            //ItemCount = ClosetItemCollection.Count;
-
         }
 
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
-            IsBusy = true;
+            //IsRefreshing = true;
 
-            ClosetItemCollection = await _closetController.GetClosetItems(QueryType, CategoryName);
-            ItemCount = ClosetItemCollection.Count;
+            //ClosetItemCollection = await _closetController.GetClosetItems(QueryType, CategoryName);
+            //ItemCount = ClosetItemCollection.Count;
 
-            IsBusy = false;
+            //IsRefreshing = false;
+
+            //RefreshClosetItemCollection(query);
         }
+
+        async Task RefreshItemsAsync()
+        {
+            IsRefreshing = true;
+            await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
+            //RefreshClosetItemCollection();
+            IsRefreshing = false;
+        }
+
+        //private void RefreshClosetItemCollection()
+        //{
+        //    IsRefreshing = true;
+
+        //    ClosetItemCollection = await _closetController.GetClosetItems(QueryType, CategoryName);
+        //    ItemCount = ClosetItemCollection.Count;
+
+        //    IsRefreshing = false;
+        //}
     }
 }
 

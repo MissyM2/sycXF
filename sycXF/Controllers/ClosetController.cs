@@ -39,76 +39,73 @@ namespace sycXF.Controllers
             Console.WriteLine("ClosetController: Constants.USE_MOCKS " + Constants.USE_MOCKS);
         }
 
-        
-        //public async Task AddClosetItem(string name, string description, string pictureUri, string size, string season, string apparelType)
-        //{
-
-        //    private IDataRepository<ClosetItemModel> _closetItemRepository;
-
-        //    var closetItem = new ClosetItemModel
-        //        {
-        //            Name = name,
-        //            Description = description,
-        //            PictureUri = pictureUri,
-        //            Size = size,
-        //            Season = season,
-        //            ApparelType = apparelType
-        //        };
-
-        //     await = await Database.InsertAsync(closetItem);
-        //    }
-
-
-        //public async Task RemoveClosetItem(int id)
-        //{
-
-        //    await Database.DeleteAsync<ClosetItemModel>(id);
-        //}
-
-        public async Task<ObservableCollection<ClosetItemModel>> GetClosetItems()
+        public async Task<ObservableCollection<ClosetItemModel>> GetAllClosetItems()
         {
 
             if (Constants.USE_MOCKS == "useMocks")
             {
-                var myClosetItemsListMock = await Api.GetAllMockClosetItems();
-                ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(myClosetItemsListMock);
+
+                var myClosetItemsList = await Api.GetAllMockClosetItems();
+                ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(myClosetItemsList);
                 return myClosetItems;
             }
             else
             {
                 var myClosetItemsList = await _closetItemRepository.GetAllAsync();
-                ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(myClosetItemsList);
+                ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>();
                 return myClosetItems;
             }
-
-            
-
-            
         }
-//huh? aren't these the same?  not using string parameters:  NEED MOCKS
+
+
         public async Task<ObservableCollection<ClosetItemModel>> GetClosetItems(string queryType, string categoryName)
         {
-            var myClosetItemsList = await _closetItemRepository.GetAllAsync();
 
-            if (queryType == "Season")
+            if (Constants.USE_MOCKS == "useMocks")
             {
-                var result = myClosetItemsList.Where(w => w.Season.Equals(categoryName));
-                ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(result);
-                return myClosetItems;
+
+                var myClosetItemsList = await Api.GetAllMockClosetItems();
+
+                if (queryType == "Season")
+                {
+                    var result = myClosetItemsList.Where(w => w.Season.Equals(categoryName));
+                    ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(result);
+                    return myClosetItems;
+                }
+                else if (queryType == "Type")
+                {
+                    var result = myClosetItemsList.Where(w => w.Type.Equals(categoryName));
+                    ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(result);
+                    return myClosetItems;
+                }
+                else
+                {
+                    ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>();
+                    return myClosetItems;
+                }
             }
-             else
+            else
             {
-                var result = myClosetItemsList.Where(w => w.Season.Equals(categoryName));
-                ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(result);
-                return myClosetItems;
+                var myClosetItemsList = await _closetItemRepository.GetAllAsync();
+
+                if (queryType == "Season")
+                {
+                    var result = myClosetItemsList.Where(w => w.Season.Equals(categoryName));
+                    ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(result);
+                    return myClosetItems;
+                }
+                else if (queryType == "Type")
+                {
+                    var result = myClosetItemsList.Where(w => w.Season.Equals(categoryName));
+                    ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(result);
+                    return myClosetItems;
+                }
+                else
+                {
+                    ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>();
+                    return myClosetItems;
+                }
             }
-
-            
-            
-            //var result = myClosetItemsList.Where(w => w..Equals(queryType) && w.CategoryName.Equals(categoryName));
-            //ObservableCollection<ClosetItemModel> myClosetItems = new ObservableCollection<ClosetItemModel>(myClosetItemsList);
-
-            //return myClosetItems;
         }
 
         public async Task<ObservableCollection<ItemCategoryModel>> GetAllItemCategories()

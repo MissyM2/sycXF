@@ -20,7 +20,7 @@ namespace sycXF.Models.Closet
         [JsonProperty("Season")]
         public string Season { get; set; }
 
-        [JsonProperty("ApparelType")]
-        public string ApparelType { get; set; }
+        [JsonProperty("Type")]
+        public string Type { get; set; }
     }
 }

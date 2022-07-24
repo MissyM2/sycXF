@@ -35,7 +35,10 @@
     </ContentPage.Resources>
 
      <StackLayout>
-        <CollectionView x:Name="CVClosetItems"
+         <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                      RefreshColor=" Teal"
+                      Command="{Binding RefreshCommand}">
+            <CollectionView x:Name="CVClosetItems"
                         SelectionMode="Single"
                         ItemsSource="{Binding ClosetItemCollection}"
                         VerticalOptions="StartAndExpand"
@@ -67,14 +70,14 @@
                 </CollectionView.Header>
 
                 <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <templates:ClosetItemTemplate />
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                
+                    <DataTemplate>
+                        <StackLayout>
+                            <templates:ClosetItemTemplate />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>     
     </StackLayout>
 </ContentPage>
 

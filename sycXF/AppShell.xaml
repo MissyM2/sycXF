@@ -34,7 +34,7 @@
     <!--<TabBar Route="Main">-->
         <ShellContent Title="My Closet"
                       Route="Closet"
-                      ContentTemplate="{DataTemplate views:ClosetView}" />
+                      ContentTemplate="{DataTemplate views:TempClosetView}" />
         <!--<ShellContent Title="Share Closet"
                       Route="ShareCloset"
                       Icon="{StaticResource ProfileIconImageSource}"

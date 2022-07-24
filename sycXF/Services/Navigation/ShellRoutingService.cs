@@ -39,7 +39,7 @@ namespace sycXF.Services.Navigation
             Application.Current.MainPage = new LoginShell();
         }
 
-        private Task GoToAsync<TViewModel>(string routePrefix, string parameters) where TViewModel : BaseViewModel
+        public Task GoToAsync<TViewModel>(string routePrefix, string parameters) where TViewModel : BaseViewModel
         {
             var route = routePrefix + typeof(TViewModel).Name;
             if (!string.IsNullOrWhiteSpace(parameters))
@@ -47,6 +47,7 @@ namespace sycXF.Services.Navigation
                 route += $"?{parameters}";
             }
             return Shell.Current.GoToAsync(route);
+            //return Shell.Current.GoToAsync(route);
         }
     }
 }

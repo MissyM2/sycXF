@@ -6,17 +6,22 @@
     Padding="5"
     Margin="0">
 
-    <Frame Style="{StaticResource CategoryCard}" Padding="10,0,0,0">
-        <StackLayout Orientation="Horizontal">
-            <Image Source="{Binding IconGlyph, TargetNullValue='default_product.png'}"
-                   WidthRequest="66"/>
-            <StackLayout VerticalOptions="Center">
-                 <Label Text="{Binding CategoryTitle}"
-                        TextColor="{StaticResource DarkGreenColor}"
-                        FontSize="{StaticResource LargerSize}"/>
-
+    <Frame Style="{StaticResource CategoryCard}" Padding="10,0,10,0">
+        <FlexLayout Direction="Row"
+                    AlignItems="Center"
+                    JustifyContent="SpaceBetween">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="{Binding IconGlyph, TargetNullValue='default_product.png'}"
+                       WidthRequest="66"/>
+                <Label Text="{Binding CategoryTitle}"
+                       VerticalTextAlignment="Center"
+                    TextColor="{StaticResource DarkGreenColor}"
+                    FontSize="{StaticResource LargerSize}"/>
             </StackLayout>
-        </StackLayout>
+            <Label Text="{Binding ItemCount}"
+                    TextColor="{StaticResource DarkGreenColor}"
+                    FontSize="{StaticResource LargerSize}"/>
+        </FlexLayout>
     </Frame>
 </Grid>
 
