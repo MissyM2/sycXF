@@ -166,6 +166,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 1,
+                Color = "#B96CBD",
                 CategoryType = "Season",
                 CategoryName = "Winter",
                 CategoryTitle = "Winter",
@@ -177,6 +178,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 2,
+                Color = "#B96CBD",
                 CategoryType = "Season",
                 CategoryName = "Spring",
                 CategoryTitle = "Spring",
@@ -188,6 +190,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 3,
+                Color = "#B96CBD",
                 CategoryType = "Season",
                 CategoryName = "Summer",
                 CategoryTitle = "Summer",
@@ -199,6 +202,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 4,
+                Color = "#B96CBD",
                 CategoryType = "Season",
                 CategoryName = "Fall",
                 CategoryTitle = "Fall",
@@ -210,6 +214,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 5,
+                Color = "#B96CBD",
                 CategoryType = "Season",
                 CategoryName = "Always",
                 CategoryTitle = "Always",
@@ -221,6 +226,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 6,
+                Color = "#B96CBD",
                 CategoryType = "Type",
                 CategoryName = "Top",
                 CategoryTitle = "Tops",
@@ -231,6 +237,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 7,
+                Color = "#B96CBD",
                 CategoryType = "Type",
                 CategoryName = "Bottom",
                 CategoryTitle = "Bottoms",
@@ -241,6 +248,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 8,
+                Color = "#B96CBD",
                 CategoryType = "Type",
                 CategoryName = "Dress",
                 CategoryTitle = "Dresses",
@@ -251,6 +259,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 9,
+                Color = "#B96CBD",
                 CategoryType = "Type",
                 CategoryName = "Outerwear",
                 CategoryTitle = "Outerwear",
@@ -261,6 +270,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 10,
+                Color = "#B96CBD",
                 CategoryType = "Type",
                 CategoryName = "Footwear",
                 CategoryTitle = "Footwear",
@@ -271,6 +281,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 11,
+                Color = "#B96CBD",
                 CategoryType = "Type",
                 CategoryName = "Accessory",
                 CategoryTitle = "Accessories",
@@ -281,6 +292,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 12,
+                Color = "#B96CBD",
                 CategoryType = "Size",
                 CategoryName = "XSmall",
                 CategoryTitle = "XSmall",
@@ -291,6 +303,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 13,
+                Color = "#B96CBD",
                 CategoryType = "Size",
                 CategoryName = "Small",
                 CategoryTitle = "Small",
@@ -301,6 +314,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 14,
+                Color = "#B96CBD",
                 CategoryType = "Size",
                 CategoryName = "Medium",
                 CategoryTitle = "Medium",
@@ -311,6 +325,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 15,
+                Color = "#B96CBD",
                 CategoryType = "Size",
                 CategoryName = "Large",
                 CategoryTitle = "Large",
@@ -321,6 +336,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 16,
+                Color = "#B96CBD",
                 CategoryType = "Size",
                 CategoryName = "XLarge",
                 CategoryTitle = "XLarge",
@@ -331,6 +347,7 @@ namespace sycXF.Services.Database
             items.Add(new ItemCategoryModel()
             {
                 Id = 17,
+                Color = "#B96CBD",
                 CategoryType = "Size",
                 CategoryName = "XSmall",
                 CategoryTitle = "XSmall",

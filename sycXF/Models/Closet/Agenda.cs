@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 using sycXF.Services.Database;
 
 namespace sycXF.Models.Closet
 {
-    public class ItemCategoryModel : BaseDatabaseItem
+    public class Agenda : BaseDatabaseItem
     {
         [JsonProperty("Color")]
         public string Color { get; set; }
@@ -35,10 +37,8 @@ namespace sycXF.Models.Closet
         [JsonProperty("ImgContent")]
         public byte[] ImgContent { get; set; }
 
-        public override string ToString()
-        {
-            return CategoryName;
-        }
+        [JsonProperty("ClosetItems")]
+        public ObservableCollection<ClosetItemModel> ClosetItems { get; set; }
     }
 }
 
